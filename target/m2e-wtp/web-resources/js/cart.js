@@ -31,15 +31,17 @@ jQuery(document).ready(function($) {
 				$(this).detach()
 			});
 		}
+		console.log(parseInt($(this).attr('data-id')));
 		$.ajax({
 			url : 'addProductToSessionAction',
 			type : 'get',
 			dataType : 'json',
 			data : {
-				productId : $(this).attr('data-id')
+				productId : parseInt($(this).attr('data-id'))
 			},
 			success : function(result) {
 				let isAddProduct = result.addProduct;
+				console.log(result);
 				if (isAddProduct) {
 					let cartNumber = parseInt($("#cartNumber").html());
 					$("#cartNumber").html(1 + cartNumber);

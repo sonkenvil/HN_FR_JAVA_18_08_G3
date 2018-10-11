@@ -99,8 +99,11 @@
 								<div class="products-slick" data-nav="#slick-nav-1">
 									<s:iterator value="listNewProduct">
 										<s:url action="product" var="productAction">
-											<s:param name="id">
+											<s:param name="productId">
 												<s:property value="id" />
+											</s:param>
+											<s:param name="color">
+												<s:property value="color" />
 											</s:param>
 										</s:url>
 										<!-- product -->
@@ -121,8 +124,7 @@
 															value="productName" /></a>
 												</h3>
 												<h4 class="product-price">
-													$980.00
-													<del class="product-old-price">$990.00</del>
+													<s:property value="price"/>
 												</h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -208,8 +210,11 @@
 					<div class="lam-mo"></div>
 					<s:iterator value="listProduct">
 						<s:url action="product" var="productAction">
-							<s:param name="id">
+							<s:param name="productId">
 								<s:property value="id" />
+							</s:param>
+							<s:param name="color">
+								<s:property value="color" />
 							</s:param>
 						</s:url>
 						<!-- product -->
@@ -229,8 +234,7 @@
 									<a href="${productAction }"><s:property value="productName" /></a>
 								</h3>
 								<h4 class="product-price">
-									$980.00
-									<del class="product-old-price">$990.00</del>
+									<s:property value="price"/>
 								</h4>
 								<div class="product-rating">
 									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -714,11 +718,11 @@
 	<s:include value="/page/common_footer.jsp"></s:include>
 	<!-- /Footer -->
 
-	<!-- cart js -->
-	<script src="<%=request.getContextPath()%>/js/cart.js"></script>
-
 	<!-- Jquery ui js -->
 	<script src="<%=request.getContextPath()%>/js/jquery-ui.min.js"></script>
+	
+	<!-- cart js -->
+	<script src="<%=request.getContextPath()%>/js/cart.js"></script>
 
 	<!-- Load list product -->
 	<script type="text/javascript" defer>
