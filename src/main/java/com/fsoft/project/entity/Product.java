@@ -18,7 +18,7 @@ public class Product {
 	private Category category;
 	private Date createDate;
 	private String color;
-	private float price;
+	private double price;
 	public Product() {
 		super();
 	}
@@ -26,7 +26,7 @@ public class Product {
 	
 
 	public Product(int id, String productName, String imagePath, ManuFacturer manuFacturer, Category category,
-			Date createDate) {
+			Date createDate, String color, double price) {
 		super();
 		this.id = id;
 		this.productName = productName;
@@ -34,6 +34,8 @@ public class Product {
 		this.manuFacturer = manuFacturer;
 		this.category = category;
 		this.createDate = createDate;
+		this.color = color;
+		this.price = price;
 	}
 
 	public int getId() {
@@ -83,6 +85,8 @@ public class Product {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
+
+
 	public String getColor() {
 		return color;
 	}
@@ -91,11 +95,11 @@ public class Product {
 		this.color = color;
 	}
 
-	public float getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(float price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 }

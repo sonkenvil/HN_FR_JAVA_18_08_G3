@@ -42,6 +42,5 @@ public class ProductAction {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	
 
 }

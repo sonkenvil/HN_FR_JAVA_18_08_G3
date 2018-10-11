@@ -46,4 +46,10 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.getProductById(id);
 	}
 
+	@Override
+	public List<Product> getListProductByValue(String val) throws SQLException {
+		// TODO Auto-generated method stub
+		return productDao.getListProductByValue(val);
+	}
+
 }

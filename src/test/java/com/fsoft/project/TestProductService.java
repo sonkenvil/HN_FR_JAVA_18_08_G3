@@ -52,12 +52,20 @@ public class TestProductService extends TestCase{
 		int total = productService.getTotalProduct();
 		assertTrue(total == 10);
 	}
-	*/
 	
 	@Test
 	public void testGetProductById() throws SQLException {
 		ProductService productService = new ProductServiceImpl(new ProductDaoImpl());
 		Product product = productService.getProductById(1);
 		assertTrue(product != null);
+	}
+	
+	*/
+	
+	@Test
+	public void testGetProductByValue() throws SQLException {
+		ProductService productService = new ProductServiceImpl(new ProductDaoImpl());
+		List<Product> listP = productService.getListProductByValue("x");
+		assertTrue(listP != null);
 	}
 }

@@ -13,21 +13,21 @@ public class OrderProduct {
 
 	private int id;
 	private double totalPrice;
-	private int memberId;
+	private Member member;
 	private Date createDate;
 	private Date updateTime;
 
-	public OrderProduct() {
-		super();
-	}
-
-	public OrderProduct(int id, double totalPrice, int memberId, Date createDate, Date updateTime) {
+	public OrderProduct(int id, double totalPrice, Member member, Date createDate, Date updateTime) {
 		super();
 		this.id = id;
 		this.totalPrice = totalPrice;
-		this.memberId = memberId;
+		this.member = member;
 		this.createDate = createDate;
 		this.updateTime = updateTime;
+	}
+
+	public OrderProduct() {
+		super();
 	}
 
 	public int getId() {
@@ -46,12 +46,12 @@ public class OrderProduct {
 		this.totalPrice = totalPrice;
 	}
 
-	public int getMemberId() {
-		return memberId;
+	public Member getMember() {
+		return member;
 	}
 
-	public void setMemberId(int memberId) {
-		this.memberId = memberId;
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
 	public Date getCreateDate() {
