@@ -41,7 +41,8 @@ public class ProductDaoImpl implements ProductDao {
 				category = getCategoryById(rs.getInt("CategoryId"));
 				manuFacturer = getManuFacturerById(rs.getInt("ManuFacturerId"));
 				listP.add(new Product(rs.getInt("Id"), rs.getString("ProductName"), rs.getString("ImagePath"),
-						manuFacturer, category, rs.getDate("CreateDate")));
+						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"),
+						rs.getDouble("Price")));
 			}
 		}
 		return listP;
@@ -63,7 +64,8 @@ public class ProductDaoImpl implements ProductDao {
 				category = getCategoryById(rs.getInt("CategoryId"));
 				manuFacturer = getManuFacturerById(rs.getInt("ManuFacturerId"));
 				listP.add(new Product(rs.getInt("Id"), rs.getString("ProductName"), rs.getString("ImagePath"),
-						manuFacturer, category, rs.getDate("CreateDate")));
+						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"),
+						rs.getDouble("Price")));
 			}
 		}
 		return listP;
@@ -83,7 +85,6 @@ public class ProductDaoImpl implements ProductDao {
 		return row;
 	}
 
-	@Override
 	public Category getCategoryById(int id) throws SQLException {
 		// TODO Auto-generated method stub
 		Category category = null;
@@ -99,7 +100,6 @@ public class ProductDaoImpl implements ProductDao {
 		return category;
 	}
 
-	@Override
 	public ManuFacturer getManuFacturerById(int id) throws SQLException {
 		// TODO Auto-generated method stub
 		ManuFacturer manuFacturer = null;
@@ -130,10 +130,35 @@ public class ProductDaoImpl implements ProductDao {
 				category = getCategoryById(rs.getInt("CategoryId"));
 				manuFacturer = getManuFacturerById(rs.getInt("ManuFacturerId"));
 				product = new Product(rs.getInt("Id"), rs.getString("ProductName"), rs.getString("ImagePath"),
-						manuFacturer, category, rs.getDate("CreateDate"));
+						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getDouble("Price"));
 			}
 		}
 		return product;
+	}
+
+	@Override
+	public List<Product> getListProductByValue(String val) throws SQLException {
+		// TODO Auto-generated method stub
+		conn = DbHelper.getConnection();
+		List<Product> listP = null;
+		ManuFacturer manuFacturer;
+		Category category;
+		if (conn != null) {
+			listP = new LinkedList<>();
+			pre = conn.prepareStatement(QueryConstants.SEARCH_PRODUCT);
+			pre.setString(1, "%" + val + "%");
+			pre.setString(2, "%" + val + "%");
+			pre.setString(3, "%" + val + "%");
+			ResultSet rs = pre.executeQuery();
+			while (rs.next()) {
+				category = getCategoryById(rs.getInt("CategoryId"));
+				manuFacturer = getManuFacturerById(rs.getInt("ManuFacturerId"));
+				listP.add(new Product(rs.getInt("Id"), rs.getString("ProductName"), rs.getString("ImagePath"),
+						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"),
+						rs.getDouble("Price")));
+			}
+		}
+		return listP;
 	}
 
 }

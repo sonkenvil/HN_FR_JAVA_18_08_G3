@@ -50,10 +50,6 @@
 	</package>
 
 	<package name="json" extends="json-default">
-		<interceptors>
-			<interceptor name="sessionInterceptor"
-				class="com.fsoft.project.interceptor.SessionInterceptor"></interceptor>
-		</interceptors>
 
 		<action name="getListProductAction"
 			class="com.fsoft.project.action.HomeAction" method="listProduct">
@@ -62,7 +58,11 @@
 		<action name="addProductToSessionAction"
 			class="com.fsoft.project.action.SessionAction"
 			method="addProductToSession">
-			<interceptor-ref name="sessionInterceptor"></interceptor-ref>
+			<result type="json"></result>
+		</action>
+		<action name="searchProductByValue"
+			class="com.fsoft.project.action.SearchProductAction"
+			method="searchProductByValue">
 			<result type="json"></result>
 		</action>
 	</package>

@@ -21,5 +21,7 @@ public interface ProductService {
 	Product getProductById(int id) throws SQLException;
 
 	int getTotalProduct() throws SQLException;
+	
+	List<Product> getListProductByValue(String val) throws SQLException;
 
 }
