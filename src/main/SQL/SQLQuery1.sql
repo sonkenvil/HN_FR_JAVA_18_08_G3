@@ -36,7 +36,7 @@ CREATE TABLE PRODUCT(
     CategoryId INT,
     CreateDate DATE,
     Color VARCHAR(50),
-    Price MONEY
+    Price MONEY,
     CONSTRAINT FK_Product_ManuFacturer FOREIGN KEY (ManuFacturerId) REFERENCES MANUFACTURER(Id) ON DELETE CASCADE,
     CONSTRAINT FK_Product_Category FOREIGN KEY (CategoryId) REFERENCES CATEGORY(Id)
 )

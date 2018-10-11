@@ -36,10 +36,11 @@
 				<!-- SEARCH BAR -->
 				<div class="col-md-6">
 					<div class="header-search">
-						<form>
-							<input class="input" placeholder="Search here">
+						<div>
+							<input class="input" placeholder="Product, Category or Manufacturer">
 							<button class="search-btn">Search</button>
-						</form>
+							<ul class="list-product"></ul>
+						</div>
 					</div>
 				</div>
 				<!-- /SEARCH BAR -->
