@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+
+	<constant name="struts.devMode" value="true" />
+
+	<package name="default" extends="struts-default">
+		<action name="">
+			<result type="redirect">home.action</result>
+		</action>
+		<action name="home" class="com.fsoft.project.action.HomeAction"
+			method="execute">
+			<result>/page/index.jsp</result>
+		</action>
+		<action name="login"
+			class="com.fsoft.project.action.LoginAction">
+			<!-- login successfully -->
+			<result name="SUCCESS_ADMIN">/page/admin.jsp</result>
+			<result name="SUCCESS_MEMBER">/page/checkout.jsp</result>
+			<result name="FAIL">/page/login.jsp</result>
+		</action>
+	</package>
+
+	<package name="json" extends="json-default">
+		<interceptors>
+			<interceptor name="sessionInterceptor"
+				class="com.fsoft.project.interceptor.SessionInterceptor"></interceptor>
+		</interceptors>
+
+		<action name="getListProductAction"
+			class="com.fsoft.project.action.HomeAction" method="listProduct">
+			<result type="json"></result>
+		</action>
+		<action name="addProductToSessionAction"
+			class="com.fsoft.project.action.SessionAction"
+			method="addProductToSession">
+			<interceptor-ref name="sessionInterceptor"></interceptor-ref>
+			<result type="json"></result>
+		</action>
+	</package>
+
+</struts>

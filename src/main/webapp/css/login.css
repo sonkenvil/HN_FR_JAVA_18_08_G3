@@ -1,0 +1,10 @@
+.input-group {
+	position: relative;
+}
+
+.input-group label.error {
+	position: absolute;
+	transform: translateY(150%);
+	bottom: 0;
+	display: block;
+}
