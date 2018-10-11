@@ -7,30 +7,45 @@
 
 	<constant name="struts.devMode" value="true" />
 
-	<package name="default" extends="struts-default">
+
+	<package name="sercurity" extends="struts-default">
 		<interceptors>
 			<interceptor name="authentication"
-				class="com.fsoft.project.intercepter.Authentication" />
+				class="com.fsoft.project.interceptor.Authentication" />
 			<interceptor-stack name="myStack">
 				<interceptor-ref name="authentication" />
 				<interceptor-ref name="defaultStack"></interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
 		<default-interceptor-ref name="myStack" />
-		
-		<action name="">
-			<result type="redirect">home.action</result>
-		</action>
-		<action name="home" class="com.fsoft.project.action.HomeAction"
-			method="execute">
-			<result>/page/index.jsp</result>
-		</action>
+		<global-results>
+			<result>/page/login.jsp</result>
+		</global-results>
+
 		<action name="login"
 			class="com.fsoft.project.action.LoginAction">
-			<!-- login successfully -->
 			<result name="SUCCESS_ADMIN">/page/admin.jsp</result>
 			<result name="SUCCESS_MEMBER">/page/checkout.jsp</result>
-			<result name="FAIL">/page/login.jsp</result>
+			<result name="FAIL" type="redirect">/page/login.jsp</result>
+		</action>
+		
+		<action name="/admin*">
+			<result name="FAIL" type="redirect">/page/login.jsp</result>
+		</action>
+	</package>
+
+	<package name="default" extends="struts-default">
+		<action name="">			
+			<result type="redirect">home.action</result>
+		</action>
+		
+		<action name="home" class="com.fsoft.project.action.HomeAction">
+			<result>/page/index.jsp</result>
+		</action>
+		
+		<action name="shopping-cart"
+			class="com.fsoft.project.action.ShoppingCartAction">
+			<result name="SUCCESS" type="redirect">/page/shopping-cart.jsp</result>
 		</action>
 	</package>
 
