@@ -294,8 +294,7 @@
 	</div>
 	<!-- /SECTION -->
 
-	<div class="col-md-12 wow fadeInDown" data-wow-duration="1s"
-		data-wow-delay="1s">
+	<div class="col-md-12 wow fadeInDown">
 		<div class="section-title text-center">
 			<h3>Related Infomation</h3>
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui
@@ -331,8 +330,7 @@
 		</div>
 	</div>
 	<!-- Section -->
-	<div class="section wow fadeInDown" data-wow-duration="1s"
-		data-wow-delay="2s">
+	<div class="section wow fadeInDown">
 		<!-- container -->
 		<div class="container">
 			<!-- row -->

@@ -38,7 +38,6 @@
 					<div class="header-search">
 						<div>
 							<input class="input" placeholder="Product, Category or Manufacturer">
-							<button class="search-btn">Search</button>
 							<ul class="list-product"></ul>
 						</div>
 					</div>

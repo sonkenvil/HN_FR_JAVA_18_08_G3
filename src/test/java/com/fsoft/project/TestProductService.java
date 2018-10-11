@@ -65,7 +65,8 @@ public class TestProductService extends TestCase{
 	@Test
 	public void testGetProductByValue() throws SQLException {
 		ProductService productService = new ProductServiceImpl(new ProductDaoImpl());
-		List<Product> listP = productService.getListProductByValue("x");
-		assertTrue(listP != null);
+		List<Product> listP = productService.getListProductByValue("i");
+		System.out.println(listP.size());
+		assertTrue(listP.size() == 2);
 	}
 }

@@ -8,8 +8,9 @@ $(document).ready(function() {
 			$("#header").removeClass('navbar-fixed-top');
 		}
 	});
-	$(".search-btn").click(function(){
-		let val  = $(".header-search .input").val();
+	$(".header-search .input").keyup(function(){
+		let val  = $(this).val();
+		let ul = $(".header-search .list-product");
 		if(val !== ''){
 			$.ajax({
 				url: 'searchProductByValue',
@@ -20,14 +21,22 @@ $(document).ready(function() {
 				},
 				success: function(result){
 					let listProduct = result.listProduct;
+					console.log(listProduct.length);
 					if(listProduct != null && listProduct.length > 0){
-						let ul = $(".header-search .list-product");
+						let text = '';
 						for(let product of listProduct){
-							$(ul).append("<li><span class='img'><img src='" + product.imagePath + "'/></span><span class='name'>" + product.productName + "'</span></li>");
+							text += "<li><span class='img'><img src='" + product.imagePath + "'/></span><a class='name' href='product?productId=" + product.id + "'>" + product.productName + "</a></li>";
 						}
+						$(ul).html(text);
+						$(ul).css('display','block');
 					}
 				}
 			})
 		}
+		$(ul).css('display','none');
+	})
+
+	$(".header-search .input").focusout(function(){
+		$(".header-search .list-product").css('display','none');
 	})
 })
