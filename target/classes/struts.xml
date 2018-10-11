@@ -8,6 +8,16 @@
 	<constant name="struts.devMode" value="true" />
 
 	<package name="default" extends="struts-default">
+		<interceptors>
+			<interceptor name="authentication"
+				class="com.fsoft.project.intercepter.Authentication" />
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="authentication" />
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="myStack" />
+		
 		<action name="">
 			<result type="redirect">home.action</result>
 		</action>

@@ -16,4 +16,6 @@ public class WebConstants {
 	public static final String SUCCESS_MEMBER = "SUCCESS_MEMBER";
 	
 	public static final String FAIL = "FAIL";
+	
+	public static final String LOGIN = "LOGIN";
 }
