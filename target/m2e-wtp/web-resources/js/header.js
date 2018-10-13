@@ -1,4 +1,13 @@
 $(document).ready(function() {
+	$.ajax({
+		url: 'getNumberProduct',
+		type: 'POST',
+		dataType: 'json',
+		success: function(result){
+			$("#cartNumber").html(result.cartNumber);
+			}
+		});
+		
 	$(window).scroll(function(event) {
 		/* Act on the event */
 		if ($(document).scrollTop() >= 10) {

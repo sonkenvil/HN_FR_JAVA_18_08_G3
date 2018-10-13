@@ -16,6 +16,7 @@ import com.fsoft.project.entity.OrderProduct;
 import com.fsoft.project.entity.Product;
 import com.fsoft.project.service.OrderProductService;
 import com.fsoft.project.service.impl.OrderProductServiceImpl;
+import com.fsoft.project.utils.constants.Constants;
 import com.fsoft.project.utils.constants.WebConstants;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
@@ -33,6 +34,7 @@ public class ShoppingCartAction extends ActionSupport implements SessionAware {
 	// send input editor number Product
 	private int productId;
 	private int number;
+	private int refreshNumberCart;
 
 	public ShoppingCartAction() {
 		orderDao = new OrderProductDaoImpl();
@@ -49,16 +51,35 @@ public class ShoppingCartAction extends ActionSupport implements SessionAware {
 		return WebConstants.SUCCESS;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public String editNumberProduct() {
 		Map<Integer, Integer> numberProduct = (Map<Integer, Integer>) session.get(WebConstants.LIST_LINEITEM);
 		numberProduct.put(productId, number);
 		return Action.SUCCESS;
 	}
+	@SuppressWarnings("unchecked")
 	public String removeProduct() {
-		System.out.println("remove" + productId);
 		Map<Integer, Integer> numberProduct = (Map<Integer, Integer>) session.get(WebConstants.LIST_LINEITEM);
+		refreshNumberCart = (int) session.get(Constants.CART_NUMBER);
+		refreshNumberCart -= numberProduct.get(productId);
 		numberProduct.remove(productId);
+		listProduct = (List<Product>) session.get(WebConstants.LIST_PRODUCT);
+		for(int i = 0 ; i < listProduct.size() ; i++) {
+			if(listProduct.get(i).getId() == productId) {
+				listProduct.remove(i);
+				break;
+			}
+		}
+		session.put(WebConstants.LIST_LINEITEM, numberProduct);
+		session.put(WebConstants.LIST_PRODUCT, listProduct);
+		session.put(Constants.CART_NUMBER, refreshNumberCart);
 		return Action.SUCCESS;
+	}
+	public int getRefreshNumberCart() {
+		return refreshNumberCart;
+	}
+	public void setRefreshNumberCart(int refreshNumberCart) {
+		this.refreshNumberCart = refreshNumberCart;
 	}
 	public int getNumber() {
 		return number;

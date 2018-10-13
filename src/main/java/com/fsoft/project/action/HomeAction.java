@@ -38,10 +38,9 @@ public class HomeAction implements SessionAware {
 			totalPages = (totalProduct % 8 == 0) ? (totalProduct / 8) : (totalProduct / 8 + 1);
 			listProduct = productService.getListProduct(0);
 			if(session.get(Constants.CART_NUMBER) == null) {
-				session.put(Constants.CART_NUMBER,0);
+				session.put(Constants.CART_NUMBER, 0);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;

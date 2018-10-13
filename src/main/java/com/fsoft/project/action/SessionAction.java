@@ -31,7 +31,7 @@ public class SessionAction {
 	private ProductService productService;
 	private boolean addProduct = false;
     private Map<Integer, Integer> listLineItem;
-    private int cartNumber;
+	private int cartNumber;
 	
 	@SuppressWarnings("unchecked")
 	public String addProductToSession() {
@@ -65,30 +65,29 @@ public class SessionAction {
 					if(listP.get(i).getId() == listP.get(j).getId()) {
 						listP.remove(j);
 						number = listLineItem.get(listP.get(i).getId());
-						int value = number ++;
-						if( value > 5) {
-							number = Constants.MAX_NUMBER_PRODUCT;
-							listLineItem.put(listP.get(i).getId(), number);
-						}
-						else
-							listLineItem.put(listP.get(i).getId(), ++ number);
+						listLineItem.put(listP.get(i).getId(), ++ number);
 					}
 				}
 			}
 			session.setAttribute(WebConstants.LIST_LINEITEM,listLineItem);
-			session.setAttribute(Constants.CART_NUMBER, cartNumber);
+			session.setAttribute(Constants.CART_NUMBER, ++ cartNumber);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
 	}
-
+	public String getNumberProduct() {
+		System.out.println("header");
+		HttpSession session = ServletActionContext.getRequest().getSession(true);
+		cartNumber = (int) session.getAttribute(Constants.CART_NUMBER);
+		return Action.SUCCESS;
+	}
 	public int getCartNumber() {
 		return cartNumber;
 	}
 
 	public void setCartNumber(int cartNumber) {
-		this.cartNumber = ++ cartNumber;
+		this.cartNumber = cartNumber;
 	}
 
 	public boolean getAddProduct() {

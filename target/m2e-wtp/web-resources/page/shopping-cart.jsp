@@ -96,7 +96,7 @@
 						<td data-th="Quantity" class="data-center"><input
 							type="number"
 							class="form-control text-center input-number-product"
-							onkeydown="return false" min="1" max="5" value="<s:property value = "numberProduct"/>"></td>
+							onkeydown="return false" min="1" value="<s:property value = "numberProduct"/>"></td>
 						<td data-th="Subtotal" class="text-center data-center total">${product.price*numberProduct}</td>
 						<td class="actions data-center" data-th="">
 							<button class="btn btn-danger btn-sm btn-remove-item">

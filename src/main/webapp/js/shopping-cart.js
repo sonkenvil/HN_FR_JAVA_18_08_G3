@@ -43,7 +43,7 @@ $(document).ready(function(){
 			},
 			dataType : 'json',
 			success : function(data) {
-				console.log("success");
+				$("#cartNumber").html(data.refreshNumberCart);
 			}
 		});
 		row.remove();

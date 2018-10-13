@@ -73,5 +73,10 @@
 			class="com.fsoft.project.action.ShoppingCartAction" method="removeProduct">
 			<result type="json"></result>
 		</action>
+		<action name="getNumberProduct"
+			class="com.fsoft.project.action.SessionAction"
+			method="getNumberProduct">
+			<result type="json"></result>
+		</action>
 	</package>
 </struts>
