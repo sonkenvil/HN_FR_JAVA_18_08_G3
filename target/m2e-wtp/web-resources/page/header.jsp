@@ -52,7 +52,7 @@
 						<div>
 							<a href="shopping-cart" id="cart"> <i class="fa fa-shopping-cart"></i> <span>Your
 									Cart</span>
-								<div id="cartNumber" class="qty">0</div>
+								<div id="cartNumber" class="qty">${session.CART_NUMBER}</div>
 							</a>
 						</div>
 						<!-- /Cart -->

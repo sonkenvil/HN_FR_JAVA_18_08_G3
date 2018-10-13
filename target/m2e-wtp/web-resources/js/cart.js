@@ -37,7 +37,8 @@ jQuery(document).ready(function($) {
 			type : 'get',
 			dataType : 'json',
 			data : {
-				productId : parseInt($(this).attr('data-id'))
+				productId : parseInt($(this).attr('data-id')),
+				cartNumber : parseInt($("#cartNumber").html())
 			},
 			success : function(result) {
 				let isAddProduct = result.addProduct;

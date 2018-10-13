@@ -4,6 +4,8 @@ $(document).ready(function(){
 		sum += parseFloat($(this).text());
 	});
 	$("div > .total-price").text(sum.toFixed(2));
+	var name = '<%= session.getAttribute("CART_NUMBER") %>';
+	console.log(name);
 	$("#cart > tbody > tr").on("click",".input-number-product", function(e){
 		var row = $(this).closest('tr');
 		var total_line_item = row.find(".price-product").text() * row.find(".input-number-product").val();

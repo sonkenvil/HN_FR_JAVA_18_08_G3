@@ -17,6 +17,7 @@ import com.fsoft.project.dao.impl.ProductDaoImpl;
 import com.fsoft.project.entity.Product;
 import com.fsoft.project.service.ProductService;
 import com.fsoft.project.service.impl.ProductServiceImpl;
+import com.fsoft.project.utils.constants.Constants;
 import com.fsoft.project.utils.constants.WebConstants;
 import com.opensymphony.xwork2.Action;
 
@@ -30,6 +31,7 @@ public class SessionAction {
 	private ProductService productService;
 	private boolean addProduct = false;
     private Map<Integer, Integer> listLineItem;
+    private int cartNumber;
 	
 	@SuppressWarnings("unchecked")
 	public String addProductToSession() {
@@ -63,16 +65,30 @@ public class SessionAction {
 					if(listP.get(i).getId() == listP.get(j).getId()) {
 						listP.remove(j);
 						number = listLineItem.get(listP.get(i).getId());
-						listLineItem.put(listP.get(i).getId(), ++ number);
+						int value = number ++;
+						if( value > 5) {
+							number = Constants.MAX_NUMBER_PRODUCT;
+							listLineItem.put(listP.get(i).getId(), number);
+						}
+						else
+							listLineItem.put(listP.get(i).getId(), ++ number);
 					}
 				}
 			}
 			session.setAttribute(WebConstants.LIST_LINEITEM,listLineItem);
-			
+			session.setAttribute(Constants.CART_NUMBER, cartNumber);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
+	}
+
+	public int getCartNumber() {
+		return cartNumber;
+	}
+
+	public void setCartNumber(int cartNumber) {
+		this.cartNumber = ++ cartNumber;
 	}
 
 	public boolean getAddProduct() {
