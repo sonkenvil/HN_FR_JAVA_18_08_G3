@@ -2,24 +2,32 @@ package com.fsoft.project.action;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.fsoft.project.dao.impl.ProductDaoImpl;
 import com.fsoft.project.entity.Product;
 import com.fsoft.project.service.ProductService;
 import com.fsoft.project.service.impl.ProductServiceImpl;
+import com.fsoft.project.utils.constants.Constants;
 import com.opensymphony.xwork2.Action;
 
 /**
  * @author hungcoutinho
  *
  */
-public class HomeAction {
+public class HomeAction implements SessionAware {
 
 	private List<Product> listNewProduct;
 	private List<Product> listProduct;
 	private int totalPages;
 	private int currentPage;
 	private int productId;
+	private Map<String, Object> session;
 	ProductService productService = null;
 
 	public String execute() {
@@ -29,6 +37,9 @@ public class HomeAction {
 			int totalProduct = productService.getTotalProduct();
 			totalPages = (totalProduct % 8 == 0) ? (totalProduct / 8) : (totalProduct / 8 + 1);
 			listProduct = productService.getListProduct(0);
+			if(session.get(Constants.CART_NUMBER) == null) {
+				session.put(Constants.CART_NUMBER,0);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -90,6 +101,11 @@ public class HomeAction {
 
 	public void setProductId(int productId) {
 		this.productId = productId;
+	}
+
+	@Override
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
 	}
 
 }
