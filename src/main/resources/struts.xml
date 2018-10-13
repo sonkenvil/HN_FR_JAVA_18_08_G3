@@ -43,6 +43,10 @@
 			<result>/page/index.jsp</result>
 		</action>
 		
+		<action name="product" class="com.fsoft.project.action.ProductAction">
+			<result>/page/product.jsp</result>
+		</action>
+		
 		<action name="shopping-cart"
 			class="com.fsoft.project.action.ShoppingCartAction">
 			<result name="SUCCESS" type="redirect">/page/shopping-cart.jsp</result>
@@ -63,6 +67,9 @@
 		<action name="searchProductByValue"
 			class="com.fsoft.project.action.SearchProductAction"
 			method="searchProductByValue">
+			<result type="json"></result>
+		</action>
+		<action name="getListImageDetail" class="com.fsoft.project.action.ProductAction" method="listImageDetail">
 			<result type="json"></result>
 		</action>
 	</package>

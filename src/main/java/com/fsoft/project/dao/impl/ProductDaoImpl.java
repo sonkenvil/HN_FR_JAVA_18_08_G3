@@ -25,24 +25,26 @@ public class ProductDaoImpl implements ProductDao {
 
 	private Connection conn;
 	private PreparedStatement pre;
+	private ManuFacturer manuFacturer;
+	private Category category;
 
 	@Override
 	public List<Product> getListNewProduct() throws SQLException {
 		// TODO Auto-generated method stub
 		List<Product> listP = null;
-		ManuFacturer manuFacturer;
-		Category category;
 		conn = DbHelper.getConnection();
 		if (conn != null) {
 			listP = new LinkedList<>();
 			pre = conn.prepareStatement(QueryConstants.SELECT_NEW_PRODUCT);
+			pre.setInt(1, 5);
 			ResultSet rs = pre.executeQuery();
 			while (rs.next()) {
-				category = getCategoryById(rs.getInt("CategoryId"));
-				manuFacturer = getManuFacturerById(rs.getInt("ManuFacturerId"));
-				listP.add(new Product(rs.getInt("Id"), rs.getString("ProductName"), rs.getString("ImagePath"),
-						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"),
-						rs.getDouble("Price")));
+				manuFacturer = new ManuFacturer(rs.getInt("ManuFacturerId"), rs.getString("ManuFacturerName"),
+						rs.getString("ManuFacturerDescription"));
+				category = new Category(rs.getInt("CategoryId"), rs.getString("CategoryName"));
+				listP.add(new Product(rs.getInt("ProductId"), rs.getString("ProductName"), rs.getString("ImagePath"),
+						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getDouble("Price"),
+						rs.getString("ProductDescription")));
 			}
 		}
 		return listP;
@@ -52,20 +54,20 @@ public class ProductDaoImpl implements ProductDao {
 	public List<Product> getListProduct(int n) throws SQLException {
 		// TODO Auto-generated method stub
 		List<Product> listP = null;
-		ManuFacturer manuFacturer;
-		Category category;
 		conn = DbHelper.getConnection();
 		if (conn != null) {
 			listP = new LinkedList<>();
 			pre = conn.prepareStatement(QueryConstants.SELECT_PRODUCT);
-			pre.setInt(1, n);
+			pre.setInt(1, 8);
+			pre.setInt(2, n);
 			ResultSet rs = pre.executeQuery();
 			while (rs.next()) {
-				category = getCategoryById(rs.getInt("CategoryId"));
-				manuFacturer = getManuFacturerById(rs.getInt("ManuFacturerId"));
-				listP.add(new Product(rs.getInt("Id"), rs.getString("ProductName"), rs.getString("ImagePath"),
-						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"),
-						rs.getDouble("Price")));
+				manuFacturer = new ManuFacturer(rs.getInt("ManuFacturerId"), rs.getString("ManuFacturerName"),
+						rs.getString("ManuFacturerDescription"));
+				category = new Category(rs.getInt("CategoryId"), rs.getString("CategoryName"));
+				listP.add(new Product(rs.getInt("ProductId"), rs.getString("ProductName"), rs.getString("ImagePath"),
+						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getDouble("Price"),
+						rs.getString("ProductDescription")));
 			}
 		}
 		return listP;
@@ -85,52 +87,19 @@ public class ProductDaoImpl implements ProductDao {
 		return row;
 	}
 
-	public Category getCategoryById(int id) throws SQLException {
-		// TODO Auto-generated method stub
-		Category category = null;
-		conn = DbHelper.getConnection();
-		if (conn != null) {
-			pre = conn.prepareStatement(QueryConstants.SELECT_CATEGORY_BY_ID);
-			pre.setInt(1, id);
-			ResultSet rs = pre.executeQuery();
-			if (rs.next()) {
-				category = new Category(rs.getInt("Id"), rs.getString("Name"));
-			}
-		}
-		return category;
-	}
-
-	public ManuFacturer getManuFacturerById(int id) throws SQLException {
-		// TODO Auto-generated method stub
-		ManuFacturer manuFacturer = null;
-		conn = DbHelper.getConnection();
-		if (conn != null) {
-			pre = conn.prepareStatement(QueryConstants.SELECT_MANUFACTURER_BY_ID);
-			pre.setInt(1, id);
-			ResultSet rs = pre.executeQuery();
-			if (rs.next()) {
-				manuFacturer = new ManuFacturer(rs.getInt("Id"), rs.getString("Name"));
-			}
-		}
-		return manuFacturer;
-	}
-
 	@Override
 	public Product getProductById(int id) throws SQLException {
 		// TODO Auto-generated method stub
 		Product product = null;
-		ManuFacturer manuFacturer;
-		Category category;
 		conn = DbHelper.getConnection();
 		if (conn != null) {
 			pre = conn.prepareStatement(QueryConstants.SELECT_PRODUCT_BY_ID);
 			pre.setInt(1, id);
 			ResultSet rs = pre.executeQuery();
 			if (rs.next()) {
-				category = getCategoryById(rs.getInt("CategoryId"));
-				manuFacturer = getManuFacturerById(rs.getInt("ManuFacturerId"));
-				product = new Product(rs.getInt("Id"), rs.getString("ProductName"), rs.getString("ImagePath"),
-						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getDouble("Price"));
+				product = new Product(rs.getInt("ProductId"), rs.getString("ProductName"), rs.getString("ImagePath"),
+						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getDouble("Price"),
+						rs.getString("ProductDescription"));
 			}
 		}
 		return product;
@@ -141,8 +110,6 @@ public class ProductDaoImpl implements ProductDao {
 		// TODO Auto-generated method stub
 		conn = DbHelper.getConnection();
 		List<Product> listP = null;
-		ManuFacturer manuFacturer;
-		Category category;
 		if (conn != null) {
 			listP = new LinkedList<>();
 			pre = conn.prepareStatement(QueryConstants.SEARCH_PRODUCT);
@@ -151,11 +118,12 @@ public class ProductDaoImpl implements ProductDao {
 			pre.setString(3, "%" + val + "%");
 			ResultSet rs = pre.executeQuery();
 			while (rs.next()) {
-				category = getCategoryById(rs.getInt("CategoryId"));
-				manuFacturer = getManuFacturerById(rs.getInt("ManuFacturerId"));
-				listP.add(new Product(rs.getInt("Id"), rs.getString("ProductName"), rs.getString("ImagePath"),
-						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"),
-						rs.getDouble("Price")));
+				manuFacturer = new ManuFacturer(rs.getInt("ManuFacturerId"), rs.getString("ManuFacturerName"),
+						rs.getString("ManuFacturerDescription"));
+				category = new Category(rs.getInt("CategoryId"), rs.getString("CategoryName"));
+				listP.add(new Product(rs.getInt("ProductId"), rs.getString("ProductName"), rs.getString("ImagePath"),
+						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getDouble("Price"),
+						rs.getString("ProductDescription")));
 			}
 		}
 		return listP;

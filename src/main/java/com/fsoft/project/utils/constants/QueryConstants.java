@@ -9,13 +9,13 @@ package com.fsoft.project.utils.constants;
  */
 public class QueryConstants {
 
-	public static final String SELECT_NEW_PRODUCT = "SELECT TOP(5) Id,ProductName,ImagePath,ManuFacturerId,CategoryId,Createdate,Color,Price FROM PRODUCT ORDER BY CreateDate DESC";
+	public static final String SELECT_NEW_PRODUCT = "SELECT TOP(?) P.Id AS 'ProductId',P.ProductName,M.Id AS 'ManuFacturerId',M.Name AS 'ManuFacturerName',M.Description AS 'ManuFacturerDescription', C.Id AS 'CategoryId', C.Name AS 'CategoryName',P.CreateDate,P.Color,P.Price,P.Description AS 'ProductDescription',P.ImagePath FROM PRODUCT P INNER JOIN MANUFACTURER M ON P.ManuFacturerId = M.Id INNER JOIN CATEGORY C ON P.CategoryId = C.Id ORDER BY P.CreateDate DESC";
 
-	public static final String SELECT_PRODUCT = "SELECT TOP(8) Id,ProductName,ImagePath,ManuFacturerId,CategoryId,Createdate,Color,Price FROM PRODUCT WHERE Id > ?";
+	public static final String SELECT_PRODUCT = "SELECT TOP(?) P.Id AS 'ProductId',P.ProductName,M.Id AS 'ManuFacturerId',M.Name AS 'ManuFacturerName',M.Description AS 'ManuFacturerDescription', C.Id AS 'CategoryId', C.Name AS 'CategoryName',P.CreateDate,P.Color,P.Price,P.Description AS 'ProductDescription',P.ImagePath FROM PRODUCT P INNER JOIN MANUFACTURER M ON P.ManuFacturerId = M.Id AND P.Id > ? INNER JOIN CATEGORY C ON P.CategoryId = C.Id";
 
-	public static final String SELECT_PRODUCT_BY_ID = "SELECT Id,ProductName,ImagePath,ManuFacturerId,CategoryId,Createdate,Color,Price FROM PRODUCT WHERE Id = ?";
+	public static final String SELECT_PRODUCT_BY_ID = "SELECT P.Id AS 'ProductId',P.ProductName,M.Id AS 'ManuFacturerId',M.Name AS 'ManuFacturerName',M.Description AS 'ManuFacturerDescription', C.Id AS 'CategoryId', C.Name AS 'CategoryName',P.CreateDate,P.Color,P.Price,P.Description AS 'ProductDescription',P.ImagePath FROM PRODUCT P INNER JOIN MANUFACTURER M ON P.ManuFacturerId = M.Id AND P.Id = ? INNER JOIN CATEGORY C ON P.CategoryId = C.Id";
 
-	public static final String SEARCH_PRODUCT = "SELECT P.Id, P.ProductName,P.ImagePath,P.ManuFacturerId,P.CategoryId,P.CreateDate,P.Color,P.Price"
+	public static final String SEARCH_PRODUCT = "SELECT P.Id AS 'ProductId',P.ProductName,M.Id AS 'ManuFacturerId',M.Name AS 'ManuFacturerName',M.Description AS 'ManuFacturerDescription', C.Id AS 'CategoryId', C.Name AS 'CategoryName',P.CreateDate,P.Color,P.Price,P.Description AS 'ProductDescription',P.ImagePath"
 			+ " FROM PRODUCT P INNER JOIN CATEGORY C ON P.CategoryId = C.Id INNER JOIN MANUFACTURER M ON P.ManuFacturerId = M.Id"
 			+ " WHERE P.ProductName LIKE ? OR C.Name LIKE ? OR M.Name LIKE ?";
 
@@ -23,7 +23,11 @@ public class QueryConstants {
 
 	public static final String SELECT_CATEGORY_BY_ID = "SELECT Id,Name FROM CATEGORY WHERE Id = ?";
 
-	public static final String SELECT_MANUFACTURER_BY_ID = "SELECT Id,Name FROM MANUFACTURER WHERE Id = ?";
+	public static final String SELECT_MANUFACTURER_BY_ID = "SELECT Id,Name,Description FROM MANUFACTURER WHERE Id = ?";
 
 	public static final String GET_MEMBER = "SELECT Id, Email, Role FROM Member WHERE Email = ? AND Password = ?";
+
+	public static final String SELECT_IMAGE_BY_PRODUCT = "SELECT I.Id AS 'ImageId', I.ImagePath AS 'ImageDetailPath',P.Id AS 'ProductId',P.ProductName,M.Id AS 'ManuFacturerId',M.Name AS 'ManuFacturerName',M.[Description] AS 'ManuFacturerDescription',C.Name AS 'CategoryId',C.Name AS 'CategoryName',P.CreateDate,P.Color,P.Price,P.[Description] AS 'ProductDescription',P.ImagePath FROM IMAGEDETAIL I INNER JOIN PRODUCT P ON I.ProductId = P.Id AND I.ProductId = ? INNER JOIN MANUFACTURER M ON P.ManuFacturerId = M.Id INNER JOIN CATEGORY C ON P.CategoryId = C.Id";
+
+	public static final String SELECT_IMAGE_BY_ID = "SELECT I.Id AS 'ImageId', I.ImagePath AS 'ImageDetailPath',P.Id AS 'ProductId',P.ProductName,M.Id AS 'ManuFacturerId',M.Name AS 'ManuFacturerName',M.[Description] AS 'ManuFacturerDescription',C.Name AS 'CategoryId',C.Name AS 'CategoryName',P.CreateDate,P.Color,P.Price,P.[Description] AS 'ProductDescription',P.ImagePath FROM IMAGEDETAIL I INNER JOIN PRODUCT P ON I.ProductId = P.Id AND I.Id = ? INNER JOIN MANUFACTURER M ON P.ManuFacturerId = M.Id INNER JOIN CATEGORY C ON P.CategoryId = C.Id";
 }

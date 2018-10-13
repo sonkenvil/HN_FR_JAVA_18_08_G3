@@ -102,14 +102,11 @@
 											<s:param name="productId">
 												<s:property value="id" />
 											</s:param>
-											<s:param name="color">
-												<s:property value="color" />
-											</s:param>
 										</s:url>
 										<!-- product -->
 										<div class="product new-product">
 											<div class="product-img">
-												<img src="<%=request.getContextPath()%>/img/product01.png"
+												<img src="${imagePath }"
 													alt="">
 												<div class="product-label">
 													<span class="sale">-30%</span> <span class="new">NEW</span>
@@ -124,7 +121,8 @@
 															value="productName" /></a>
 												</h3>
 												<h4 class="product-price">
-													<s:property value="price"/>
+													<s:property value="price" />
+													VND
 												</h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -136,7 +134,8 @@
 														<a class="a-detail" href="${productAction }"><i
 															class="fa fa-info-circle" aria-hidden="true"></i> Detail</a>
 													</button>
-													<button class="btn btn-warning btn-cart" data-id='<s:property value="id"/>'>
+													<button class="btn btn-warning btn-cart"
+														data-id='<s:property value="id"/>'>
 														<a class="a-add-cart"><i class="fa fa-shopping-cart"></i>
 															Add to cart</a>
 													</button>
@@ -213,14 +212,11 @@
 							<s:param name="productId">
 								<s:property value="id" />
 							</s:param>
-							<s:param name="color">
-								<s:property value="color" />
-							</s:param>
 						</s:url>
 						<!-- product -->
 						<div class="product">
 							<div class="product-img">
-								<img src="<%=request.getContextPath()%>/img/product01.png"
+								<img src="${imagePath }"
 									alt="">
 								<div class="product-label">
 									<span class="sale">-30%</span> <span class="new">NEW</span>
@@ -234,7 +230,8 @@
 									<a href="${productAction }"><s:property value="productName" /></a>
 								</h3>
 								<h4 class="product-price">
-									<s:property value="price"/>
+									<s:property value="price" />
+									VND
 								</h4>
 								<div class="product-rating">
 									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -246,9 +243,9 @@
 										<a class="a-detail" href="${productAction }"><i
 											class="fa fa-info-circle" aria-hidden="true"></i> Detail</a>
 									</button>
-									<button class="btn btn-warning btn-cart" data-id='<s:property value="id"/>'>
-										<a><i class="fa fa-shopping-cart"></i>
-											Add to cart</a>
+									<button class="btn btn-warning btn-cart"
+										data-id='<s:property value="id"/>'>
+										<a><i class="fa fa-shopping-cart"></i> Add to cart</a>
 									</button>
 								</div>
 							</div>
@@ -720,7 +717,7 @@
 
 	<!-- Jquery ui js -->
 	<script src="<%=request.getContextPath()%>/js/jquery-ui.min.js"></script>
-	
+
 	<!-- cart js -->
 	<script src="<%=request.getContextPath()%>/js/cart.js"></script>
 
@@ -764,26 +761,61 @@
 							let listCurrentProduct = $(".grid-product .product");
 							if(listProduct.length > 0){
 								for(let i=0;i<listProduct.length;i++){
-									$(listCurrentProduct[i]).find('.product-img img').attr('src',"<%=request.getContextPath()%>/img/product01.png");
-									$(listCurrentProduct[i]).find('.product-category').text(listProduct[i].category.name);
-									$(listCurrentProduct[i]).find('.product-name a').text(listProduct[i].productName);
-									$(listCurrentProduct[i]).find('.product-name a').attr('href','product.action?id=' + listProduct[i].id);
-									$(listCurrentProduct[i]).find('.product-name .a-detail').attr('href','product.action?id=' + listProduct[i].id);
-									$(listCurrentProduct[i]).css('display','block');
-								}
-							}
-							$(".grid-product .lam-mo").css({
-								"z-index" : -1,
-								"opacity": 0
-							});
-							$(".img-gif").css({
-								"display" : "none"
-							})
-						}
-					})
-				}
-			})
-		})
+									$(listCurrentProduct[i]).find('.product-img img').attr('src',"<%=request.getContextPath()%>
+		/img/product01.png");
+																			$(
+																					listCurrentProduct[i])
+																					.find(
+																							'.product-category')
+																					.text(
+																							listProduct[i].category.name);
+																			$(
+																					listCurrentProduct[i])
+																					.find(
+																							'.product-name a')
+																					.text(
+																							listProduct[i].productName);
+																			$(
+																					listCurrentProduct[i])
+																					.find(
+																							'.product-name a')
+																					.attr(
+																							'href',
+																							'product.action?id='
+																									+ listProduct[i].id);
+																			$(
+																					listCurrentProduct[i])
+																					.find(
+																							'.product-name .a-detail')
+																					.attr(
+																							'href',
+																							'product.action?id='
+																									+ listProduct[i].id);
+																			$(
+																					listCurrentProduct[i])
+																					.css(
+																							'display',
+																							'block');
+																		}
+																	}
+																	$(
+																			".grid-product .lam-mo")
+																			.css(
+																					{
+																						"z-index" : -1,
+																						"opacity" : 0
+																					});
+																	$(
+																			".img-gif")
+																			.css(
+																					{
+																						"display" : "none"
+																					})
+																}
+															})
+												}
+											})
+						})
 	</script>
 	<!-- /Load list product -->
 
