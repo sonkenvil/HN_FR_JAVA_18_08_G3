@@ -20,4 +20,7 @@ public class WebConstants {
 	public static final String FAIL = "FAIL";
 	
 	public static final String LOGIN = "LOGIN";
+	
+	public static final String LIST_LINEITEM = "LIST_LINEITEM";
+	
 }

@@ -13,12 +13,12 @@
     color: aqua;
 }
 
-.col-sm-10.my-auto {
+/* .col-sm-10.my-auto {
     transform: translateY(50%);
-}
+}*/
 .data-center{
-    transform: translateY(40%)
-}
+    transform: translateY(30%)
+} 
 table thead {
     border: 1px solid #ccc;
     background: #888888;
@@ -30,4 +30,10 @@ table thead {
 }
 table tfoot {
    margin-top: 20px !important;
+}
+td.NoneDisplay {
+  display: none;
+}
+th.NoneDisplay {
+  display: none;
 }

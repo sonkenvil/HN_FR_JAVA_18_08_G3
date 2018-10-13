@@ -45,12 +45,12 @@
 		
 		<action name="shopping-cart"
 			class="com.fsoft.project.action.ShoppingCartAction">
-			<result name="SUCCESS" type="redirect">/page/shopping-cart.jsp</result>
+			<result name="SUCCESS">/page/shopping-cart.jsp</result>
 		</action>
+		
 	</package>
 
 	<package name="json" extends="json-default">
-
 		<action name="getListProductAction"
 			class="com.fsoft.project.action.HomeAction" method="listProduct">
 			<result type="json"></result>
@@ -65,6 +65,13 @@
 			method="searchProductByValue">
 			<result type="json"></result>
 		</action>
+		<action name="editNumberProduct"
+			class="com.fsoft.project.action.ShoppingCartAction" method="editNumberProduct">
+			<result type="json"></result>
+		</action>
+		<action name="removeProduct"
+			class="com.fsoft.project.action.ShoppingCartAction" method="removeProduct">
+			<result type="json"></result>
+		</action>
 	</package>
-
 </struts>

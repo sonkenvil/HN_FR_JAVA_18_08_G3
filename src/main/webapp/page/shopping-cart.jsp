@@ -1,4 +1,4 @@
-<%@ taglib uri="/struts-tags" prefix="s"%>
+<%@taglib uri="/struts-tags" prefix="s" %>
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -71,65 +71,42 @@
 					<th style="width: 8%">Quantity</th>
 					<th style="width: 22%" class="text-center">Subtotal</th>
 					<th style="width: 10%"></th>
+					<th class="NoneDisplay">No</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td data-th="Product">
-						<div class="row">
-							<div class="col-sm-2 hidden-xs">
-								<img src="<%=request.getContextPath() %>/img/iphone-xs.png" alt="Iphone-XS"
-									class="img-responsive" />
+				<s:iterator value = "listItem">
+					<tr>
+						<td data-th="Product">
+							<div class="row">
+								<div class="col-sm-2 hidden-xs">
+									<img src="<s:property value = "product.imagePath"/>" alt="Iphone-XS"
+										class="img-responsive" />
+								</div>
+								<div class="col-sm-10  my-auto">
+									<h4 class="nomargin"><s:property value = "product.productName"/></h4>
+									<p>Quis aute iure reprehenderit in voluptate velit esse
+										cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit
+										amet.</p>
+								</div>
 							</div>
-							<div class="col-sm-10  my-auto">
-								<h4 class="nomargin">Iphone-XS</h4>
-								<p>Quis aute iure reprehenderit in voluptate velit esse
-									cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit
-									amet.</p>
-							</div>
-						</div>
-					</td>
-					<td data-th="Price" class="data-center"><span
-						class="price-product">1.99</span></td>
-					<td data-th="Quantity" class="data-center"><input
-						type="number"
-						class="form-control text-center input-number-product"
-						onkeydown="return false" min="1" max="5" value="1"></td>
-					<td data-th="Subtotal" class="text-center data-center total">1.99</td>
-					<td class="actions data-center" data-th="">
-						<button class="btn btn-danger btn-sm btn-remove-item">
-							<i class="fa fa-trash-o"></i>
-						</button>
-					</td>
-				</tr>
-				<tr>
-					<td data-th="Product">
-						<div class="row">
-							<div class="col-sm-2 hidden-xs">
-								<img src="<%=request.getContextPath() %>/img/iphone-xs.png" alt="Iphone-XS"
-									class="img-responsive" />
-							</div>
-							<div class="col-sm-10  my-auto">
-								<h4 class="nomargin">Iphone-XS</h4>
-								<p>Quis aute iure reprehenderit in voluptate velit esse
-									cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit
-									amet.</p>
-							</div>
-						</div>
-					</td>
-					<td data-th="Price" class="data-center"><span
-						class="price-product">1.99</span></td>
-					<td data-th="Quantity" class="data-center"><input
-						type="number"
-						class="form-control text-center input-number-product"
-						onkeydown="return false" min="1" max="5" value="1"></td>
-					<td data-th="Subtotal" class="text-center data-center total">1.99</td>
-					<td class="actions data-center" data-th="">
-						<button class="btn btn-danger btn-sm btn-remove-item">
-							<i class="fa fa-trash-o"></i>
-						</button>
-					</td>
-				</tr>
+						</td>
+						<td data-th="Price" class="data-center"><span
+							class="price-product"><s:property value = "product.price"/></span></td>
+						<td data-th="Quantity" class="data-center"><input
+							type="number"
+							class="form-control text-center input-number-product"
+							onkeydown="return false" min="1" max="5" value="<s:property value = "numberProduct"/>"></td>
+						<td data-th="Subtotal" class="text-center data-center total">${product.price*numberProduct}</td>
+						<td class="actions data-center" data-th="">
+							<button class="btn btn-danger btn-sm btn-remove-item">
+								<i class="fa fa-trash-o"></i>
+							</button>
+						</td>
+						<td class="NoneDisplay data-center"><s:property value = "product.id"/></td>
+					</tr>
+					<tr>
+				</s:iterator>
 			</tbody>
 			<tfoot>
 				<tr class="visible-xs">
@@ -141,7 +118,9 @@
 					<td colspan="2" class="hidden-xs"></td>
 					<td class="hidden-xs text-center">
 						<div>
-							<strong>Total</strong> <strong class="total-price">1.99</strong>
+							<strong>Total</strong> <strong class="total-price">
+								0$
+							</strong>
 						</div>
 					</td>
 					<td><a href="#" class="btn btn-success btn-block">Checkout

@@ -109,7 +109,8 @@
 										<!-- product -->
 										<div class="product new-product">
 											<div class="product-img">
-												<img src="<%=request.getContextPath()%>/img/product01.png"
+												<img src="<s:property
+															value="imagePath" />"
 													alt="">
 												<div class="product-label">
 													<span class="sale">-30%</span> <span class="new">NEW</span>
@@ -124,7 +125,7 @@
 															value="productName" /></a>
 												</h3>
 												<h4 class="product-price">
-													<s:property value="price"/>
+													<s:property value="price"/>$
 												</h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -220,7 +221,7 @@
 						<!-- product -->
 						<div class="product">
 							<div class="product-img">
-								<img src="<%=request.getContextPath()%>/img/product01.png"
+								<img src="<s:property value="imagePath"/>"
 									alt="">
 								<div class="product-label">
 									<span class="sale">-30%</span> <span class="new">NEW</span>
@@ -234,7 +235,7 @@
 									<a href="${productAction }"><s:property value="productName" /></a>
 								</h3>
 								<h4 class="product-price">
-									<s:property value="price"/>
+									<s:property value="price"/>$
 								</h4>
 								<div class="product-rating">
 									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i

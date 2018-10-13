@@ -3,13 +3,14 @@
  */
 package com.fsoft.project.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
  * @author hungcoutinho
  *
  */
-public class Product {
+public class Product implements Serializable{
 
 	private int id;
 	private String productName;

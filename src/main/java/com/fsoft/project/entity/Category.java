@@ -3,11 +3,13 @@
  */
 package com.fsoft.project.entity;
 
+import java.io.Serializable;
+
 /**
  * @author hungcoutinho
  *
  */
-public class Category {
+public class Category implements Serializable{
 
 	private int id;
 	private String name;

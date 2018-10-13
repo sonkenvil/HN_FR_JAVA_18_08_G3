@@ -4,8 +4,10 @@
 package com.fsoft.project.action;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -27,7 +29,8 @@ public class SessionAction {
 	private int productId;
 	private ProductService productService;
 	private boolean addProduct = false;
-
+    private Map<Integer, Integer> listLineItem;
+	
 	@SuppressWarnings("unchecked")
 	public String addProductToSession() {
 		HttpSession session = ServletActionContext.getRequest().getSession(true);
@@ -43,8 +46,30 @@ public class SessionAction {
 				addProduct = true;
 				session.setAttribute(WebConstants.LIST_PRODUCT, listP);
 			}
+			/*
+			 * LineItem Product include number
+			 * */
+			listLineItem = (Map<Integer, Integer>) session.getAttribute(WebConstants.LIST_LINEITEM);
+			if(listLineItem == null) {
+				listLineItem = new HashMap<>();
+			}
+			
+			for(int i = 0 ; i < listP.size(); i++) {
+				int number = 1;
+				if(listLineItem.get(listP.get(i).getId()) ==  null) {
+					listLineItem.put(listP.get(i).getId(), number );
+				}
+				for(int j = i +1 ; j < listP.size() ; j++) {
+					if(listP.get(i).getId() == listP.get(j).getId()) {
+						listP.remove(j);
+						number = listLineItem.get(listP.get(i).getId());
+						listLineItem.put(listP.get(i).getId(), ++ number);
+					}
+				}
+			}
+			session.setAttribute(WebConstants.LIST_LINEITEM,listLineItem);
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
