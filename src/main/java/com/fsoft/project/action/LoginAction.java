@@ -9,6 +9,7 @@ import com.fsoft.project.dao.impl.LoginDaoImpl;
 import com.fsoft.project.entity.Member;
 import com.fsoft.project.service.LoginService;
 import com.fsoft.project.service.impl.LoginServiceImpl;
+import com.fsoft.project.utils.constants.Constants;
 import com.fsoft.project.utils.constants.WebConstants;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -39,7 +40,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		if (member == null)
 			return WebConstants.FAIL;
-		session.put("member", member);
+		session.put(Constants.MEMBER, member);
 		if (member.isRole())
 			return WebConstants.SUCCESS_ADMIN;
 		return WebConstants.SUCCESS_MEMBER;

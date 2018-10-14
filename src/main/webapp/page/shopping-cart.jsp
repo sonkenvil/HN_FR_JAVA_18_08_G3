@@ -8,8 +8,6 @@
 <s:include value="/page/common_head.jsp"></s:include>
 
 <link type="text/css" rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/checkout.css" />
-<link type="text/css" rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/shopping-cart.css" />
 </head>
 
@@ -67,6 +65,7 @@
 			<thead>
 				<tr>
 					<th style="width: 50%">Product</th>
+					<th style="width: 5%">Color</th>
 					<th style="width: 10%">Price</th>
 					<th style="width: 8%">Quantity</th>
 					<th style="width: 22%" class="text-center">Subtotal</th>
@@ -91,6 +90,7 @@
 								</div>
 							</div>
 						</td>
+						<td class="data-center"><button  class="colorOption_3imj" style="background-color: <s:property value = "product.color"/>"></button></td>
 						<td data-th="Price" class="data-center"><span
 							class="price-product"><s:property value = "product.price"/></span></td>
 						<td data-th="Quantity" class="data-center"><input
@@ -115,11 +115,11 @@
 				<tr>
 					<td><a href="#" class="btn btn-warning"><i
 							class="fa fa-angle-left"></i> Continue Shopping</a></td>
-					<td colspan="2" class="hidden-xs"></td>
+					<td colspan="3" class="hidden-xs"></td>
 					<td class="hidden-xs text-center">
 						<div>
 							<strong>Total</strong> <strong class="total-price">
-								0$
+								$ 0
 							</strong>
 						</div>
 					</td>

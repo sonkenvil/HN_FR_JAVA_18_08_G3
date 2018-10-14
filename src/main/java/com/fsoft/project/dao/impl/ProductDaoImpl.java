@@ -42,7 +42,7 @@ public class ProductDaoImpl implements ProductDao {
 				manuFacturer = getManuFacturerById(rs.getInt("ManuFacturerId"));
 				listP.add(new Product(rs.getInt("Id"), rs.getString("ProductName"), rs.getString("ImagePath"),
 						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"),
-						rs.getDouble("Price")));
+						rs.getInt("Price")));
 			}
 		}
 		return listP;

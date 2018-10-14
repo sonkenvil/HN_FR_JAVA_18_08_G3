@@ -37,3 +37,9 @@ td.NoneDisplay {
 th.NoneDisplay {
   display: none;
 }
+.colorOption_3imj{
+	width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 5px;
+    border: .2rem solid #e8e8e8;
+}

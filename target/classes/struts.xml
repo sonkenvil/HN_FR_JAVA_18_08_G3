@@ -7,14 +7,15 @@
 
 	<constant name="struts.devMode" value="true" />
 
-
 	<package name="sercurity" extends="struts-default">
 		<interceptors>
 			<interceptor name="authentication"
 				class="com.fsoft.project.interceptor.Authentication" />
 			<interceptor-stack name="myStack">
 				<interceptor-ref name="authentication" />
-				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="defaultStack">
+					
+				</interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
 		<default-interceptor-ref name="myStack" />

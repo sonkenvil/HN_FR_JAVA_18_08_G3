@@ -77,7 +77,6 @@ public class SessionAction {
 		return Action.SUCCESS;
 	}
 	public String getNumberProduct() {
-		System.out.println("header");
 		HttpSession session = ServletActionContext.getRequest().getSession(true);
 		cartNumber = (int) session.getAttribute(Constants.CART_NUMBER);
 		return Action.SUCCESS;

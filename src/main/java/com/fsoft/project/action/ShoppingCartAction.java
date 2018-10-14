@@ -55,6 +55,14 @@ public class ShoppingCartAction extends ActionSupport implements SessionAware {
 	public String editNumberProduct() {
 		Map<Integer, Integer> numberProduct = (Map<Integer, Integer>) session.get(WebConstants.LIST_LINEITEM);
 		numberProduct.put(productId, number);
+		int sum = 0;
+		Set<Integer> keySet = numberProduct.keySet();
+		Iterator<Integer> iterator = keySet.iterator();
+		while(iterator.hasNext()) {
+			sum += numberProduct.get(iterator.next());
+		}
+		refreshNumberCart = sum;
+		session.put(Constants.CART_NUMBER, refreshNumberCart);
 		return Action.SUCCESS;
 	}
 	@SuppressWarnings("unchecked")
