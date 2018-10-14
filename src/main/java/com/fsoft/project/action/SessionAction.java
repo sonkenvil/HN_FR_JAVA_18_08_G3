@@ -80,7 +80,7 @@ public class SessionAction {
 							listP.remove(j);
 							number = listLineItem.get(listP.get(i).getId());
 							number += numberProductDetail;
-							listLineItem.put(listP.get(i).getId(), ++number);
+							listLineItem.put(listP.get(i).getId(), number);
 						}
 					}
 				}
