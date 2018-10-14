@@ -23,5 +23,8 @@ public interface ProductService {
 	int getTotalProduct() throws SQLException;
 	
 	List<Product> getListProductByValue(String val) throws SQLException;
+	
+	List<Product> getListProductRelated(Product product) throws SQLException;
 
+	List<Product> searchListProductByValue(boolean sortByName,boolean sortByPrice,double minPrice,double maxPrice) throws SQLException;
 }

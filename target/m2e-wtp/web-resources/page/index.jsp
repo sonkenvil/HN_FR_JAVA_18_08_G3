@@ -106,8 +106,7 @@
 										<!-- product -->
 										<div class="product new-product">
 											<div class="product-img">
-												<img src="${imagePath }"
-													alt="">
+												<img src="${imagePath }" alt="">
 												<div class="product-label">
 													<span class="sale">-30%</span> <span class="new">NEW</span>
 												</div>
@@ -182,25 +181,70 @@
 				<!-- /section title -->
 			</div>
 
-			<div class="row">
-				<div class="col-md-3">
-					<label>Sort :</label> <select name="sort-type">
-						<option value="name">Name (a -> z)</option>
-						<option value="mintomaxPrice">Price (min -> max)</option>
-						<option value="maxtominPrice">Name (max -> min)</option>
+			<div class="row search-by-type">
+				<div class="col-md-3 sort">
+					<label>Sort By Name (a -> z) </label><input type="checkbox" name="sortByName" value="sortByName"/>
+					<label>Sort By Price (min -> max) </label><input type="checkbox" name="sortByPrice" value="sortByPrice"/>
+				</div>
+				<div class="col-md-4 rangePrice">
+					<label>Range price </label> <select name="price-range">
+						<option value="0">Default</option>
+						<option value="1">1000000-10000000</option>
+						<option value="2">10000000-20000000</option>
+						<option value="3">20000000-30000000</option>
 					</select>
 				</div>
-				<div class="col-md-4">
-					<label>Range price :</label> <select name="price-range">
-						<option value="range-1">1000000-10000000</option>
-						<option value="range-2">10000000-20000000</option>
-						<option value="range-3">20000000-30000000</option>
-					</select>
-				</div>
-				<div class="col-md-3">
-					<input type="button" value="Search" />
+				<div class="col-md-3 btn">
+					<input type="button" value="Search" class="btn-search"/>
 				</div>
 			</div>
+			<script type="text/javascript">
+				$(document).ready(function(){
+					let sortByName,sortByPrice,minPrice,maxPrice;
+					$(".search-by-type .sort input[name='sortByName']").change(function(){
+						if(this.checked == true)
+							sortByName = true;
+					})
+					$(".search-by-type .sort input[name='sortByPrice']").change(function(){
+						if(this.checked == true)
+							sortByPrice = true;
+					})
+					$(".search-by-type .rangePrice selece").change(function(){
+						let value = $(this).val();
+						if(value === '0'){
+							minPrice = 0;
+							maxPrice = 30000000;
+						}
+						else if(value === '1'){
+							minPrice = 1000000;
+							maxPrice = 10000000;
+						}
+						else if(value === '2'){
+							minPrice = 10000000;
+							maxPrice = 20000000;
+						}
+						else{
+							minPrice = 20000000;
+							maxPrice = 30000000;
+						}
+					})
+					$(".search-by-type .btn-search").click(function(){
+						if(typeof sortByName !== 'undefined' || typeof sortByPrice !== 'undefined' || minPrice !== 'undefined' || maxPrice !== 'undefined'){
+							if(typeof sortName === 'undefined')
+								sortByName = false;
+							if(typeof sortByPrice === 'undefined')
+								sortByPrice = false;
+							if(typeof minPrice === 'undefined')
+								minPrice = 0;
+							if(typeof maxPrice === 'undefined')
+								maxPrice = 30000000;
+							$.ajax({
+								
+							})
+						}
+					})
+				})
+			</script>
 			<div class="div-grid-product">
 				<p class="img-gif">
 					<img src="<%=request.getContextPath()%>/img/magnify.gif" />
@@ -216,8 +260,7 @@
 						<!-- product -->
 						<div class="product">
 							<div class="product-img">
-								<img src="${imagePath }"
-									alt="">
+								<img src="${imagePath }" alt="">
 								<div class="product-label">
 									<span class="sale">-30%</span> <span class="new">NEW</span>
 								</div>
@@ -761,61 +804,26 @@
 							let listCurrentProduct = $(".grid-product .product");
 							if(listProduct.length > 0){
 								for(let i=0;i<listProduct.length;i++){
-									$(listCurrentProduct[i]).find('.product-img img').attr('src',"<%=request.getContextPath()%>
-		/img/product01.png");
-																			$(
-																					listCurrentProduct[i])
-																					.find(
-																							'.product-category')
-																					.text(
-																							listProduct[i].category.name);
-																			$(
-																					listCurrentProduct[i])
-																					.find(
-																							'.product-name a')
-																					.text(
-																							listProduct[i].productName);
-																			$(
-																					listCurrentProduct[i])
-																					.find(
-																							'.product-name a')
-																					.attr(
-																							'href',
-																							'product.action?id='
-																									+ listProduct[i].id);
-																			$(
-																					listCurrentProduct[i])
-																					.find(
-																							'.product-name .a-detail')
-																					.attr(
-																							'href',
-																							'product.action?id='
-																									+ listProduct[i].id);
-																			$(
-																					listCurrentProduct[i])
-																					.css(
-																							'display',
-																							'block');
-																		}
-																	}
-																	$(
-																			".grid-product .lam-mo")
-																			.css(
-																					{
-																						"z-index" : -1,
-																						"opacity" : 0
-																					});
-																	$(
-																			".img-gif")
-																			.css(
-																					{
-																						"display" : "none"
-																					})
-																}
-															})
-												}
-											})
-						})
+									$(listCurrentProduct[i]).find('.product-img img').attr('src',"<%=request.getContextPath()%>/img/product01.png");
+									$(listCurrentProduct[i]).find('.product-category').text(listProduct[i].category.name);
+									$(listCurrentProduct[i]).find('.product-name a').text(listProduct[i].productName);
+									$(listCurrentProduct[i]).find('.product-name a').attr('href','product.action?id=' + listProduct[i].id);
+									$(listCurrentProduct[i]).find('.product-name .a-detail').attr('href','product.action?id=' + listProduct[i].id);
+									$(listCurrentProduct[i]).css('display','block');
+								}
+							}
+							$(".grid-product .lam-mo").css({
+								"z-index" : -1,
+								"opacity": 0
+							});
+							$(".img-gif").css({
+								"display" : "none"
+							})
+						}
+					})
+				}
+			})
+		})
 	</script>
 	<!-- /Load list product -->
 

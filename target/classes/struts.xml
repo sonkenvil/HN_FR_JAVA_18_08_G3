@@ -69,9 +69,6 @@
 			method="searchProductByValue">
 			<result type="json"></result>
 		</action>
-		<action name="getListImageDetail" class="com.fsoft.project.action.ProductAction" method="listImageDetail">
-			<result type="json"></result>
-		</action>
 	</package>
 
 </struts>

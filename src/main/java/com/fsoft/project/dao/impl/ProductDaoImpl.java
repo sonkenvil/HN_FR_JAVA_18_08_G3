@@ -3,6 +3,7 @@
  */
 package com.fsoft.project.dao.impl;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,6 +26,7 @@ public class ProductDaoImpl implements ProductDao {
 
 	private Connection conn;
 	private PreparedStatement pre;
+	private CallableStatement cstm;
 	private ManuFacturer manuFacturer;
 	private Category category;
 
@@ -97,6 +99,9 @@ public class ProductDaoImpl implements ProductDao {
 			pre.setInt(1, id);
 			ResultSet rs = pre.executeQuery();
 			if (rs.next()) {
+				manuFacturer = new ManuFacturer(rs.getInt("ManuFacturerId"), rs.getString("ManuFacturerName"),
+						rs.getString("ManuFacturerDescription"));
+				category = new Category(rs.getInt("CategoryId"), rs.getString("CategoryName"));
 				product = new Product(rs.getInt("ProductId"), rs.getString("ProductName"), rs.getString("ImagePath"),
 						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getDouble("Price"),
 						rs.getString("ProductDescription"));
@@ -116,6 +121,56 @@ public class ProductDaoImpl implements ProductDao {
 			pre.setString(1, "%" + val + "%");
 			pre.setString(2, "%" + val + "%");
 			pre.setString(3, "%" + val + "%");
+			ResultSet rs = pre.executeQuery();
+			while (rs.next()) {
+				manuFacturer = new ManuFacturer(rs.getInt("ManuFacturerId"), rs.getString("ManuFacturerName"),
+						rs.getString("ManuFacturerDescription"));
+				category = new Category(rs.getInt("CategoryId"), rs.getString("CategoryName"));
+				listP.add(new Product(rs.getInt("ProductId"), rs.getString("ProductName"), rs.getString("ImagePath"),
+						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getDouble("Price"),
+						rs.getString("ProductDescription")));
+			}
+		}
+		return listP;
+	}
+
+	@Override
+	public List<Product> getListProductRelated(Product product) throws SQLException {
+		// TODO Auto-generated method stub
+		List<Product> listP = null;
+		conn = DbHelper.getConnection();
+		if (conn != null) {
+			listP = new LinkedList<>();
+			cstm = conn.prepareCall(QueryConstants.SELECT_PRODUCT_RELATED);
+			cstm.setInt(1, 4);
+			cstm.setInt(2, product.getId());
+			cstm.setInt(3, product.getManuFacturer().getId());
+			cstm.setDouble(4, product.getPrice());
+			ResultSet rs = cstm.executeQuery();
+			while (rs.next()) {
+				manuFacturer = new ManuFacturer(rs.getInt("ManuFacturerId"), rs.getString("ManuFacturerName"),
+						rs.getString("ManuFacturerDescription"));
+				category = new Category(rs.getInt("CategoryId"), rs.getString("CategoryName"));
+				listP.add(new Product(rs.getInt("ProductId"), rs.getString("ProductName"), rs.getString("ImagePath"),
+						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getDouble("Price"),
+						rs.getString("ProductDescription")));
+			}
+		}
+		return listP;
+	}
+
+	@Override
+	public List<Product> selectListProductByValue(String selectByPrice, String orderByName, String orderByPrice)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		List<Product> listP = null;
+		conn = DbHelper.getConnection();
+		if (conn != null) {
+			listP = new LinkedList<>();
+			pre = conn.prepareStatement(QueryConstants.SEARCH_PRODUCT_BY_VALUE);
+			pre.setString(1, selectByPrice);
+			pre.setString(2, orderByName);
+			pre.setString(3, orderByPrice);
 			ResultSet rs = pre.executeQuery();
 			while (rs.next()) {
 				manuFacturer = new ManuFacturer(rs.getInt("ManuFacturerId"), rs.getString("ManuFacturerName"),

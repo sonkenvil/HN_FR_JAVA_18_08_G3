@@ -32,15 +32,12 @@ public class ProductAction {
 	public String execute() throws SQLException {
 		productService = new ProductServiceImpl(new ProductDaoImpl());
 		product = productService.getProductById(productId);
+		imageDetailService = new ImageDetailServiceImpl(new ImageDetailDaoImpl());
+		listImageDetail = imageDetailService.getListImageDetailByProductId(productId);
+		listRelateProduct = productService.getListProductRelated(product);
 		return Action.SUCCESS;
 	}
 
-	public String listImageDetail() throws SQLException {
-		imageDetailService = new ImageDetailServiceImpl(new ImageDetailDaoImpl());
-		listImageDetail = imageDetailService.getListImageDetailByProductId(productId);
-		return Action.SUCCESS;
-	}
-	
 	public int getProductId() {
 		return productId;
 	}

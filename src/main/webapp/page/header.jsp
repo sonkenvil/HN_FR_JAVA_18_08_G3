@@ -1,4 +1,4 @@
-
+<%@taglib uri="/struts-tags" prefix="s"%>
 <!-- HEADER -->
 <header>
 	<!-- TOP HEADER -->
@@ -52,7 +52,9 @@
 						<div>
 							<a href="shopping-cart" id="cart"> <i class="fa fa-shopping-cart"></i> <span>Your
 									Cart</span>
-								<div id="cartNumber" class="qty">0</div>
+								<div id="cartNumber" class="qty">
+									
+								</div>
 							</a>
 						</div>
 						<!-- /Cart -->

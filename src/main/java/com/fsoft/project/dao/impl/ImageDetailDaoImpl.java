@@ -46,8 +46,8 @@ public class ImageDetailDaoImpl implements ImageDetailDao {
 				category = new Category(rs.getInt("CategoryId"), rs.getString("CategoryName"));
 				product = new Product(rs.getInt("ProductId"), rs.getString("ProductName"), rs.getString("ImagePath"),
 						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getDouble("Price"),
-						rs.getString("Description"));
-				listImage.add(new ImageDetail(rs.getInt("Id"), rs.getString("ImagePath"), product));
+						rs.getString("ProductDescription"));
+				listImage.add(new ImageDetail(rs.getInt("ImageId"), rs.getString("ImageDetailPath"), product));
 			}
 		}
 		return listImage;
