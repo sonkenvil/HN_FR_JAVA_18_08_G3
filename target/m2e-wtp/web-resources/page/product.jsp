@@ -161,7 +161,7 @@
 						</div>
 						<div>
 							<h3 class="product-price">
-								<span style="color: black">Price: <s:property value="product.price"/> VND</span>
+								<span style="color: black">Price: $<s:property value="product.price"/> </span>
 							</h3>
 						</div>
 
@@ -192,9 +192,10 @@
 								</div>
 							</div>
 							<div class="add-cart">
-								<button class="btn btn-warning btn-cart">
-									<a><i class="fa fa-shopping-cart"></i> Add to cart</a>
-								</button>
+								<button class="btn btn-warning btn-cart"
+										data-id="${product.id }">
+										<a><i class="fa fa-shopping-cart"></i> Add to cart</a>
+									</button>
 								<button class="btn btn-danger">
 									<a href="<%=request.getContextPath()%>/page/checkout.jsp"><i
 										class="fa fa-usd"></i> Buy now</a>
@@ -278,7 +279,7 @@
 									<a href="${productAction }"><s:property value="productName"/></a>
 								</h3>
 								<h4 class="product-price">
-									<s:property value="price"/>
+									<s:property value="price"/>$
 								</h4>
 								<div class="product-rating">
 									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -346,8 +347,8 @@
 	<script src="<%=request.getContextPath()%>/js/wow.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/custom.js"></script>
 	<!-- custom js -->
-	<script src="<%=request.getContextPath()%>/js/cart.js"></script>
-
+	<script src="<%=request.getContextPath()%>/js/header.js"></script>
+	<script src="<%=request.getContextPath()%>/js/product.js"></script>
 	<!-- Jquery ui js -->
 	<script src="<%=request.getContextPath()%>/js/jquery-ui.min.js"></script>
 

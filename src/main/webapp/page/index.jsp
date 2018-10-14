@@ -269,7 +269,7 @@
 							</div>
 							<div class="product-body">
 								<p class="product-category">
-									<s:property value="productName" />
+									<s:property value="category.name" />
 								</p>
 								<h3 class="product-name">
 									<a href="${productAction }"><s:property value="productName" /></a>
