@@ -1,7 +1,10 @@
 $(document).ready(function(){
 	var sum = 0;
 	$(".total").each(function(){
-		sum += parseInt($(this).text());
+		$(this).text(convertFormatNumber($(this).text()));
+	});
+	$(".total").each(function(){
+		sum += parseInt(convertTypeMoneyLineItem($(this).text().toString()));
 	});
 	$("div > .total-price").text("$"+convertFormatNumber(sum.toString()));
 	$("#cart > tbody > tr").on("click",".input-number-product", function(e){
@@ -79,6 +82,17 @@ $(document).ready(function(){
 		input = input.toString();
 		console.log(input);
 		input = input.substr(1);
+		console.log(input);
+		for(var i = 0 ; i < input.length ; i++){
+			if(input[i] !== '.'){
+				result += input[i];
+			}
+		}
+		return result;
+	}
+	function convertTypeMoneyLineItem(input){
+		var result ="";
+		input = input.toString();
 		console.log(input);
 		for(var i = 0 ; i < input.length ; i++){
 			if(input[i] !== '.'){

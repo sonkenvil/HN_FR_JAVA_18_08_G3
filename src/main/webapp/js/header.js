@@ -17,6 +17,23 @@ $(document).ready(function() {
 			$("#header").removeClass('navbar-fixed-top');
 		}
 	});
+	
+	$.ajax({
+		url: 'getMember',
+		type: 'POST',
+		dataType: 'json',
+		success: function(result){
+			if(! result.message){
+				$("div > .sign-in").show();
+				$("div > .account").hide();
+			}else{
+				console.log(result.fullName);
+				$("div > .sign-in").hide();
+				$("div > .account").show();
+				$("div > .account > .fullname").text("<i class='fa fa-user-o'></i>"+result.fullName);
+				}
+			}
+		});
 	$(".header-search .input").keyup(function(){
 		let val  = $(this).val();
 		let ul = $(".header-search .list-product");

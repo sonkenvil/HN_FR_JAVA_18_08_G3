@@ -19,7 +19,7 @@ public class Product implements Serializable{
 	private Category category;
 	private Date createDate;
 	private String color;
-	private double price;
+	private int price;
 	private String description;
 
 	public Product() {  
@@ -27,7 +27,7 @@ public class Product implements Serializable{
 	}
 
 	public Product(int id, String productName, String imagePath, ManuFacturer manuFacturer, Category category,
-			Date createDate, String color, double price, String description) {
+			Date createDate, String color, int price, String description) {
 		super();
 		this.id = id;
 		this.productName = productName;
@@ -96,11 +96,11 @@ public class Product implements Serializable{
 		this.color = color;
 	}
 
-	public double getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 

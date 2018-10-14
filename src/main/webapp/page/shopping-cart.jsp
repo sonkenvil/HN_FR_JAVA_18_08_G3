@@ -113,7 +113,7 @@
 					<td class="text-center"><strong></strong></td>
 				</tr>
 				<tr>
-					<td><a href="#" class="btn btn-warning"><i
+					<td><a href="continue-shopping" class="btn btn-warning"><i
 							class="fa fa-angle-left"></i> Continue Shopping</a></td>
 					<td colspan="3" class="hidden-xs"></td>
 					<td class="hidden-xs text-center">

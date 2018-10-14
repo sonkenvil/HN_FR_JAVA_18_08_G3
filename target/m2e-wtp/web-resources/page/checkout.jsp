@@ -221,14 +221,12 @@
 							</div>
 						</div>
 						<div class="order-products">
+						<s:iterator value="listItem">
 							<div class="order-col">
-								<div>1x Product Name Goes Here</div>
-								<div>$980.00</div>
+								<div class="product-number"><s:property value = "numberProduct"/>x <s:property value = "product.productName"/> </div>
+								<div class="total-price">${product.price*numberProduct}</div>
 							</div>
-							<div class="order-col">
-								<div>2x Product Name Goes Here</div>
-								<div>$980.00</div>
-							</div>
+						</s:iterator>
 						</div>
 						<div class="order-col">
 							<div>Shiping</div>

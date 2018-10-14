@@ -5,6 +5,9 @@ package com.fsoft.project.action;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.fsoft.project.dao.impl.ImageDetailDaoImpl;
 import com.fsoft.project.dao.impl.ProductDaoImpl;
@@ -14,13 +17,14 @@ import com.fsoft.project.service.ImageDetailService;
 import com.fsoft.project.service.ProductService;
 import com.fsoft.project.service.impl.ImageDetailServiceImpl;
 import com.fsoft.project.service.impl.ProductServiceImpl;
+import com.fsoft.project.utils.constants.Constants;
 import com.opensymphony.xwork2.Action;
 
 /**
  * @author hungcoutinho
  *
  */
-public class ProductAction {
+public class ProductAction implements SessionAware{
 
 	private int productId;
 	private ProductService productService;
@@ -28,14 +32,46 @@ public class ProductAction {
 	private Product product;
 	private List<ImageDetail> listImageDetail;
 	private List<Product> listRelateProduct;
-
-	public String execute() throws SQLException {
+	private String url;
+	private Map<String,Object> session;
+	
+	public ProductAction() throws SQLException {
 		productService = new ProductServiceImpl(new ProductDaoImpl());
-		product = productService.getProductById(productId);
 		imageDetailService = new ImageDetailServiceImpl(new ImageDetailDaoImpl());
+	}
+	public String execute() throws SQLException {
+		product = productService.getProductById(productId);
 		listImageDetail = imageDetailService.getListImageDetailByProductId(productId);
 		listRelateProduct = productService.getListProductRelated(product);
+		String name = product.getProductName();
+		String []ds = name.split(" ");
+		url ="";
+		for(String i : ds) {
+			url += i;
+		}
+		session.put(Constants.PRODUCT, productId);
+		session.put(Constants.PAGE_INDEX, Constants.PRODUCT_DETAIL);
 		return Action.SUCCESS;
+	}
+	
+	public String productDetail() throws SQLException {
+		Object object = session.get(Constants.PRODUCT);
+		if(object != null) {
+			int productId = (int) object;
+			product = productService.getProductById(productId);
+			listImageDetail = imageDetailService.getListImageDetailByProductId(productId);
+			listRelateProduct = productService.getListProductRelated(product);
+			return Action.SUCCESS;
+		}
+		return Action.SUCCESS;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public int getProductId() {
@@ -68,6 +104,11 @@ public class ProductAction {
 
 	public void setListRelateProduct(List<Product> listRelateProduct) {
 		this.listRelateProduct = listRelateProduct;
+	}
+
+	@Override
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
 	}
 
 }

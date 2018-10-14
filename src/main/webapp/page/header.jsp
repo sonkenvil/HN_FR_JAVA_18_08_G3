@@ -12,8 +12,10 @@
 						Ha Noi, Viet Nam</a></li>
 			</ul>
 			<ul class="header-links pull-right">
-				<li><a href="#"><i class="fa fa-dollar"></i> VND</a></li>
-				<li><a href="<%=request.getContextPath()%>/page/login.jsp"><i class="fa fa-user-o"></i> My Account</a></li>
+			<div style="display:inline">
+				<li class="sign-in"><a href="<%=request.getContextPath()%>/page/login.jsp"><i class="fas fa-sign-in-alt"></i> Sign-in </a></li>
+				<li class="account" style="display:none"><a href="<%=request.getContextPath()%>/page/login.jsp" class="fullname"><i class="fa fa-user-o"></i> My Account</a></li>
+			</div>
 			</ul>
 		</div>
 	</div>

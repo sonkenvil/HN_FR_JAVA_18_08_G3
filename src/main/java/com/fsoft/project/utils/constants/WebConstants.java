@@ -23,4 +23,12 @@ public class WebConstants {
 	
 	public static final String LIST_LINEITEM = "LIST_LINEITEM";
 	
+	public static final String MEMBER_INDEX = "MEMBER_INDEX";
+	
+	public static final String MEMBER_PRODUCT_DETAIL = "MEMBER_PRODUCT_DETAIL";
+	
+	public static final String MEMBER_SHOPPING_CART = "MEMBER_SHOPPING_CART";
+	
+	public static final String MEMBER_CHECKOUT = "MEMBER_CHECKOUT";
+	
 }

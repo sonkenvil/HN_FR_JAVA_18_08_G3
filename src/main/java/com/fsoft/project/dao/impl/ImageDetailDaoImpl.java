@@ -45,7 +45,7 @@ public class ImageDetailDaoImpl implements ImageDetailDao {
 						rs.getString("ManuFacturerDescription"));
 				category = new Category(rs.getInt("CategoryId"), rs.getString("CategoryName"));
 				product = new Product(rs.getInt("ProductId"), rs.getString("ProductName"), rs.getString("ImagePath"),
-						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getDouble("Price"),
+						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getInt("Price"),
 						rs.getString("ProductDescription"));
 				listImage.add(new ImageDetail(rs.getInt("ImageId"), rs.getString("ImageDetailPath"), product));
 			}
@@ -67,7 +67,7 @@ public class ImageDetailDaoImpl implements ImageDetailDao {
 						rs.getString("ManuFacturerDescription"));
 				category = new Category(rs.getInt("CategoryId"), rs.getString("CategoryName"));
 				product = new Product(rs.getInt("ProductId"), rs.getString("ProductName"), rs.getString("ImagePath"),
-						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getDouble("Price"),
+						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getInt("Price"),
 						rs.getString("Description"));
 				imageDetail = new ImageDetail(rs.getInt("Id"), rs.getString("ImagePath"), product);
 			}

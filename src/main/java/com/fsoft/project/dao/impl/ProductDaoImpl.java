@@ -45,7 +45,7 @@ public class ProductDaoImpl implements ProductDao {
 						rs.getString("ManuFacturerDescription"));
 				category = new Category(rs.getInt("CategoryId"), rs.getString("CategoryName"));
 				listP.add(new Product(rs.getInt("ProductId"), rs.getString("ProductName"), rs.getString("ImagePath"),
-						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getDouble("Price"),
+						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getInt("Price"),
 						rs.getString("ProductDescription")));
 			}
 		}
@@ -68,7 +68,7 @@ public class ProductDaoImpl implements ProductDao {
 						rs.getString("ManuFacturerDescription"));
 				category = new Category(rs.getInt("CategoryId"), rs.getString("CategoryName"));
 				listP.add(new Product(rs.getInt("ProductId"), rs.getString("ProductName"), rs.getString("ImagePath"),
-						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getDouble("Price"),
+						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getInt("Price"),
 						rs.getString("ProductDescription")));
 			}
 		}
@@ -103,7 +103,7 @@ public class ProductDaoImpl implements ProductDao {
 						rs.getString("ManuFacturerDescription"));
 				category = new Category(rs.getInt("CategoryId"), rs.getString("CategoryName"));
 				product = new Product(rs.getInt("ProductId"), rs.getString("ProductName"), rs.getString("ImagePath"),
-						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getDouble("Price"),
+						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getInt("Price"),
 						rs.getString("ProductDescription"));
 			}
 		}
@@ -127,7 +127,7 @@ public class ProductDaoImpl implements ProductDao {
 						rs.getString("ManuFacturerDescription"));
 				category = new Category(rs.getInt("CategoryId"), rs.getString("CategoryName"));
 				listP.add(new Product(rs.getInt("ProductId"), rs.getString("ProductName"), rs.getString("ImagePath"),
-						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getDouble("Price"),
+						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getInt("Price"),
 						rs.getString("ProductDescription")));
 			}
 		}
@@ -152,7 +152,7 @@ public class ProductDaoImpl implements ProductDao {
 						rs.getString("ManuFacturerDescription"));
 				category = new Category(rs.getInt("CategoryId"), rs.getString("CategoryName"));
 				listP.add(new Product(rs.getInt("ProductId"), rs.getString("ProductName"), rs.getString("ImagePath"),
-						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getDouble("Price"),
+						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getInt("Price"),
 						rs.getString("ProductDescription")));
 			}
 		}
@@ -177,7 +177,7 @@ public class ProductDaoImpl implements ProductDao {
 						rs.getString("ManuFacturerDescription"));
 				category = new Category(rs.getInt("CategoryId"), rs.getString("CategoryName"));
 				listP.add(new Product(rs.getInt("ProductId"), rs.getString("ProductName"), rs.getString("ImagePath"),
-						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getDouble("Price"),
+						manuFacturer, category, rs.getDate("CreateDate"), rs.getString("Color"), rs.getInt("Price"),
 						rs.getString("ProductDescription")));
 			}
 		}

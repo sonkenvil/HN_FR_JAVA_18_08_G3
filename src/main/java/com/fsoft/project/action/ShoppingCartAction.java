@@ -1,5 +1,6 @@
 package com.fsoft.project.action;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,6 +13,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.fsoft.project.dao.OrderProductDao;
 import com.fsoft.project.dao.impl.OrderProductDaoImpl;
 import com.fsoft.project.entity.LineItem;
+import com.fsoft.project.entity.Member;
 import com.fsoft.project.entity.OrderProduct;
 import com.fsoft.project.entity.Product;
 import com.fsoft.project.service.OrderProductService;
@@ -43,11 +45,13 @@ public class ShoppingCartAction extends ActionSupport implements SessionAware {
 	@SuppressWarnings("unchecked")
 	@Override
 	public String execute() throws Exception {
+		session.put(Constants.PAGE_INDEX, Constants.SHOPPING_CART);
 		Object object = session.get(WebConstants.LIST_PRODUCT);
 		listProduct = (List<Product>) object;
 		if (listProduct == null)
 			return WebConstants.SUCCESS;
 		listItem = getAllProductCart();
+		session.put(Constants.LIST_LINE_ITEM, listItem);
 		return WebConstants.SUCCESS;
 	}
 	
@@ -63,6 +67,9 @@ public class ShoppingCartAction extends ActionSupport implements SessionAware {
 		}
 		refreshNumberCart = sum;
 		session.put(Constants.CART_NUMBER, refreshNumberCart);
+		listProduct = (List<Product>) session.get(WebConstants.LIST_PRODUCT);
+		listItem = getAllProductCart();
+		session.put(Constants.LIST_LINE_ITEM, listItem);
 		return Action.SUCCESS;
 	}
 	@SuppressWarnings("unchecked")
@@ -81,6 +88,8 @@ public class ShoppingCartAction extends ActionSupport implements SessionAware {
 		session.put(WebConstants.LIST_LINEITEM, numberProduct);
 		session.put(WebConstants.LIST_PRODUCT, listProduct);
 		session.put(Constants.CART_NUMBER, refreshNumberCart);
+		listItem = getAllProductCart();
+		session.put(Constants.LIST_LINE_ITEM, listItem);
 		return Action.SUCCESS;
 	}
 	public int getRefreshNumberCart() {

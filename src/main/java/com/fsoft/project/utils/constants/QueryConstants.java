@@ -31,7 +31,7 @@ public class QueryConstants {
 
 	public static final String SELECT_MANUFACTURER_BY_ID = "SELECT Id,Name,Description FROM MANUFACTURER WHERE Id = ?";
 
-	public static final String GET_MEMBER = "SELECT Id, Email, Role FROM Member WHERE Email = ? AND Password = ?";
+	public static final String GET_MEMBER = "SELECT Id, Email, Role, FirstName, LastName, Address FROM Member WHERE Email = ? AND Password = ?";
 	
 	public static final String CURRENT_ORDER = " SELECT IDENT_CURRENT ('Order_Product') AS Current_Identity";
 
@@ -39,4 +39,7 @@ public class QueryConstants {
 
 	public static final String SELECT_IMAGE_BY_ID = "SELECT I.Id AS 'ImageId', I.ImagePath AS 'ImageDetailPath',P.Id AS 'ProductId',P.ProductName,M.Id AS 'ManuFacturerId',M.Name AS 'ManuFacturerName',M.[Description] AS 'ManuFacturerDescription',C.Name AS 'CategoryId',C.Name AS 'CategoryName',P.CreateDate,P.Color,P.Price,P.[Description] AS 'ProductDescription',P.ImagePath FROM IMAGEDETAIL I INNER JOIN PRODUCT P ON I.ProductId = P.Id AND I.Id = ? INNER JOIN MANUFACTURER M ON P.ManuFacturerId = M.Id INNER JOIN CATEGORY C ON P.CategoryId = C.Id";
 
+	public static final String ADD_LINEITEM = "INSERT INTO LINEITEM(OrderID, ProductID,NumberProduct) VALUES(?,?,?)";
+	
+	public static final String ADD_ORDER="INSERT INTO ORDER_PRODUCT(TotalPrice, MemberId, CreateDate) VALUES(?,?,?)";
 }

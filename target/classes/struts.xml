@@ -14,7 +14,7 @@
 			<interceptor-stack name="myStack">
 				<interceptor-ref name="authentication" />
 				<interceptor-ref name="defaultStack">
-					
+
 				</interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
@@ -28,36 +28,51 @@
 			<result name="SUCCESS_ADMIN">/page/admin.jsp</result>
 			<result name="SUCCESS_MEMBER">/page/checkout.jsp</result>
 			<result name="FAIL" type="redirect">/page/login.jsp</result>
+			<result name="MEMBER_INDEX" type="redirect">continue-shopping</result>
+			<result name="MEMBER_PRODUCT_DETAIL">/page/product.jsp</result>
+			<result name="MEMBER_SHOPPING_CART">/page/shopping-cart.jsp</result>
+			<result name="MEMBER_CHECKOUT">/page/checkout.jsp</result>
 		</action>
-		
+
 		<action name="/admin*">
 			<result name="FAIL" type="redirect">/page/login.jsp</result>
 		</action>
 	</package>
 
 	<package name="default" extends="struts-default">
-		<action name="">			
+		<action name="">
 			<result type="redirect">home.action</result>
 		</action>
-		
+
 		<action name="home" class="com.fsoft.project.action.HomeAction">
 			<result>/page/index.jsp</result>
 		</action>
-		
-		<action name="product" class="com.fsoft.project.action.ProductAction">
+
+		<action name="product"
+			class="com.fsoft.project.action.ProductAction">
+			<result type="redirect">${url}</result>
+		</action>
+
+		<action name="IphoneX"
+			class="com.fsoft.project.action.ProductAction" method="productDetail">
 			<result>/page/product.jsp</result>
 		</action>
-		
+
 		<action name="shopping-cart"
 			class="com.fsoft.project.action.ShoppingCartAction">
 			<result name="SUCCESS">/page/shopping-cart.jsp</result>
 		</action>
-		
+
 		<action name="checkout"
 			class="com.fsoft.project.action.CheckoutAction">
-			<result >/page/checkout.jsp</result>
+			<result>/page/checkout.jsp</result>
 		</action>
-		
+
+		<action name="continue-shopping"
+			class="com.fsoft.project.action.HomeAction">
+			<result>/page/index.jsp</result>
+		</action>
+
 	</package>
 
 	<package name="json" extends="json-default">
@@ -76,16 +91,23 @@
 			<result type="json"></result>
 		</action>
 		<action name="editNumberProduct"
-			class="com.fsoft.project.action.ShoppingCartAction" method="editNumberProduct">
+			class="com.fsoft.project.action.ShoppingCartAction"
+			method="editNumberProduct">
 			<result type="json"></result>
 		</action>
 		<action name="removeProduct"
-			class="com.fsoft.project.action.ShoppingCartAction" method="removeProduct">
+			class="com.fsoft.project.action.ShoppingCartAction"
+			method="removeProduct">
 			<result type="json"></result>
 		</action>
 		<action name="getNumberProduct"
 			class="com.fsoft.project.action.SessionAction"
 			method="getNumberProduct">
+			<result type="json"></result>
+		</action>
+		<action name="getMember"
+			class="com.fsoft.project.action.LoginAction"
+			method="getMember">
 			<result type="json"></result>
 		</action>
 	</package>

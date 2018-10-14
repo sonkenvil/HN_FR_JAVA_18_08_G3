@@ -29,6 +29,9 @@ public class LoginDaoImpl implements LoginDao{
         member.setId(rs.getInt("Id"));
         member.setEmail(rs.getString("Email"));
         member.setRole(rs.getBoolean("Role"));
+        member.setFirstName(rs.getString("Firstname"));
+        member.setLastName(rs.getString("LastName"));
+        member.setAddress(rs.getString("Address"));
       }
     } catch (SQLException e) {
       e.printStackTrace();

@@ -31,6 +31,7 @@ public class HomeAction implements SessionAware {
 	ProductService productService = null;
 
 	public String execute() {
+		session.put(Constants.PAGE_INDEX, Constants.INDEX);
 		productService = new ProductServiceImpl(new ProductDaoImpl());
 		try {
 			listNewProduct = productService.getListNewProduct();
