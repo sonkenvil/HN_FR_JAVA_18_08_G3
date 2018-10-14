@@ -78,7 +78,9 @@ public class SessionAction {
 	}
 	public String getNumberProduct() {
 		HttpSession session = ServletActionContext.getRequest().getSession(true);
-		cartNumber = (int) session.getAttribute(Constants.CART_NUMBER);
+		Object object = session.getAttribute(Constants.CART_NUMBER);
+		if(object != null)
+		cartNumber = (int) object;
 		return Action.SUCCESS;
 	}
 	public int getCartNumber() {

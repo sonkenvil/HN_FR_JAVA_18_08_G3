@@ -123,7 +123,7 @@
 							</strong>
 						</div>
 					</td>
-					<td><a href="#" class="btn btn-success btn-block">Checkout
+					<td><a href="checkout" class="btn btn-success btn-block">Checkout
 							<i class="fa fa-angle-right"></i>
 					</a></td>
 				</tr>

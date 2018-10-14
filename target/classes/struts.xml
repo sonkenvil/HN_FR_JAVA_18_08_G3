@@ -49,6 +49,11 @@
 			<result name="SUCCESS">/page/shopping-cart.jsp</result>
 		</action>
 		
+		<action name="checkout"
+			class="com.fsoft.project.action.CheckoutAction">
+			<result >/page/checkout.jsp</result>
+		</action>
+		
 	</package>
 
 	<package name="json" extends="json-default">
