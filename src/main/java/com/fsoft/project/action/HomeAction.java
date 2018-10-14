@@ -62,6 +62,10 @@ public class HomeAction implements SessionAware {
 		return Action.SUCCESS;
 	}
 
+	public String searchListProductByValue(boolean sortByName, boolean sortByPrice, double priceMin, double priceMax) {
+		return Action.SUCCESS;
+	}
+	
 	public List<Product> getListNewProduct() {
 		return listNewProduct;
 	}

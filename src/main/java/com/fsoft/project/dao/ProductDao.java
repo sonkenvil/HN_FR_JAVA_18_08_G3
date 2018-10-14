@@ -17,11 +17,15 @@ public interface ProductDao {
 	List<Product> getListNewProduct() throws SQLException;
 
 	List<Product> getListProduct(int n) throws SQLException;
-	
+
 	List<Product> getListProductByValue(String val) throws SQLException;
 
 	int getTotalProduct() throws SQLException;
 
 	Product getProductById(int id) throws SQLException;
+
+	List<Product> getListProductRelated(Product product) throws SQLException;
+
+	List<Product> selectListProductByValue(String selectByPrice, String orderByName, String orderByPrice) throws SQLException;
 
 }

@@ -31,7 +31,6 @@ jQuery(document).ready(function($) {
 				$(this).detach()
 			});
 		}
-		console.log(parseInt($(this).attr('data-id')));
 		$.ajax({
 			url : 'addProductToSessionAction',
 			type : 'get',

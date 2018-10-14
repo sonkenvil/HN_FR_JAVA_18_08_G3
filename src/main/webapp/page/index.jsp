@@ -102,9 +102,6 @@
 											<s:param name="productId">
 												<s:property value="id" />
 											</s:param>
-											<s:param name="color">
-												<s:property value="color" />
-											</s:param>
 										</s:url>
 										<!-- product -->
 										<div class="product new-product">
@@ -137,7 +134,8 @@
 														<a class="a-detail" href="${productAction }"><i
 															class="fa fa-info-circle" aria-hidden="true"></i> Detail</a>
 													</button>
-													<button class="btn btn-warning btn-cart" data-id='<s:property value="id"/>'>
+													<button class="btn btn-warning btn-cart"
+														data-id='<s:property value="id"/>'>
 														<a class="a-add-cart"><i class="fa fa-shopping-cart"></i>
 															Add to cart</a>
 													</button>
@@ -184,25 +182,70 @@
 				<!-- /section title -->
 			</div>
 
-			<div class="row">
-				<div class="col-md-3">
-					<label>Sort :</label> <select name="sort-type">
-						<option value="name">Name (a -> z)</option>
-						<option value="mintomaxPrice">Price (min -> max)</option>
-						<option value="maxtominPrice">Name (max -> min)</option>
+			<div class="row search-by-type">
+				<div class="col-md-3 sort">
+					<label>Sort By Name (a -> z) </label><input type="checkbox" name="sortByName" value="sortByName"/>
+					<label>Sort By Price (min -> max) </label><input type="checkbox" name="sortByPrice" value="sortByPrice"/>
+				</div>
+				<div class="col-md-4 rangePrice">
+					<label>Range price </label> <select name="price-range">
+						<option value="0">Default</option>
+						<option value="1">1000000-10000000</option>
+						<option value="2">10000000-20000000</option>
+						<option value="3">20000000-30000000</option>
 					</select>
 				</div>
-				<div class="col-md-4">
-					<label>Range price :</label> <select name="price-range">
-						<option value="range-1">1000000-10000000</option>
-						<option value="range-2">10000000-20000000</option>
-						<option value="range-3">20000000-30000000</option>
-					</select>
-				</div>
-				<div class="col-md-3">
-					<input type="button" value="Search" />
+				<div class="col-md-3 btn">
+					<input type="button" value="Search" class="btn-search"/>
 				</div>
 			</div>
+			<script type="text/javascript">
+				$(document).ready(function(){
+					let sortByName,sortByPrice,minPrice,maxPrice;
+					$(".search-by-type .sort input[name='sortByName']").change(function(){
+						if(this.checked == true)
+							sortByName = true;
+					})
+					$(".search-by-type .sort input[name='sortByPrice']").change(function(){
+						if(this.checked == true)
+							sortByPrice = true;
+					})
+					$(".search-by-type .rangePrice selece").change(function(){
+						let value = $(this).val();
+						if(value === '0'){
+							minPrice = 0;
+							maxPrice = 30000000;
+						}
+						else if(value === '1'){
+							minPrice = 1000000;
+							maxPrice = 10000000;
+						}
+						else if(value === '2'){
+							minPrice = 10000000;
+							maxPrice = 20000000;
+						}
+						else{
+							minPrice = 20000000;
+							maxPrice = 30000000;
+						}
+					})
+					$(".search-by-type .btn-search").click(function(){
+						if(typeof sortByName !== 'undefined' || typeof sortByPrice !== 'undefined' || minPrice !== 'undefined' || maxPrice !== 'undefined'){
+							if(typeof sortName === 'undefined')
+								sortByName = false;
+							if(typeof sortByPrice === 'undefined')
+								sortByPrice = false;
+							if(typeof minPrice === 'undefined')
+								minPrice = 0;
+							if(typeof maxPrice === 'undefined')
+								maxPrice = 30000000;
+							$.ajax({
+								
+							})
+						}
+					})
+				})
+			</script>
 			<div class="div-grid-product">
 				<p class="img-gif">
 					<img src="<%=request.getContextPath()%>/img/magnify.gif" />
@@ -213,9 +256,6 @@
 						<s:url action="product" var="productAction">
 							<s:param name="productId">
 								<s:property value="id" />
-							</s:param>
-							<s:param name="color">
-								<s:property value="color" />
 							</s:param>
 						</s:url>
 						<!-- product -->
@@ -236,6 +276,7 @@
 								</h3>
 								<h4 class="product-price">
 									<s:property value="price"/>$
+
 								</h4>
 								<div class="product-rating">
 									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -247,9 +288,9 @@
 										<a class="a-detail" href="${productAction }"><i
 											class="fa fa-info-circle" aria-hidden="true"></i> Detail</a>
 									</button>
-									<button class="btn btn-warning btn-cart" data-id='<s:property value="id"/>'>
-										<a><i class="fa fa-shopping-cart"></i>
-											Add to cart</a>
+									<button class="btn btn-warning btn-cart"
+										data-id='<s:property value="id"/>'>
+										<a><i class="fa fa-shopping-cart"></i> Add to cart</a>
 									</button>
 								</div>
 							</div>
@@ -721,7 +762,7 @@
 
 	<!-- Jquery ui js -->
 	<script src="<%=request.getContextPath()%>/js/jquery-ui.min.js"></script>
-	
+
 	<!-- cart js -->
 	<script src="<%=request.getContextPath()%>/js/cart.js"></script>
 

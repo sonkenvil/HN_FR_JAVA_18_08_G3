@@ -67,20 +67,13 @@
 					</div>
 					<div id="product-main-img">
 						<div class="product-preview">
-							<img src="<%=request.getContextPath()%>/img/product01.png" alt="">
+							<img src="${product.imagePath }" alt="">
 						</div>
-
-						<div class="product-preview">
-							<img src="<%=request.getContextPath()%>/img/product03.png" alt="">
-						</div>
-
-						<div class="product-preview">
-							<img src="<%=request.getContextPath()%>/img/product06.png" alt="">
-						</div>
-
-						<div class="product-preview">
-							<img src="<%=request.getContextPath()%>/img/product08.png" alt="">
-						</div>
+						<s:iterator value="listImageDetail">
+							<div class="product-preview">
+								<img src="${imagePath }" alt="">
+							</div>
+						</s:iterator>
 					</div>
 				</div>
 				<!-- modal information product-->
@@ -95,44 +88,12 @@
 								<h4 class="modal-title">Information Product</h4>
 							</div>
 							<div class="modal-body">
-
-								<ul
-									style="font-size: 13px; list-style: none; padding: 0; margin: 0 0 10px; line-height: 1.4;">
-									<li style="padding: 5px 12px; background-color: #ebebeb">
-										<strong>Tình trạng máy:</strong> <span>Có trầy
-											xước,Chưa bung máy.</span>
-									</li>
-
-									<li style="padding: 5px 12px"><strong>Phụ
-											kiện kèm theo:</strong> <span>Củ sạc,Cáp sạc.</span></li>
-
-									<li style="padding: 5px 12px; background-color: #ebebeb">
-										<strong>Kết nối mạng:</strong> <span>2G,3G,Wifi.</span>
-									</li>
-
-									<li style="padding: 5px 12px"><strong>Phương
-											thức bảo hành:</strong> <span>Bằng phiếu bảo hành.</span>
-									</li>
-
-									<li style="padding: 5px 12px; background-color: #ebebeb">
-										<strong>Nơi bảo hành:</strong> <span>Bảo hành
-											tại cửa hàng.</span>
-									</li>
-
-									<li style="padding: '5px 12px'"><strong>Model
-											iPhone:</strong> <span>iPhone 4.</span></li>
-
-									<li style="padding: 5px 12px; background-color: #ebebeb">
-										<strong>Hãng sản xuất:</strong> <span>Apple.</span>
-									</li>
-									<li style="padding: 5px 12px"><strong>Bộ nhớ
-											trong:</strong> <span>8Gb.</span></li>
-									<li style="padding: 5px 12px; background-color: #ebebeb">
-										<strong>Bảo hành:</strong> <span>1 tháng.</span>
-									</li>
-
-								</ul>
-
+								<h3><s:property value="product.productName"/></h3>
+								<p>Price: <s:property value="product.price"/></p>
+								<p>Description: <s:property value="product.description"/></p>
+								<p>Create date: <s:property value="product.createDate"/></p>
+								<p>Manufacturer: <s:property value="product.manuFacturer.name"/></p>
+								<p>Color: <span style="display:inline-block;width:20px;height:20px;background-color:${product.color}"></span></p>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
@@ -156,31 +117,8 @@
 								<h4 class="modal-title">Informaion company</h4>
 							</div>
 							<div class="modal-body">
-								<p>
-								<ul
-									style="font-size: 13px; list-style: none; padding: 0; margin: 0 0 10px; line-height: 1.4;">
-									<li style="padding: 5px 12px; background-color: #ebebeb">
-										<strong>Ten cong ty:</strong> <span>Java 1808</span>
-									</li>
-
-									<li style="padding: 5px 12px"><strong>so dien
-											thoai</strong> <span>09876544543</span></li>
-
-									<li style="padding: 5px 12px; background-color: #ebebeb">
-										<strong>dia chi</strong> <span>ha noi</span>
-									</li>
-
-									<li style="padding: 5px 12px"><strong>gioi thieu
-											ve cong ty</strong> <span>Lorem ipsum dolor sit amet,
-											consectetur adipisicing elit. Veniam dicta commodi
-											repellendus maiores minus ullam reiciendis delectus officiis,
-											laboriosam sapiente ea, ut magni earum tempora et a hic
-											deleniti! Quisquam, iure praesentium deleniti. Unde quasi
-											vero, asperiores architecto ab ad, cupiditate facere
-											praesentium, consectetur quidem aut. Eius eos est fugiat.</span></li>
-
-								</ul>
-								</p>
+								<h3><s:property value="product.manuFacturer.name"/></h3>
+								<p>Description: <s:property value="product.manuFacturer.description"/></p>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
@@ -197,20 +135,13 @@
 					data-wow-duration="1s">
 					<div id="product-imgs">
 						<div class="product-preview">
-							<img src="<%=request.getContextPath()%>/img/product01.png" alt="">
+							<img src="${product.imagePath }" alt="">
 						</div>
-
-						<div class="product-preview">
-							<img src="<%=request.getContextPath()%>/img/product03.png" alt="">
-						</div>
-
-						<div class="product-preview">
-							<img src="<%=request.getContextPath()%>/img/product06.png" alt="">
-						</div>
-
-						<div class="product-preview">
-							<img src="<%=request.getContextPath()%>/img/product08.png" alt="">
-						</div>
+						<s:iterator value="listImageDetail">
+							<div class="product-preview">
+								<img src="${imagePath }" alt="">
+							</div>
+						</s:iterator>
 					</div>
 				</div>
 				<!-- /Product thumb imgs -->
@@ -226,29 +157,20 @@
 									class="fa fa-star-o"></i>
 							</div>
 
-							<h2 class="product-name">IPHONE X 32GB INTERNATIONAL PRIMARY
-								APPLE PRICE</h2>
+							<h2 class="product-name"><s:property value="product.productName"/></h2>
 						</div>
 						<div>
 							<h3 class="product-price">
-								<span style="color: black">Price: </span> $980.00
-								<del class="product-old-price">$990.00</del>
+								<span style="color: black">Price: <s:property value="product.price"/> VND</span>
 							</h3>
 						</div>
 
-						<p>Company java_1808 ha noi viet nam</p>
+						<p><s:property value="product.manuFacturer.name"/></p>
 
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-							sed do eiusmod tempor incididunt ut labore et dolore magna
-							aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-							ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+						<p><s:property value="product.description"/></p>
 
 						<p class="freeShip">
-							<img src="<%=request.getContextPath()%>/img/4B6MEO.png" />Lorem
-							ipsum dolor sit amet, consectetur adipisicing elit. Commodi
-							deleniti rem vo vel possimus molestias nam. Blanditiis,
-							accusamus.
-						</p>
+							<img src="<%=request.getContextPath()%>/img/4B6MEO.png" /><span>Free ship</span>
 						<div class="product-options">
 
 							<label>
@@ -256,19 +178,14 @@
 								<div>
 
 									<button value="black" class="colorOption_3imj"
-										style="background-color: black"></button>
-									<button value="white" class="colorOption_3imj"
-										style="background-color: white"></button>
-									<button value="yellow" class="colorOption_3imj"
-										style="background-color: #FFE4E1"></button>
-
+										style="background-color: ${product.color}"></button>
 								</div>
 							</label>
 						</div>
 
 						<div class="add-to-cart">
 							<div class="qty-label">
-								Qty
+								<span>Quantity</span>
 								<div class="input-number">
 									<input type="number" value="1"> <span class="qty-up">+</span>
 									<span class="qty-down">-</span>
@@ -279,7 +196,8 @@
 									<a><i class="fa fa-shopping-cart"></i> Add to cart</a>
 								</button>
 								<button class="btn btn-danger">
-									<a href="<%=request.getContextPath()%>/page/checkout.jsp"><i class="fa fa-usd"></i> Buy now</a>
+									<a href="<%=request.getContextPath()%>/page/checkout.jsp"><i
+										class="fa fa-usd"></i> Buy now</a>
 								</button>
 							</div>
 						</div>
@@ -293,7 +211,6 @@
 		<!-- /container -->
 	</div>
 	<!-- /SECTION -->
-
 	<div class="col-md-12 wow fadeInDown">
 		<div class="section-title text-center">
 			<h3>Related Infomation</h3>
@@ -341,146 +258,46 @@
 						<h3 class="title">Related Products</h3>
 					</div>
 				</div>
-
-				<!-- product -->
-				<div class="col-md-3 col-xs-6">
-					<div class="product">
-						<div class="product-img">
-							<img src="<%=request.getContextPath()%>/img/product01.png" alt="">
-							<div class="product-label">
-								<span class="sale">-30%</span>
+				
+				<s:iterator value="listRelateProduct">
+					<s:url action="product" var="productAction">
+						<s:param name="productId"><s:property value="id"/></s:param>
+					</s:url>
+					<!-- product -->
+					<div class="col-md-3 col-xs-6">
+						<div class="product">
+							<div class="product-img">
+								<img src="${imagePath }" alt="">
+								<div class="product-label">
+									<span class="sale">-30%</span>
+								</div>
 							</div>
-						</div>
-						<div class="product-body">
-							<p class="product-category">Category</p>
-							<h3 class="product-name">
-								<a href="#">product name goes here</a>
-							</h3>
-							<h4 class="product-price">
-								$980.00
-								<del class="product-old-price">$990.00</del>
-							</h4>
-							<div class="product-rating">
-								<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-									class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-									class="fa fa-star"></i>
-							</div>
-							<div class="add-cart">
-								<button class="btn btn-info btn-detail test">
-									<i class="fa fa-info-circle" aria-hidden="true"></i> DetailA
-								</button>
-								<button class="btn btn-warning btn-cart">
-									<i class="fa fa-shopping-cart"></i> Add to cart
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- /product -->
-
-				<!-- product -->
-				<div class="col-md-3 col-xs-6">
-					<div class="product">
-						<div class="product-img">
-							<img src="<%=request.getContextPath()%>/img/product02.png" alt="">
-							<div class="product-label">
-								<span class="new">NEW</span>
-							</div>
-						</div>
-						<div class="product-body">
-							<p class="product-category">Category</p>
-							<h3 class="product-name">
-								<a href="#">product name goes here</a>
-							</h3>
-							<h4 class="product-price">
-								$980.00
-								<del class="product-old-price">$990.00</del>
-							</h4>
-							<div class="product-rating">
-								<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-									class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-									class="fa fa-star"></i>
-							</div>
-							<div class="add-cart">
-								<button class="btn btn-info btn-detail test">
-									<i class="fa fa-info-circle" aria-hidden="true"></i> DetailA
-								</button>
-								<button class="btn btn-warning btn-cart">
-									<i class="fa fa-shopping-cart"></i> Add to cart
-								</button>
+							<div class="product-body">
+								<p class="product-category"><s:property value="category.name"/></p>
+								<h3 class="product-name">
+									<a href="${productAction }"><s:property value="productName"/></a>
+								</h3>
+								<h4 class="product-price">
+									<s:property value="price"/>
+								</h4>
+								<div class="product-rating">
+									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+										class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+										class="fa fa-star"></i>
+								</div>
+								<div class="add-cart">
+									<button class="btn btn-info btn-detail test">
+										<a class="a-detail" href="${productAction }"><i class="fa fa-info-circle" aria-hidden="true"></i> Detail</a>
+									</button>
+									<button class="btn btn-warning btn-cart"
+										data-id='<s:property value="id"/>'>
+										<a class="a-add-cart"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<!-- /product -->
-
-				<div class="clearfix visible-sm visible-xs"></div>
-
-				<!-- product -->
-				<div class="col-md-3 col-xs-6">
-					<div class="product">
-						<div class="product-img">
-							<img src="<%=request.getContextPath()%>/img/product03.png" alt="">
-						</div>
-						<div class="product-body">
-							<p class="product-category">Category</p>
-							<h3 class="product-name">
-								<a href="#">product name goes here</a>
-							</h3>
-							<h4 class="product-price">
-								$980.00
-								<del class="product-old-price">$990.00</del>
-							</h4>
-							<div class="product-rating">
-								<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-									class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-									class="fa fa-star"></i>
-							</div>
-							<div class="add-cart">
-								<button class="btn btn-info btn-detail test">
-									<i class="fa fa-info-circle" aria-hidden="true"></i> DetailA
-								</button>
-								<button class="btn btn-warning btn-cart">
-									<i class="fa fa-shopping-cart"></i> Add to cart
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- /product -->
-
-				<!-- product -->
-				<div class="col-md-3 col-xs-6">
-					<div class="product">
-						<div class="product-img">
-							<img src="<%=request.getContextPath()%>/img/product04.png" alt="">
-						</div>
-						<div class="product-body">
-							<p class="product-category">Category</p>
-							<h3 class="product-name">
-								<a href="#">product name goes here</a>
-							</h3>
-							<h4 class="product-price">
-								$980.00
-								<del class="product-old-price">$990.00</del>
-							</h4>
-							<div class="product-rating">
-								<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-									class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-									class="fa fa-star"></i>
-							</div>
-							<div class="add-cart">
-								<button class="btn btn-info btn-detail test">
-									<i class="fa fa-info-circle" aria-hidden="true"></i> DetailA
-								</button>
-								<button class="btn btn-warning btn-cart">
-									<i class="fa fa-shopping-cart"></i> Add to cart
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- /product -->
+					<!-- /product -->
+				</s:iterator>
 
 			</div>
 			<!-- /row -->
@@ -533,6 +350,24 @@
 
 	<!-- Jquery ui js -->
 	<script src="<%=request.getContextPath()%>/js/jquery-ui.min.js"></script>
+
+	<!-- Custom input number -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$(".qty-up").click(function() {
+				let input = $(".input-number input");
+				let val = parseInt($(input).attr('value')) + 1;
+				$(input).attr('value', val);
+			})
+			$(".qty-down").click(function() {
+				let input = $(".input-number input");
+				let val = parseInt($(input).attr('value')) - 1;
+				if (val >= 0)
+					$(input).attr('value', val);
+			})
+		})
+	</script>
+	<!-- /Custom input number -->
 
 	<script>
 		new WOW().init();

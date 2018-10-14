@@ -52,4 +52,25 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.getListProductByValue(val);
 	}
 
+	@Override
+	public List<Product> getListProductRelated(Product product) throws SQLException {
+		// TODO Auto-generated method stub
+		return productDao.getListProductRelated(product);
+	}
+
+	@Override
+	public List<Product> searchListProductByValue(boolean sortByName, boolean sortByPrice, double minPrice,
+			double maxPrice) throws SQLException {
+		// TODO Auto-generated method stub
+		String orderByName = "";
+		String orderByPrice = "";
+		String selectByPrice;
+		if(sortByName)
+			orderByName = ",ORDER BY P.ProductName ASC";
+		if(sortByPrice)
+			orderByPrice = (sortByName)?",":"" +  "ORDER BY P.Price ASC";
+		selectByPrice = "WHERE P.Price >= " + minPrice + " AND P.Price <= " + maxPrice;
+		return productDao.selectListProductByValue(selectByPrice, orderByName, orderByPrice);
+	}
+
 }

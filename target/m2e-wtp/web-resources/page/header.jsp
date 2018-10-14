@@ -1,4 +1,4 @@
-
+<%@taglib uri="/struts-tags" prefix="s"%>
 <!-- HEADER -->
 <header>
 	<!-- TOP HEADER -->

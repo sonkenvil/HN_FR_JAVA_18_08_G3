@@ -44,6 +44,10 @@
 			<result>/page/index.jsp</result>
 		</action>
 		
+		<action name="product" class="com.fsoft.project.action.ProductAction">
+			<result>/page/product.jsp</result>
+		</action>
+		
 		<action name="shopping-cart"
 			class="com.fsoft.project.action.ShoppingCartAction">
 			<result name="SUCCESS">/page/shopping-cart.jsp</result>
