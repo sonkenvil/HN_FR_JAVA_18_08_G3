@@ -4,9 +4,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
-
 
 public class DbHelper {
 	private static Connection connection;
@@ -39,6 +40,29 @@ public class DbHelper {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void closeConnection(Connection connection, PreparedStatement ps, ResultSet rs) {
+		try {
+			if (rs != null)
+				rs.close();
+			if (ps != null)
+				ps.close();
+			if (connection != null)
+				connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public static void closeConnection(Connection connection, PreparedStatement ps) {
+		try {
+			if (ps != null)
+				ps.close();
+			if (connection != null)
+				connection.close();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}

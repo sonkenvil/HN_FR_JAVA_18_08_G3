@@ -12,10 +12,13 @@
 						Ha Noi, Viet Nam</a></li>
 			</ul>
 			<ul class="header-links pull-right">
-			<div style="display:inline">
-				<li class="sign-in"><a href="<%=request.getContextPath()%>/page/login.jsp"><i class="fas fa-sign-in-alt"></i> Sign-in </a></li>
-				<li class="account" style="display:none"><a href="<%=request.getContextPath()%>/page/login.jsp" class="fullname"><i class="fa fa-user-o"></i> My Account</a></li>
-			</div>
+				<div>
+					<li style="display:none" class="sign-in"><a href="<%=request.getContextPath()%>/page/login.jsp"><i class="fas fa-sign-in-alt"></i> Sign-in </a></li>
+					<div style="display:none" class="profile">
+						<li ><a href="myaccount"><i class="fa fa-user-o"></i></a></li>
+						<li ><a href="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+					</div>
+				</div>
 			</ul>
 		</div>
 	</div>
@@ -30,7 +33,7 @@
 				<!-- LOGO -->
 				<div class="col-md-3">
 					<div class="header-logo">
-						<a href="<%=request.getContextPath() %>/page/index.jsp" class="logo">JAVA 1808</a>
+						<a href="continue-shopping" class="logo">JAVA 1808</a>
 					</div>
 				</div>
 				<!-- /LOGO -->

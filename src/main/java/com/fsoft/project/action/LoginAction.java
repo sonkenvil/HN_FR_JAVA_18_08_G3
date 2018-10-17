@@ -5,17 +5,21 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.fsoft.project.dao.LoginDao;
+import com.fsoft.project.dao.MemberDao;
 import com.fsoft.project.dao.impl.LoginDaoImpl;
+import com.fsoft.project.dao.impl.MemberDaoImpl;
 import com.fsoft.project.entity.Member;
 import com.fsoft.project.service.LoginService;
+import com.fsoft.project.service.MemberService;
 import com.fsoft.project.service.impl.LoginServiceImpl;
+import com.fsoft.project.service.impl.MemberServiceImpl;
 import com.fsoft.project.utils.constants.Constants;
 import com.fsoft.project.utils.constants.WebConstants;
 import com.opensymphony.xwork2.Action;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.Preparable;
 
-public class LoginAction extends ActionSupport implements SessionAware {
+public class LoginAction extends ActionSupport implements SessionAware, Preparable {
 
 	/**
 	 * 
@@ -26,50 +30,88 @@ public class LoginAction extends ActionSupport implements SessionAware {
 
 	/*
 	 * */
-	private LoginDao loginDao;
-	private LoginService loginService;
 	private Map<String, Object> session;
 	private boolean message;
 	private Member member;
 	private String fullName;
-	public LoginAction() {
-		loginDao = new LoginDaoImpl();
-		loginService = new LoginServiceImpl(loginDao);
-	}
+	private int index;
+	private boolean notification;
+	private int productId;
+	private MemberDao memberDao;
+	private MemberService memberService;
+	
 
 	@Override
 	public String execute() throws Exception {
-		 member = loginService.getMember(email, password);
-		if (member == null)
+		member = memberService.getMember(email, password);
+		if (member == null) {
+			notification = false;
 			return WebConstants.FAIL;
-		session.put(Constants.MEMBER, member);
-		if (member.isRole())
-			return WebConstants.SUCCESS_ADMIN;
-		Object object = session.get(Constants.PAGE_INDEX);
-		if(object != null) {
-			int index = (int) object;
-			if(index == 1) {
-				return WebConstants.MEMBER_INDEX;
-			}else if(index == 2) {
-				return WebConstants.MEMBER_PRODUCT_DETAIL;
-			}else if(index == 3) {
-				return WebConstants.MEMBER_SHOPPING_CART;
-			}else {
-				return WebConstants.MEMBER_CHECKOUT;
+		} else {
+			notification = true;
+			session.put(Constants.MEMBER, member);
+			if (member.isRole())
+				return WebConstants.SUCCESS_ADMIN;
+			Object object = session.get(Constants.PAGE_INDEX);
+			if (object != null) {
+				index = (int) object;
+				if (index == Constants.INDEX) {
+					return WebConstants.MEMBER_INDEX;
+				} else if (index == Constants.PRODUCT_DETAIL) {
+					productId = (int) session.put(Constants.PRODUCT, productId);
+					return WebConstants.MEMBER_PRODUCT_DETAIL;
+				} else if (index == Constants.SHOPPING_CART) {
+					return WebConstants.MEMBER_SHOPPING_CART;
+				} else {
+					return WebConstants.MEMBER_CHECKOUT;
+				}
 			}
 		}
 		return WebConstants.SUCCESS_MEMBER;
 	}
+
 	public String getMember() {
 		member = (Member) session.get(Constants.MEMBER);
-		if(member == null) {
+		if (member == null) {
 			message = false;
-		}else {
+		} else {
 			fullName = member.getFirstName() + member.getLastName();
 			message = true;
 		}
 		return Action.SUCCESS;
 	}
+
+	public int getProductId() {
+		return productId;
+	}
+
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
+
+	public boolean isNotification() {
+		return notification;
+	}
+
+	public void setNotification(boolean notification) {
+		this.notification = notification;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
+
+	@Override
+	public void validate() {
+		if (member != null) {
+			addActionMessage("Account not exist!");
+		}
+	}
+
 	public String getFullName() {
 		return fullName;
 	}
@@ -113,5 +155,11 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
+	}
+
+	@Override
+	public void prepare() throws Exception {
+		memberDao = new MemberDaoImpl();
+		memberService = new MemberServiceImpl(memberDao);
 	}
 }

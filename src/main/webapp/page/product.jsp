@@ -187,7 +187,7 @@
 							<div class="qty-label">
 								<span>Quantity</span>
 								<div class="input-number">
-									<input type="number" value="1"> <span class="qty-up">+</span>
+									<input type="number" value="1" min="1"> <span class="qty-up">+</span>
 									<span class="qty-down">-</span>
 								</div>
 							</div>
@@ -363,7 +363,7 @@
 			$(".qty-down").click(function() {
 				let input = $(".input-number input");
 				let val = parseInt($(input).attr('value')) - 1;
-				if (val >= 0)
+				if (val >= 1)
 					$(input).attr('value', val);
 			})
 		})

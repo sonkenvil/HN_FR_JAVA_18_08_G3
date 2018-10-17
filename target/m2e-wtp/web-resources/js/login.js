@@ -10,6 +10,30 @@ $("#loginform").validate({
 	}
 	,submitHandler: function(form){
 		$("label.error").hide();
-		 form.submit();
+		 $.ajax({
+	            url: "login", 
+	            type: "POST",             
+	            data: {
+	            	email : $("#login-email").val(),
+	            	password : $("#login-password").val()
+	            },   
+	            success: function(data) {
+	            	if(data.notification){
+	            		$("#error").hide();
+	            		if(data.index === 1){
+	            			window.location.href = 'home.action';
+	            		}else if(data.index === 2){
+	            			window.location.href = 'http://localhost:8080/HN_FR_JAVA_18_08_G3/product.action?productId='+data.productId;
+	            		}else if(data.index === 3){
+	            			window.location.href = 'shopping-cart';
+	            		}else{
+	            			window.location.href = 'checkout';
+	            		}
+	            	}else{
+	            		$("#error").show();
+	            		$("#error").text("Account not exist!");
+	            	}
+	            }
+	        });
 	}
 })

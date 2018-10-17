@@ -31,4 +31,6 @@ public class WebConstants {
 	
 	public static final String MEMBER_CHECKOUT = "MEMBER_CHECKOUT";
 	
+	public static final String LOGOUT = "LOGOUT";
+	
 }

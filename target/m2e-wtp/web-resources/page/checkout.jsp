@@ -223,7 +223,7 @@
 						<div class="order-products">
 						<s:iterator value="listItem">
 							<div class="order-col">
-								<div class="product-number"><s:property value = "numberProduct"/>x <s:property value = "product.productName"/> </div>
+								<div class="product-number"><s:property value = "numberProduct"/>x <s:property value = "product.productName"/> - <s:property value = "product.color"/></div>
 								<div class="total-price">${product.price*numberProduct}</div>
 							</div>
 						</s:iterator>

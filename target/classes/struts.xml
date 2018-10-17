@@ -23,17 +23,6 @@
 			<result>/page/login.jsp</result>
 		</global-results>
 
-		<action name="login"
-			class="com.fsoft.project.action.LoginAction">
-			<result name="SUCCESS_ADMIN">/page/admin.jsp</result>
-			<result name="SUCCESS_MEMBER">/page/checkout.jsp</result>
-			<result name="FAIL" type="redirect">/page/login.jsp</result>
-			<result name="MEMBER_INDEX" type="redirect">continue-shopping</result>
-			<result name="MEMBER_PRODUCT_DETAIL">/page/product.jsp</result>
-			<result name="MEMBER_SHOPPING_CART">/page/shopping-cart.jsp</result>
-			<result name="MEMBER_CHECKOUT">/page/checkout.jsp</result>
-		</action>
-
 		<action name="/admin*">
 			<result name="FAIL" type="redirect">/page/login.jsp</result>
 		</action>
@@ -47,14 +36,9 @@
 		<action name="home" class="com.fsoft.project.action.HomeAction">
 			<result>/page/index.jsp</result>
 		</action>
-
+        
 		<action name="product"
 			class="com.fsoft.project.action.ProductAction">
-			<result type="redirect">${url}</result>
-		</action>
-
-		<action name="IphoneX"
-			class="com.fsoft.project.action.ProductAction" method="productDetail">
 			<result>/page/product.jsp</result>
 		</action>
 
@@ -73,6 +57,16 @@
 			<result>/page/index.jsp</result>
 		</action>
 
+		<action name="logout"
+			class="com.fsoft.project.action.LogoutAction">
+			<result type="redirect">home</result>
+		</action>
+		
+		<action name="myaccount"
+			class="com.fsoft.project.action.ProfileAction">
+			<result>/page/edit-profile.jsp</result>
+		</action>
+		
 	</package>
 
 	<package name="json" extends="json-default">
@@ -108,6 +102,20 @@
 		<action name="getMember"
 			class="com.fsoft.project.action.LoginAction"
 			method="getMember">
+			<result type="json"></result>
+		</action>
+		<action name="login"
+			class="com.fsoft.project.action.LoginAction">
+			<result name="SUCCESS_ADMIN" type="json"></result>
+			<result name="SUCCESS_MEMBER" type="json"></result>
+			<result name="FAIL" type="json"></result>
+			<result name="MEMBER_INDEX" type="json"></result>
+			<result name="MEMBER_PRODUCT_DETAIL" type="json"></result>
+			<result name="MEMBER_SHOPPING_CART" type ="json"></result>
+			<result name="MEMBER_CHECKOUT" type="json"></result>
+		</action>
+		<action name="update-profile"
+			class="com.fsoft.project.action.ProfileAction" method="updateProfile">
 			<result type="json"></result>
 		</action>
 	</package>

@@ -20,4 +20,5 @@ public class Constants {
 	public static final int SHOPPING_CART = 3;
 	
 	public static final int CHECKOUT = 4;
+	
 }

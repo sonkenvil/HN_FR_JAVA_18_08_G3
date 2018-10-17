@@ -14,7 +14,6 @@ $(document).ready(function(){
 		var total = (row.find("td:eq(4)"));
 		total.text(total_line_item); 
 		$(".total").each(function(){
-			console.log($(this).text());
 			sumTotal += parseInt($(this).text());
 		});
 		$("div > .total-price").text("$"+convertFormatNumber(sumTotal.toString()));
@@ -36,7 +35,7 @@ $(document).ready(function(){
 	$("#cart > tbody > tr").on("click",".btn-remove-item",function(){
 		var row = $(this).closest('tr');
 		var total = row.find("td:eq(4)").text();
-		var currentValue = parseInt(convertTypeMoney($(".total-price").text())) - parseInt(total);
+		var currentValue = parseInt(convertTypeMoney($("div > .total-price").text())) - parseInt(convertTypeMoneyLineItem(total));
 		$("div > .total-price").text("$"+convertFormatNumber(currentValue.toString()));
 		$.ajax({
 			type : 'POST',

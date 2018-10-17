@@ -1,3 +1,4 @@
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -9,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Login</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<%=request.getContextPath() %>/css/bootstrap-admin.min.css" rel="stylesheet">
@@ -53,11 +54,11 @@
 
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
                             
-                        <form id="loginform" class="form-horizontal" role="form" action="<%=request.getContextPath()%>/login" method="post">
+                        <form id="loginform" class="form-horizontal" role="form">
                                     
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                        <input id="login-username" type="text" class="form-control" name="email" value="" placeholder="email">                                        
+                                        <input id="login-email" type="text" class="form-control" name="email" value="" placeholder="email">                                        
                                     </div>
                                 
                             <div style="margin-bottom: 25px" class="input-group">
@@ -84,6 +85,7 @@
                                       <a id="btn-fblogin" href="#" class="btn btn-primary">Login with Facebook</a>
 
                                     </div>
+                                    <span class="label label-danger " id = "error" style="display:none"></span>
                                 </div>
 
 
@@ -168,6 +170,7 @@
                          </div>
                     </div>
          </div> 
+         
     </div>
   <!-- Login JS -->
 <script src="<%= request.getContextPath()%>/js/login.js"></script>

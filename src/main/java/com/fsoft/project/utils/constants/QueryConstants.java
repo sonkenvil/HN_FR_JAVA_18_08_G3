@@ -31,7 +31,7 @@ public class QueryConstants {
 
 	public static final String SELECT_MANUFACTURER_BY_ID = "SELECT Id,Name,Description FROM MANUFACTURER WHERE Id = ?";
 
-	public static final String GET_MEMBER = "SELECT Id, Email, Role, FirstName, LastName, Address FROM Member WHERE Email = ? AND Password = ?";
+	public static final String GET_MEMBER = "SELECT * FROM Member WHERE Email = ? AND Password = ?";
 	
 	public static final String CURRENT_ORDER = " SELECT IDENT_CURRENT ('Order_Product') AS Current_Identity";
 
@@ -42,4 +42,6 @@ public class QueryConstants {
 	public static final String ADD_LINEITEM = "INSERT INTO LINEITEM(OrderID, ProductID,NumberProduct) VALUES(?,?,?)";
 	
 	public static final String ADD_ORDER="INSERT INTO ORDER_PRODUCT(TotalPrice, MemberId, CreateDate) VALUES(?,?,?)";
+	
+	public static final String UPDATE_MEMBER = "UPDATE Member SET FirstName = ?, LastName = ?, Address = ?, Phone = ?, Email =?, Password = ? WHERE Id= ?";
 }

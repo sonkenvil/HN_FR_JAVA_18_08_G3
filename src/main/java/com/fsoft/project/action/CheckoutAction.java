@@ -26,7 +26,6 @@ public class CheckoutAction extends ActionSupport implements SessionAware{
 		if(object != null) {
 			listItem = (List<LineItem>) object;
 		}
-		System.out.println("checkout");
 		session.put(Constants.PAGE_INDEX, Constants.CHECKOUT);
 		return Action.SUCCESS;
 	}

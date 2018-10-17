@@ -25,15 +25,16 @@ $(document).ready(function() {
 		success: function(result){
 			if(! result.message){
 				$("div > .sign-in").show();
-				$("div > .account").hide();
+				$("div > .profile").hide();
 			}else{
-				console.log(result.fullName);
 				$("div > .sign-in").hide();
-				$("div > .account").show();
-				$("div > .account > .fullname").text("<i class='fa fa-user-o'></i>"+result.fullName);
+				$("div > .profile").show();
+				$("div > .profile ").html('<li><a href="myaccount"><i class="fa fa-user-o"></i>'+result.fullName+'</a></li>'
+						                 + '<li ><a href="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>');				
 				}
 			}
 		});
+	
 	$(".header-search .input").keyup(function(){
 		let val  = $(this).val();
 		let ul = $(".header-search .list-product");

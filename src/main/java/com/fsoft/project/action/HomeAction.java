@@ -15,12 +15,13 @@ import com.fsoft.project.service.ProductService;
 import com.fsoft.project.service.impl.ProductServiceImpl;
 import com.fsoft.project.utils.constants.Constants;
 import com.opensymphony.xwork2.Action;
+import com.opensymphony.xwork2.Preparable;
 
 /**
  * @author hungcoutinho
  *
  */
-public class HomeAction implements SessionAware {
+public class HomeAction implements SessionAware, Preparable {
 
 	private List<Product> listNewProduct;
 	private List<Product> listProduct;
@@ -29,7 +30,7 @@ public class HomeAction implements SessionAware {
 	private int productId;
 	private Map<String, Object> session;
 	ProductService productService = null;
-
+	
 	public String execute() {
 		session.put(Constants.PAGE_INDEX, Constants.INDEX);
 		productService = new ProductServiceImpl(new ProductDaoImpl());
@@ -52,7 +53,6 @@ public class HomeAction implements SessionAware {
 		try {
 			listProduct = productService.getListProduct((currentPage - 1) * 8);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
@@ -110,6 +110,11 @@ public class HomeAction implements SessionAware {
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
+	}
+
+	@Override
+	public void prepare() throws Exception {
+		
 	}
 
 }

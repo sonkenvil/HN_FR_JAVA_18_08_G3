@@ -781,13 +781,14 @@
 					$(".img-gif").css({
 						"display" : "block"
 					});
-					$(".pagination li a").parent().removeClass('active');
-					$(this).parent().addClass('active');
 					let id = $(this).attr('id');
 					if(id === 'previous' || id === 'next')
 						currentPage += parseInt($(this).attr('data-index'));
 					else
 						currentPage = parseInt($(this).attr('data-index'));
+					let as = $(".pagination li a");
+					$(as).parent().removeClass('active');
+					$(as[currentPage]).parent().addClass('active');
 					if(currentPage === 1)
 						$("#previous").parent().addClass('disabled');
 					else
@@ -806,7 +807,7 @@
 							let listCurrentProduct = $(".grid-product .product");
 							if(listProduct.length > 0){
 								for(let i=0;i<listProduct.length;i++){
-									$(listCurrentProduct[i]).find('.product-img img').attr('src',"<%=request.getContextPath()%>/img/product01.png");
+									$(listCurrentProduct[i]).find('.product-img img').attr('src',listProduct[i].imagePath);
 									$(listCurrentProduct[i]).find('.product-category').text(listProduct[i].category.name);
 									$(listCurrentProduct[i]).find('.product-name a').text(listProduct[i].productName);
 									$(listCurrentProduct[i]).find('.product-name a').attr('href','product.action?id=' + listProduct[i].id);

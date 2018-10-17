@@ -32,7 +32,6 @@ public class ProductAction implements SessionAware{
 	private Product product;
 	private List<ImageDetail> listImageDetail;
 	private List<Product> listRelateProduct;
-	private String url;
 	private Map<String,Object> session;
 	
 	public ProductAction() throws SQLException {
@@ -40,15 +39,11 @@ public class ProductAction implements SessionAware{
 		imageDetailService = new ImageDetailServiceImpl(new ImageDetailDaoImpl());
 	}
 	public String execute() throws SQLException {
+		if(productId == 0) productId = (int) session.get(Constants.PRODUCT);
 		product = productService.getProductById(productId);
 		listImageDetail = imageDetailService.getListImageDetailByProductId(productId);
 		listRelateProduct = productService.getListProductRelated(product);
 		String name = product.getProductName();
-		String []ds = name.split(" ");
-		url ="";
-		for(String i : ds) {
-			url += i;
-		}
 		session.put(Constants.PRODUCT, productId);
 		session.put(Constants.PAGE_INDEX, Constants.PRODUCT_DETAIL);
 		return Action.SUCCESS;
@@ -64,14 +59,6 @@ public class ProductAction implements SessionAware{
 			return Action.SUCCESS;
 		}
 		return Action.SUCCESS;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
 	}
 
 	public int getProductId() {
