@@ -33,7 +33,7 @@
 				<!-- LOGO -->
 				<div class="col-md-3">
 					<div class="header-logo">
-						<a href="<%=request.getContextPath() %>/page/home" class="logo">JAVA 1808</a>
+						<a href="continue-shopping" class="logo">JAVA 1808</a>
 					</div>
 				</div>
 				<!-- /LOGO -->
