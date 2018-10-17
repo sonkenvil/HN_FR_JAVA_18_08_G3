@@ -178,7 +178,7 @@
 					<div class="col-md-2">
 						<label>Category </label>
 						<select name="categoryId">
-							<option value="Default">All</option>
+							<option value="0">All</option>
 							<s:iterator value="listCategory">
 								<option value='<s:property value="id"/>'><s:property value="name"/></option>
 							</s:iterator>
@@ -188,8 +188,8 @@
 						<label>Name </label>
 						<select name="sortName">
 							<option value="Default">Default</option>
-							<option value="asc">ASC</option>
-							<option value="desc">DESC</option>
+							<option value="ASC">ASC</option>
+							<option value="DESC">DESC</option>
 						</select>
 					</div>
 					
@@ -754,7 +754,7 @@
 	<script src="<%=request.getContextPath()%>/js/cart.js"></script>
 	
 	<!-- home.js -->
-	<script type="text/javascript" src=""></script>
+	<script type="text/javascript" src="<%=request.getContextPath() %>/js/home.js"></script>
 	<!-- /home.js -->
 
 </body>

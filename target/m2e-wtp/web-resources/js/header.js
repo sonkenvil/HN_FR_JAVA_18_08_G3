@@ -35,7 +35,12 @@ $(document).ready(function() {
 		}
 		$(ul).css('display','none');
 	})
+	let i = true;
+	$(".header-search > div > ul").mouseover(function(){
+		i = false;
+	})
 	$(".header-search .input").focusout(function(){
-		$(".header-search .list-product").css('display','none');
+		if(i)
+			$(".header-search .list-product").css('display','none');
 	})
 })

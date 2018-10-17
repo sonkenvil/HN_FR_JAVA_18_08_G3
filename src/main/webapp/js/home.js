@@ -1,9 +1,15 @@
 $(document).ready(function(){
 	// xu ly phan form search
+	var categoryOptions = $(".form-search-product select[name='input-categoryId'] option");
+	$(categoryOptions).attr('selected',false);
+	for(let i=0;i<categoryOptions.length;i++){
+		if(categoryOptions[i].value === $(".input-sortName").val()){
+			categoryOptions[i].selected = true;
+		}
+	}
 	var sortNameOptions = $(".form-search-product select[name='sortName'] option");
 	$(sortNameOptions).attr('selected',false);
 	for(let i=0;i<sortNameOptions.length;i++){
-		console.log(sortNameOptions[i]);
 		if(sortNameOptions[i].value === $(".input-sortName").val()){
 			sortNameOptions[i].selected = true;
 		}
