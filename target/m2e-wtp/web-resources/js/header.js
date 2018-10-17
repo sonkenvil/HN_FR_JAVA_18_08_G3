@@ -62,7 +62,8 @@ $(document).ready(function() {
 		}
 		$(ul).css('display','none');
 	})
-	$(".header-search .input").focusout(function(){
+	
+	/*$(".header-search .input").focusout(function(){
 		$(".header-search .list-product").css('display','none');
-	})
+	})*/
 })

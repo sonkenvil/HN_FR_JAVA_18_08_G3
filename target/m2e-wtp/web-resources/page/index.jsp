@@ -121,8 +121,8 @@
 													<a href="${productAction }"><s:property
 															value="productName" /></a>
 												</h3>
-												<h4 class="product-price">
-													<s:property value="price"/>$
+												<h4 class="product-price">$
+													<s:property value="price"/>
 												</h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -257,7 +257,7 @@
 									<a href="${productAction }"><s:property value="productName" /></a>
 								</h3>
 								<h4 class="product-price">
-									<s:property value="price"/>$
+									$<s:property value="price"/>
 
 								</h4>
 								<div class="product-rating">
