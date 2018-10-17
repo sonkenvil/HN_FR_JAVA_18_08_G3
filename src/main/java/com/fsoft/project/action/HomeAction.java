@@ -1,5 +1,6 @@
 package com.fsoft.project.action;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -9,11 +10,16 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.fsoft.project.dao.impl.CategoryDaoImpl;
 import com.fsoft.project.dao.impl.ProductDaoImpl;
+import com.fsoft.project.entity.Category;
 import com.fsoft.project.entity.Product;
+import com.fsoft.project.service.CategoryService;
 import com.fsoft.project.service.ProductService;
+import com.fsoft.project.service.impl.CategoryServiceImpl;
 import com.fsoft.project.service.impl.ProductServiceImpl;
 import com.fsoft.project.utils.constants.Constants;
+import com.fsoft.project.utils.constants.WebConstants;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.Preparable;
 
@@ -25,15 +31,25 @@ public class HomeAction implements SessionAware, Preparable {
 
 	private List<Product> listNewProduct;
 	private List<Product> listProduct;
+	private List<Category> listCategory;
 	private int totalPages;
 	private int currentPage;
 	private int productId;
 	private Map<String, Object> session;
-	ProductService productService = null;
-	
+	private String categoryId = WebConstants.CATEGORY_ALL;
+	private String sortName = WebConstants.DEFAULT;
+	private String sortPrice = WebConstants.DEFAULT;
+	private String priceMin = WebConstants.PRICE_MIN;
+	private String priceMax = WebConstants.PRICE_MAX;
+	private String url;
+	private ProductService productService = null;
+	private CategoryService categoryService = null;
+
+
 	public String execute() {
 		session.put(Constants.PAGE_INDEX, Constants.INDEX);
 		productService = new ProductServiceImpl(new ProductDaoImpl());
+		categoryService = new CategoryServiceImpl(new CategoryDaoImpl());
 		try {
 			listNewProduct = productService.getListNewProduct();
 			int totalProduct = productService.getTotalProduct();
@@ -42,6 +58,8 @@ public class HomeAction implements SessionAware, Preparable {
 			if(session.get(Constants.CART_NUMBER) == null) {
 				session.put(Constants.CART_NUMBER, 0);
 			}
+			listCategory = categoryService.getListCategory();
+			url = "getListProductAction";
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -63,10 +81,63 @@ public class HomeAction implements SessionAware, Preparable {
 		return Action.SUCCESS;
 	}
 
-	public String searchListProductByValue(boolean sortByName, boolean sortByPrice, double priceMin, double priceMax) {
+	public String listProductByValue() {
+		productService = new ProductServiceImpl(new ProductDaoImpl());
+		categoryService = new CategoryServiceImpl(new CategoryDaoImpl());
+		if (!WebConstants.DEFAULT.equals(sortName) && !WebConstants.ASC.equals(sortName)
+				&& !WebConstants.DESC.equals(sortName)) {
+			execute();
+			return Action.SUCCESS;
+		}
+		if (!WebConstants.DEFAULT.equals(sortPrice) && !WebConstants.ASC.equals(sortPrice)
+				&& !WebConstants.DESC.equals(sortPrice)) {
+			execute();
+			return Action.SUCCESS;
+		}
+		try {
+			double x = Double.parseDouble(priceMin);
+			double y = Double.parseDouble(priceMax);
+			int z = Integer.parseInt(categoryId);
+			if (x < 0 || y < 0 || x > y || z < 0) {
+				execute();
+				return Action.SUCCESS;
+			}
+		} catch (IllegalArgumentException e) {
+			execute();
+			return Action.SUCCESS;
+		}
+		try {
+			listNewProduct = productService.getListNewProduct();
+			BigDecimal priceBigMin = new BigDecimal(priceMin);
+			BigDecimal priceBigMax = new BigDecimal(priceMax);
+			int totalProduct = productService.getTotalProductSelectByValue(Integer.parseInt(categoryId), priceBigMin,
+					priceBigMax);
+			listCategory = categoryService.getListCategory();
+			totalPages = (totalProduct % 8 == 0) ? (totalProduct / 8) : (totalProduct / 8 + 1);
+			listProduct = productService.selectListProductByValue(Integer.parseInt(categoryId), sortName, sortPrice,
+					priceBigMin, priceBigMax, 0, 8);
+			url = "loadProductByValueAction";
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return Action.SUCCESS;
 	}
-	
+
+	public String loadListProductByValue() {
+		productService = new ProductServiceImpl(new ProductDaoImpl());
+		BigDecimal priceBigMin = new BigDecimal(priceMin);
+		BigDecimal priceBigMax = new BigDecimal(priceMax);
+		try {
+			listProduct = productService.selectListProductByValue(Integer.parseInt(categoryId), sortName, sortPrice,
+					priceBigMin, priceBigMax, (currentPage - 1) * 8, 8);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+
 	public List<Product> getListNewProduct() {
 		return listNewProduct;
 	}
@@ -115,6 +186,61 @@ public class HomeAction implements SessionAware, Preparable {
 	@Override
 	public void prepare() throws Exception {
 		
+	}
+	public String getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(String categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public String getSortName() {
+		return sortName;
+	}
+
+	public void setSortName(String sortName) {
+		this.sortName = sortName;
+	}
+
+	public String getSortPrice() {
+		return sortPrice;
+	}
+
+	public void setSortPrice(String sortPrice) {
+		this.sortPrice = sortPrice;
+	}
+
+	public String getPriceMin() {
+		return priceMin;
+	}
+
+	public void setPriceMin(String priceMin) {
+		this.priceMin = priceMin;
+	}
+
+	public String getPriceMax() {
+		return priceMax;
+	}
+
+	public void setPriceMax(String priceMax) {
+		this.priceMax = priceMax;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public List<Category> getListCategory() {
+		return listCategory;
+	}
+
+	public void setListCategory(List<Category> listCategory) {
+		this.listCategory = listCategory;
 	}
 
 }

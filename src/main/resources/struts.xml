@@ -6,6 +6,11 @@
 <struts>
 
 	<constant name="struts.devMode" value="true" />
+	
+	<constant name="struts.action.extension" value=",,action" />
+	<constant name="struts.mapper.alwaysSelectFullNamespace" value="false" />
+	<constant name="struts.enable.SlashesInActionNames" value="true" />
+	<constant name="struts.patternMatcher" value="regex" />
 
 	<package name="sercurity" extends="struts-default">
 		<interceptors>
@@ -22,7 +27,6 @@
 		<global-results>
 			<result>/page/login.jsp</result>
 		</global-results>
-
 		<action name="/admin*">
 			<result name="FAIL" type="redirect">/page/login.jsp</result>
 		</action>
@@ -30,16 +34,20 @@
 
 	<package name="default" extends="struts-default">
 		<action name="">
-			<result type="redirect">home.action</result>
+			<result type="redirect">home</result>
 		</action>
 
 		<action name="home" class="com.fsoft.project.action.HomeAction">
 			<result>/page/index.jsp</result>
 		</action>
-        
 		<action name="product"
 			class="com.fsoft.project.action.ProductAction">
 			<result>/page/product.jsp</result>
+		</action>
+		<action name="searchProduct"
+			class="com.fsoft.project.action.HomeAction"
+			method="listProductByValue">
+			<result>/page/index.jsp</result>
 		</action>
 
 		<action name="shopping-cart"
@@ -67,6 +75,11 @@
 			<result>/page/edit-profile.jsp</result>
 		</action>
 		
+		<action name="add_product"
+			class="com.fsoft.project.action.AddProductAction" method="loadData">
+			<result>/page/addProduct.jsp</result>
+		</action>
+
 	</package>
 
 	<package name="json" extends="json-default">
@@ -74,6 +87,13 @@
 			class="com.fsoft.project.action.HomeAction" method="listProduct">
 			<result type="json"></result>
 		</action>
+
+		<action name="loadProductByValueAction"
+			class="com.fsoft.project.action.HomeAction"
+			method="loadListProductByValue">
+			<result type="json"></result>
+		</action>
+
 		<action name="addProductToSessionAction"
 			class="com.fsoft.project.action.SessionAction"
 			method="addProductToSession">
@@ -84,6 +104,7 @@
 			method="searchProductByValue">
 			<result type="json"></result>
 		</action>
+
 		<action name="editNumberProduct"
 			class="com.fsoft.project.action.ShoppingCartAction"
 			method="editNumberProduct">
@@ -116,6 +137,12 @@
 		</action>
 		<action name="update-profile"
 			class="com.fsoft.project.action.ProfileAction" method="updateProfile">
+			<result type="json"></result>
+		</action>
+
+		<action name="checkProductNameExits"
+			class="com.fsoft.project.action.AddProductAction"
+			method="exitsProduct">
 			<result type="json"></result>
 		</action>
 	</package>

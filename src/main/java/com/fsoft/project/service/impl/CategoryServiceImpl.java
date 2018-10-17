@@ -4,6 +4,7 @@
 package com.fsoft.project.service.impl;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.fsoft.project.dao.CategoryDao;
 import com.fsoft.project.entity.Category;
@@ -25,6 +26,12 @@ public class CategoryServiceImpl implements CategoryService{
 	public Category getCategoryById(int id) throws SQLException {
 		// TODO Auto-generated method stub
 		return categoryDao.getCategoryById(id);
+	}
+
+	@Override
+	public List<Category> getListCategory() throws SQLException {
+		// TODO Auto-generated method stub
+		return categoryDao.getListCategory();
 	}
 
 }

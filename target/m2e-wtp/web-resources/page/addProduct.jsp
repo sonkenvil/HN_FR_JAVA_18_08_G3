@@ -1,3 +1,4 @@
+<%@taglib uri="/struts-tags" prefix="s" %>
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -131,133 +132,63 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <form role="form">
-
-                            <div class="row">
-                                <div class="col-lg-7">
-                                    
-                                        <div class="form-group">
-                                            <label>Text Input</label>
-                                            <input class="form-control">
-                                            <p class="help-block">Example block-level help text here.</p>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Text Input with Placeholder</label>
-                                            <input class="form-control" placeholder="Enter text">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Static Control</label>
-                                            <p class="form-control-static">email@example.com</p>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>File input</label>
-                                            <input type="file">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Text area</label>
-                                            <textarea class="form-control" rows="3"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Checkboxes</label>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" value="">Checkbox 1
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" value="">Checkbox 2
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" value="">Checkbox 3
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Inline Checkboxes</label>
-                                            <label class="checkbox-inline">
-                                                <input type="checkbox">1
-                                            </label>
-                                            <label class="checkbox-inline">
-                                                <input type="checkbox">2
-                                            </label>
-                                            <label class="checkbox-inline">
-                                                <input type="checkbox">3
-                                            </label>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Radio Buttons</label>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>Radio 1
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Radio 2
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">Radio 3
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Inline Radio Buttons</label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" checked>1
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">2
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">3
-                                            </label>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Selects</label>
-                                            <select class="form-control">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Multiple Selects</label>
-                                            <select multiple class="form-control">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </div>
-                                        
-                                </div>
-                                <div class="col-lg-5 form_image_multil">
-                                     <div class="form-group">
-                                        <label for="exampleFormControlFile1">Example file input</label>
-                                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                                      </div>
-
-                                       <div class="form-group">
-                                        <label for="exampleFormControlFile1">Example file input</label>
-                                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                                      </div>
-
-                                      <div class="form-group">
-                                        <label for="exampleFormControlFile1">Example file input</label>
-                                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                                      </div>
-
-                                </div>
-                                <button type="submit" class="btn btn-default btn_submit_button">Submit Button</button>
-                                <button type="reset" class="btn btn-default">Reset Button</button>
+                            <form role="form" class="add-product-form">
+	                            <div class="row row-form">
+	                                <div class="col-lg-7">
+	                                   <div class="form-group">
+	                                       <label>Product name</label>
+	                                       <input class="form-control" id="txtName" type="text" name="product.productName" placeholder="Enter product name" required>
+	                                   </div>
+	                                   <div class="form-group">
+	                                       <label>Price</label>
+	                                       <input class="form-control" type="number" name="product.price" placeholder="Enter price" required>
+	                                   </div>
+	                                   
+	                                   <div class="form-group form-group-file">
+	                                       <label>Image</label>
+	                                       <input type="file" name="fileImageMain" accept="image/*" required>
+	                                   </div>
+	                                   
+	                                   <div class="form-group">
+	                                       <label>Description</label>
+	                                       <textarea class="form-control" rows="3" name="product.description"></textarea>
+	                                   </div>
+	                                   
+	                                   <div class="form-group">
+	                                       <label>Select Manufacturer</label>
+	                                       <select class="form-control" name="product.manuFacturer.id" required>
+		                                       	<s:iterator value="listManu" var="manu">
+		                                       		<option value='<s:property value="id"/>'><s:property value="name"/></option>
+		                                       	</s:iterator>
+	                                       </select>
+	                                       <button style="margin-top:10px" class="btn btn-info">Add Manufacturer</button>
+	                                   </div>
+	                                   
+	                                   <div class="form-group">
+	                                       <label>Select Category</label>
+	                                       <select class="form-control" name="product.category.id" required>
+		                                       	<s:iterator value="listCategory" var="manu">
+		                                       		<option value='<s:property value="id"/>'><s:property value="name"/></option>
+		                                       	</s:iterator>
+		                                       	<option>Hello</option>
+	                                       </select>
+	                                       <button style="margin-top:10px" class="btn btn-info">Add Category</button>
+	                                   </div>
+	                                   
+	                                   <button type="submit" class="btn btn-default btn_submit_button">Submit Button</button>
+                                	   <button type="reset" class="btn btn-default">Reset Button</button>
+		                           </div>
+	                                <div class="col-lg-5 form_image_multil">
+	                                     <div class="div-img">
+	                                     	<img style="width:auto;height:100%"/>
+	                                     </div>
+	                                     <div class="list-image-detail">
+	                                     	<p><b>Add list image detail</b></p>
+	                                     	<p><input type="file" name="listImageDetails" accept="image/*" multiple/></p>
+	                                     	<div class="grid">
+	                                     	</div>
+	                                     </div>
+	                                </div>
                                 </form>
                             </div>
                             <!-- /.row (nested) -->
@@ -271,7 +202,6 @@
             <!-- /.row -->
         </div>
         <!-- /#page-wrapper -->
-
     </div>
     <!-- /#wrapper -->
 
@@ -286,6 +216,80 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="<%=request.getContextPath() %>/js/sb-admin-2.js"></script>
+    
+    <!-- Jquery validate -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <!-- /Jquery validate -->
+    
+    <!-- Custom js validate form -->
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		let productName;
+    		$("#txtName").change(function(){
+    			productName = $(this).val();
+    		})
+    		$(".add-product-form").validate({
+    			rules:{
+	    			'product.productName': {
+	    				maxlength: 255,
+	    				remote: {
+	    					url: 'checkProductNameExits',
+	    					type: 'get',
+	    					dataType: 'json',
+	    					data: {
+	    						'product.productName': productName
+	    					},
+    						success: function(result){
+    							let exitsProductName = result.exitsProductName;
+    							console.log(exitsProductName);
+    							if(exitsProductName)
+    								return "fuck";
+    							return true;
+    						}
+	    				}
+	    			},
+	    			'product.price': {
+	    				min: 0
+	    			}
+    			},
+    			messages:{
+    				'product.productName' : $.validator.format("{0} is exits"),
+    				'product.price': "price is lange 0"
+    			}
+    		})
+    	})
+    </script>
+    <!-- /Custom js validate form -->
+    
+    <!-- custom js load image -->
+    <script type="text/javascript" defer>
+       	$(document).ready(function(){
+       		$(".form-group-file input").change(function(){
+       			let files = this.files;
+       			if(files.length > 0){
+       				let reader = new FileReader();
+       				reader.readAsDataURL(files[0]);
+       				reader.onload = function(data){
+       					$(".form_image_multil .div-img img").attr('src',data.target.result);
+       					$(".list-image-detail").css('display','block');
+       				}
+       			}
+       		})
+       		$(".list-image-detail input").change(function(){
+       			let files = this.files;
+       			if(files.length > 0){
+       				let reader = new FileReader();
+       				for(let i=0;i<files.length;i++){
+       					reader.readAsDataURL(files[i]);
+       					reader.onload = function(data){
+       						$(".form_image_multil .list-image-detail .grid").append("<div><img src='" + data.target.result + "'/></div>");
+       					}
+       				}
+       			}
+       		})
+       	})
+   </script>
+   <!-- /custom js load image -->
 
 </body>
 
