@@ -25,19 +25,20 @@ GO
 
 CREATE TABLE CATEGORY(
     Id INT PRIMARY KEY IDENTITY(1,1),
-    Name NVARCHAR(255)
+    Name NVARCHAR(255) UNIQUE
 )
 GO
 
 CREATE TABLE PRODUCT(
     Id INT PRIMARY KEY IDENTITY(1,1),
-    ProductName NVARCHAR(255),
+    ProductName NVARCHAR(255) UNIQUE,
     ManuFacturerId INT,
     CategoryId INT,
     CreateDate DATE,
     Color VARCHAR(50),
     Price MONEY,
     ImageDetail INT,
+    Description TEXT,
     CONSTRAINT FK_Product_ManuFacturer FOREIGN KEY (ManuFacturerId) REFERENCES MANUFACTURER(Id) ON DELETE CASCADE,
     CONSTRAINT FK_Product_Category FOREIGN KEY (CategoryId) REFERENCES CATEGORY(Id)
 )
@@ -47,7 +48,6 @@ CREATE TABLE IMAGEDETAIL(
 	Id INT PRIMARY KEY IDENTITY(1,1),
     ImagePath TEXT,
     ProductId INT,
-    Description TEXT,
     CONSTRAINT FK_ImageDetail FOREIGN KEY (ProductId) REFERENCES PRODUCT(Id) ON DELETE CASCADE
 )
 GO

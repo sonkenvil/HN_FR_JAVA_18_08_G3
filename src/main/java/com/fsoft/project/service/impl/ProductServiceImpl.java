@@ -3,6 +3,7 @@
  */
 package com.fsoft.project.service.impl;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -59,18 +60,17 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> searchListProductByValue(boolean sortByName, boolean sortByPrice, double minPrice,
-			double maxPrice) throws SQLException {
+	public List<Product> selectListProductByValue(int categoryId, String sortName, String sortPrice,
+			BigDecimal priceMin, BigDecimal priceMax, int offset, int fetch) throws SQLException {
 		// TODO Auto-generated method stub
-		String orderByName = "";
-		String orderByPrice = "";
-		String selectByPrice;
-		if(sortByName)
-			orderByName = ",ORDER BY P.ProductName ASC";
-		if(sortByPrice)
-			orderByPrice = (sortByName)?",":"" +  "ORDER BY P.Price ASC";
-		selectByPrice = "WHERE P.Price >= " + minPrice + " AND P.Price <= " + maxPrice;
-		return productDao.selectListProductByValue(selectByPrice, orderByName, orderByPrice);
+		return productDao.selectListProductByValue(categoryId, sortName, sortPrice, priceMin, priceMax, offset, fetch);
+	}
+
+	@Override
+	public int getTotalProductSelectByValue(int categoryId, BigDecimal priceMin, BigDecimal priceMax)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		return productDao.getTotalProductSelectByValue(categoryId, priceMin, priceMax);
 	}
 
 }

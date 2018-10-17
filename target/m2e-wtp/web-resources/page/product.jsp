@@ -88,12 +88,29 @@
 								<h4 class="modal-title">Information Product</h4>
 							</div>
 							<div class="modal-body">
-								<h3><s:property value="product.productName"/></h3>
-								<p>Price: <s:property value="product.price"/></p>
-								<p>Description: <s:property value="product.description"/></p>
-								<p>Create date: <s:property value="product.createDate"/></p>
-								<p>Manufacturer: <s:property value="product.manuFacturer.name"/></p>
-								<p>Color: <span style="display:inline-block;width:20px;height:20px;background-color:${product.color}"></span></p>
+								<h3>
+									<s:property value="product.productName" />
+								</h3>
+								<p>
+									Price:
+									<s:property value="product.price" />
+								</p>
+								<p>
+									Description:
+									<s:property value="product.description" />
+								</p>
+								<p>
+									Create date:
+									<s:property value="product.createDate" />
+								</p>
+								<p>
+									Manufacturer:
+									<s:property value="product.manuFacturer.name" />
+								</p>
+								<p>
+									Color: <span
+										style="display:inline-block;width:20px;height:20px;background-color:${product.color}"></span>
+								</p>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
@@ -117,8 +134,13 @@
 								<h4 class="modal-title">Informaion company</h4>
 							</div>
 							<div class="modal-body">
-								<h3><s:property value="product.manuFacturer.name"/></h3>
-								<p>Description: <s:property value="product.manuFacturer.description"/></p>
+								<h3>
+									<s:property value="product.manuFacturer.name" />
+								</h3>
+								<p>
+									Description:
+									<s:property value="product.manuFacturer.description" />
+								</p>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
@@ -157,20 +179,29 @@
 									class="fa fa-star-o"></i>
 							</div>
 
-							<h2 class="product-name"><s:property value="product.productName"/></h2>
+							<h2 class="product-name">
+								<s:property value="product.productName" />
+							</h2>
 						</div>
 						<div>
 							<h3 class="product-price">
-								<span style="color: black">Price: <s:property value="product.price"/> VND</span>
+								<span style="color: black">Price: <s:property
+										value="product.price" /> VND
+								</span>
 							</h3>
 						</div>
 
-						<p><s:property value="product.manuFacturer.name"/></p>
+						<p>
+							<s:property value="product.manuFacturer.name" />
+						</p>
 
-						<p><s:property value="product.description"/></p>
+						<p>
+							<s:property value="product.description" />
+						</p>
 
 						<p class="freeShip">
-							<img src="<%=request.getContextPath()%>/img/4B6MEO.png" /><span>Free ship</span>
+							<img src="<%=request.getContextPath()%>/img/4B6MEO.png" /><span>Free
+								ship</span>
 						<div class="product-options">
 
 							<label>
@@ -192,7 +223,8 @@
 								</div>
 							</div>
 							<div class="add-cart">
-								<button class="btn btn-warning btn-cart">
+								<button class="btn btn-warning btn-cart"
+									data-id='<s:property value="id"/>'>
 									<a><i class="fa fa-shopping-cart"></i> Add to cart</a>
 								</button>
 								<button class="btn btn-danger">
@@ -258,10 +290,12 @@
 						<h3 class="title">Related Products</h3>
 					</div>
 				</div>
-				
+
 				<s:iterator value="listRelateProduct">
 					<s:url action="product" var="productAction">
-						<s:param name="productId"><s:property value="id"/></s:param>
+						<s:param name="productId">
+							<s:property value="id" />
+						</s:param>
 					</s:url>
 					<!-- product -->
 					<div class="col-md-3 col-xs-6">
@@ -273,12 +307,14 @@
 								</div>
 							</div>
 							<div class="product-body">
-								<p class="product-category"><s:property value="category.name"/></p>
+								<p class="product-category">
+									<s:property value="category.name" />
+								</p>
 								<h3 class="product-name">
-									<a href="${productAction }"><s:property value="productName"/></a>
+									<a href="${productAction }"><s:property value="productName" /></a>
 								</h3>
 								<h4 class="product-price">
-									<s:property value="price"/>
+									<s:property value="price" />
 								</h4>
 								<div class="product-rating">
 									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -287,11 +323,13 @@
 								</div>
 								<div class="add-cart">
 									<button class="btn btn-info btn-detail test">
-										<a class="a-detail" href="${productAction }"><i class="fa fa-info-circle" aria-hidden="true"></i> Detail</a>
+										<a class="a-detail" href="${productAction }"><i
+											class="fa fa-info-circle" aria-hidden="true"></i> Detail</a>
 									</button>
 									<button class="btn btn-warning btn-cart"
 										data-id='<s:property value="id"/>'>
-										<a class="a-add-cart"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+										<a class="a-add-cart"><i class="fa fa-shopping-cart"></i>
+											Add to cart</a>
 								</div>
 							</div>
 						</div>

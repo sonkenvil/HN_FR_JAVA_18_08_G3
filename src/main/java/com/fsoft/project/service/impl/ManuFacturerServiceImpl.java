@@ -4,6 +4,7 @@
 package com.fsoft.project.service.impl;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.fsoft.project.dao.ManuFacturerDao;
 import com.fsoft.project.entity.ManuFacturer;
@@ -25,6 +26,12 @@ public class ManuFacturerServiceImpl implements ManuFacturerService{
 	public ManuFacturer getManuFacturerById(int id) throws SQLException {
 		// TODO Auto-generated method stub
 		return manuFacturerDao.getManuFacturerById(id);
+	}
+
+	@Override
+	public List<ManuFacturer> getListManuFacturerService() throws SQLException {
+		// TODO Auto-generated method stub
+		return manuFacturerDao.getListManuFacturer();
 	}
 
 }

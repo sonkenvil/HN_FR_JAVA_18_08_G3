@@ -168,83 +168,65 @@
 				<div class="col-md-12">
 					<div class="section-title">
 						<p id="new-product-tile">List Product</p>
-						<div class="section-nav">
-							<ul class="section-tab-nav tab-nav">
-								<li class="active"><a data-toggle="tab" href="#tab2">IPhone</a></li>
-								<li><a data-toggle="tab" href="#tab2">Samsung</a></li>
-								<li><a data-toggle="tab" href="#tab2">Oppo</a></li>
-								<li><a data-toggle="tab" href="#tab2">Nokia</a></li>
-							</ul>
-						</div>
 					</div>
 				</div>
 				<!-- /section title -->
 			</div>
 
 			<div class="row search-by-type">
-				<div class="col-md-3 sort">
-					<label>Sort By Name (a -> z) </label><input type="checkbox" name="sortByName" value="sortByName"/>
-					<label>Sort By Price (min -> max) </label><input type="checkbox" name="sortByPrice" value="sortByPrice"/>
-				</div>
-				<div class="col-md-4 rangePrice">
-					<label>Range price </label> <select name="price-range">
-						<option value="0">Default</option>
-						<option value="1">1000000-10000000</option>
-						<option value="2">10000000-20000000</option>
-						<option value="3">20000000-30000000</option>
-					</select>
-				</div>
-				<div class="col-md-3 btn">
-					<input type="button" value="Search" class="btn-search"/>
-				</div>
+				<form action="searchProduct" method="get" class="form-search-product">
+					<div class="col-md-2">
+						<label>Category </label>
+						<select name="categoryId">
+							<option value="Default">All</option>
+							<s:iterator value="listCategory">
+								<option value='<s:property value="id"/>'><s:property value="name"/></option>
+							</s:iterator>
+						</select>
+					</div>
+					<div class="col-md-2">
+						<label>Name </label>
+						<select name="sortName">
+							<option value="Default">Default</option>
+							<option value="asc">ASC</option>
+							<option value="desc">DESC</option>
+						</select>
+					</div>
+					
+					<div class="col-md-2">
+						<label>Price </label>
+						<select name="sortPrice">
+							<option value="Default">Default</option>
+							<option value="ASC">ASC</option>
+							<option value="DESC">DESC</option>
+						</select>
+					</div>
+					
+					<div class="col-md-2">
+						<label>Min </label>
+						<select name="priceMin">
+							<option value="0">0</option>
+							<option value="10000000">10000000</option>
+							<option value="20000000">20000000</option>
+							<option value="30000000">30000000</option>
+						</select>
+					</div>
+					
+					<div class="col-md-2">
+						<label>Max </label>
+						<select name="priceMax">
+							<option value="30000000">30000000</option>
+							<option value="20000000">20000000</option>
+							<option value="10000000">10000000</option>
+							<option value="0">0</option>
+						</select>
+					</div>
+					
+					<div class="col-md-2 btn">
+						<input type="submit" value="Search" class="btn-search"/>
+					</div>
+				</form>
 			</div>
-			<script type="text/javascript">
-				$(document).ready(function(){
-					let sortByName,sortByPrice,minPrice,maxPrice;
-					$(".search-by-type .sort input[name='sortByName']").change(function(){
-						if(this.checked == true)
-							sortByName = true;
-					})
-					$(".search-by-type .sort input[name='sortByPrice']").change(function(){
-						if(this.checked == true)
-							sortByPrice = true;
-					})
-					$(".search-by-type .rangePrice selece").change(function(){
-						let value = $(this).val();
-						if(value === '0'){
-							minPrice = 0;
-							maxPrice = 30000000;
-						}
-						else if(value === '1'){
-							minPrice = 1000000;
-							maxPrice = 10000000;
-						}
-						else if(value === '2'){
-							minPrice = 10000000;
-							maxPrice = 20000000;
-						}
-						else{
-							minPrice = 20000000;
-							maxPrice = 30000000;
-						}
-					})
-					$(".search-by-type .btn-search").click(function(){
-						if(typeof sortByName !== 'undefined' || typeof sortByPrice !== 'undefined' || minPrice !== 'undefined' || maxPrice !== 'undefined'){
-							if(typeof sortName === 'undefined')
-								sortByName = false;
-							if(typeof sortByPrice === 'undefined')
-								sortByPrice = false;
-							if(typeof minPrice === 'undefined')
-								minPrice = 0;
-							if(typeof maxPrice === 'undefined')
-								maxPrice = 30000000;
-							$.ajax({
-								
-							})
-						}
-					})
-				})
-			</script>
 			<div class="div-grid-product">
 				<p class="img-gif">
 					<img src="<%=request.getContextPath()%>/img/magnify.gif" />
@@ -267,7 +249,7 @@
 							</div>
 							<div class="product-body">
 								<p class="product-category">
-									<s:property value="productName" />
+									<s:property value="category.name" />
 								</p>
 								<h3 class="product-name">
 									<a href="${productAction }"><s:property value="productName" /></a>
@@ -753,6 +735,13 @@
 		<!-- /container -->
 	</div>
 	<!-- /NEWSLETTER -->
+	
+	<input type="hidden" value="${categoryId }" class="input-categoryId"/>
+	<input type="hidden" value="${sortName }" class="input-sortName"/>
+	<input type="hidden" value="${sortPrice }" class="input-sortPrice"/>
+	<input type="hidden" value="${priceMin }" class="input-priceMin"/>
+	<input type="hidden" value="${priceMax }" class="input-priceMax"/>
+	<input type="hidden" value="${url }" class="input-url"/>
 
 	<!-- Footer -->
 	<s:include value="/page/common_footer.jsp"></s:include>
@@ -763,69 +752,10 @@
 
 	<!-- cart js -->
 	<script src="<%=request.getContextPath()%>/js/cart.js"></script>
-
-	<!-- Load list product -->
-	<script type="text/javascript" defer>
-		let currentPage = 1;
-		$(document).ready(function(){
-			$(".pagination li a").click(function(event){
-				event.preventDefault();
-				let isDisabled = $(this).parent().attr('class');
-				if(isDisabled !== 'disabled'){
-					$(".grid-product .lam-mo").css({
-						"z-index" : 10,
-						"opacity" : 0.7
-					});
-					$(".img-gif").css({
-						"display" : "block"
-					});
-					$(".pagination li a").parent().removeClass('active');
-					$(this).parent().addClass('active');
-					let id = $(this).attr('id');
-					if(id === 'previous' || id === 'next')
-						currentPage += parseInt($(this).attr('data-index'));
-					else
-						currentPage = parseInt($(this).attr('data-index'));
-					if(currentPage === 1)
-						$("#previous").parent().addClass('disabled');
-					else
-						$("#previous").parent().removeClass('disabled');
-					$.ajax({
-						url: 'getListProductAction',
-						type: 'get',
-						dataType: 'json',
-						data: {
-							currentPage: currentPage
-						},
-						success: function(result){
-							$(".grid-product .product").css('display','none');
-							let listProduct = result.listProduct;
-							console.log(listProduct.length);
-							let listCurrentProduct = $(".grid-product .product");
-							if(listProduct.length > 0){
-								for(let i=0;i<listProduct.length;i++){
-									$(listCurrentProduct[i]).find('.product-img img').attr('src',"<%=request.getContextPath()%>/img/product01.png");
-									$(listCurrentProduct[i]).find('.product-category').text(listProduct[i].category.name);
-									$(listCurrentProduct[i]).find('.product-name a').text(listProduct[i].productName);
-									$(listCurrentProduct[i]).find('.product-name a').attr('href','product.action?id=' + listProduct[i].id);
-									$(listCurrentProduct[i]).find('.product-name .a-detail').attr('href','product.action?id=' + listProduct[i].id);
-									$(listCurrentProduct[i]).css('display','block');
-								}
-							}
-							$(".grid-product .lam-mo").css({
-								"z-index" : -1,
-								"opacity": 0
-							});
-							$(".img-gif").css({
-								"display" : "none"
-							})
-						}
-					})
-				}
-			})
-		})
-	</script>
-	<!-- /Load list product -->
+	
+	<!-- home.js -->
+	<script type="text/javascript" src=""></script>
+	<!-- /home.js -->
 
 </body>
 

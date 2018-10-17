@@ -99,7 +99,7 @@
                                     <a href="<%=request.getContextPath() %>/page/allProduct.jsp"><i class="fa fa-table fa-fw"></i> allProduct</a>
                                 </li>
                                 <li>
-                                    <a href="<%=request.getContextPath() %>/page/addProduct.jsp"><i class="fa fa-edit fa-fw"></i> addProduct</a>
+                                    <a href="add_product.action"><i class="fa fa-edit fa-fw"></i> addProduct</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

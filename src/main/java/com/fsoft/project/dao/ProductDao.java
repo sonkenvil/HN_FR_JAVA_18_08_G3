@@ -3,6 +3,7 @@
  */
 package com.fsoft.project.dao;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -26,6 +27,9 @@ public interface ProductDao {
 
 	List<Product> getListProductRelated(Product product) throws SQLException;
 
-	List<Product> selectListProductByValue(String selectByPrice, String orderByName, String orderByPrice) throws SQLException;
+	List<Product> selectListProductByValue(int categoryID, String sortName, String sortPrice, BigDecimal priceMin,
+			BigDecimal priceMax, int offset, int fetch) throws SQLException;
+
+	int getTotalProductSelectByValue(int categoryId, BigDecimal priceMin, BigDecimal priceMax) throws SQLException;
 
 }

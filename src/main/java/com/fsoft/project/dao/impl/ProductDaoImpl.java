@@ -3,6 +3,7 @@
  */
 package com.fsoft.project.dao.impl;
 
+import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -160,17 +161,31 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public List<Product> selectListProductByValue(String selectByPrice, String orderByName, String orderByPrice)
-			throws SQLException {
+	public List<Product> selectListProductByValue(int categoryId, String sortName, String sortPrice,
+			BigDecimal priceMin, BigDecimal priceMax, int offset, int fetch) throws SQLException {
 		// TODO Auto-generated method stub
 		List<Product> listP = null;
 		conn = DbHelper.getConnection();
 		if (conn != null) {
 			listP = new LinkedList<>();
-			pre = conn.prepareStatement(QueryConstants.SEARCH_PRODUCT_BY_VALUE);
-			pre.setString(1, selectByPrice);
-			pre.setString(2, orderByName);
-			pre.setString(3, orderByPrice);
+			StringBuilder str = new StringBuilder();
+			if (categoryId > 0)
+				str.append("WHERE C.Id = " + categoryId);
+			if ("".equals(str.toString()))
+				str.append(" WHERE P.Price >= " + priceMin + " AND P.Price <= " + priceMax);
+			else
+				str.append(" AND P.Price >= " + priceMin + " AND P.Price <= " + priceMax);
+			if (!sortName.equals("Default") && !sortPrice.equals("Default"))
+				str.append(" ORDER BY P.ProductName " + sortName + " , P.Price " + sortPrice);
+			else if (!sortName.equals("Default") && sortPrice.equals("Default"))
+				str.append(" ORDER BY P.ProductName " + sortName);
+			else if (sortName.equals("Default") && !sortPrice.equals("Default"))
+				str.append(" ORDER BY P.Price " + sortPrice);
+			else
+				str.append(" ORDER BY ProductId");
+			str.append(" OFFSET " + offset + " ROWS FETCH NEXT " + fetch + " ROWS ONLY");
+			// pre.setString(1, str.toString());
+			pre = conn.prepareStatement(QueryConstants.SEARCH_PRODUCT_BY_VALUE + str.toString());
 			ResultSet rs = pre.executeQuery();
 			while (rs.next()) {
 				manuFacturer = new ManuFacturer(rs.getInt("ManuFacturerId"), rs.getString("ManuFacturerName"),
@@ -182,6 +197,28 @@ public class ProductDaoImpl implements ProductDao {
 			}
 		}
 		return listP;
+	}
+
+	@Override
+	public int getTotalProductSelectByValue(int categoryId, BigDecimal priceMin, BigDecimal priceMax)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		int rows = 0;
+		conn = DbHelper.getConnection();
+		if (conn != null) {
+			StringBuilder str = new StringBuilder();
+			if (categoryId > 0)
+				str.append("WHERE C.Id = " + categoryId);
+			if ("".equals(str.toString()))
+				str.append("WHERE Price >= " + priceMin + " AND Price <= " + priceMax);
+			else
+				str.append(" AND Price >= " + priceMin + " AND Price <= " + priceMax);
+			pre = conn.prepareStatement(QueryConstants.SELECT_TOTAL_PRODUCT_SELECT_BY_VALUE + str);
+			ResultSet rs = pre.executeQuery();
+			if (rs.next())
+				rows = rs.getInt("Number");
+		}
+		return rows;
 	}
 
 }

@@ -28,7 +28,7 @@
 				<!-- LOGO -->
 				<div class="col-md-3">
 					<div class="header-logo">
-						<a href="<%=request.getContextPath() %>/page/index.jsp" class="logo">JAVA 1808</a>
+						<a href="<%=request.getContextPath() %>/page/home.action" class="logo">JAVA 1808</a>
 					</div>
 				</div>
 				<!-- /LOGO -->
