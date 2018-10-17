@@ -32,6 +32,8 @@ public class Authentication implements Interceptor {
 		if( user != null) {
 			if((user.isRole())) {
 				return WebConstants.SUCCESS_ADMIN;
+			}else {
+				return WebConstants.SUCCESS_MEMBER;
 			}
 		}
 		return WebConstants.FAIL;

@@ -23,7 +23,8 @@
 			
 		</global-results>
 		<action name="admin*" >	
-			<result name="SUCCESS_ADMIN">/page/admin.jsp</result>		
+			<result name="SUCCESS_ADMIN">/page/admin.jsp</result>	
+			<result name="SUCCESS_MEMBER" type="redirect">home</result>	
 		</action>
 	</package>
 
