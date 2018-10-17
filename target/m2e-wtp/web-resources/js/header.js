@@ -62,7 +62,14 @@ $(document).ready(function() {
 		}
 		$(ul).css('display','none');
 	})
+	
+	let mouseOver = false;
+	$(".header-search > div > ul").mouseover(function(){
+		mouseOver = true;
+	})
+	
 	$(".header-search .input").focusout(function(){
-		$(".header-search .list-product").css('display','none');
+		if(!mouseOver)
+			$(".header-search .list-product").css('display','none');
 	})
 })

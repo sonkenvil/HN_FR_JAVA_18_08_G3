@@ -3,7 +3,6 @@ $(document).ready(function(){
 	var sortNameOptions = $(".form-search-product select[name='sortName'] option");
 	$(sortNameOptions).attr('selected',false);
 	for(let i=0;i<sortNameOptions.length;i++){
-		console.log(sortNameOptions[i]);
 		if(sortNameOptions[i].value === $(".input-sortName").val()){
 			sortNameOptions[i].selected = true;
 		}

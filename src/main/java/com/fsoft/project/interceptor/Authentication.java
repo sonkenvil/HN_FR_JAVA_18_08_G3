@@ -3,6 +3,7 @@ package com.fsoft.project.interceptor;
 import java.util.Map;
 
 import com.fsoft.project.action.LoginAction;
+import com.fsoft.project.entity.Member;
 import com.fsoft.project.utils.constants.Constants;
 import com.fsoft.project.utils.constants.WebConstants;
 import com.opensymphony.xwork2.ActionContext;
@@ -26,10 +27,12 @@ public class Authentication implements Interceptor {
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {
 		Map<String,Object> session = ActionContext.getContext().getSession();
-		Object action = invocation.getAction();
-		Object user = session.get(Constants.MEMBER);
-		if(invocation.getAction() instanceof LoginAction || user != null) {
-			return invocation.invoke();
+		Member user = (Member) session.get(Constants.MEMBER);
+		String forwardURL = invocation.getInvocationContext().getName();
+		if( user != null) {
+			if((user.isRole())) {
+				return WebConstants.SUCCESS_ADMIN;
+			}
 		}
 		return WebConstants.FAIL;
 	}

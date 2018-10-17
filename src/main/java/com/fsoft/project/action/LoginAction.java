@@ -39,7 +39,7 @@ public class LoginAction extends ActionSupport implements SessionAware, Preparab
 	private int productId;
 	private MemberDao memberDao;
 	private MemberService memberService;
-	
+	private String redirectURL;
 
 	@Override
 	public String execute() throws Exception {
@@ -50,8 +50,9 @@ public class LoginAction extends ActionSupport implements SessionAware, Preparab
 		} else {
 			notification = true;
 			session.put(Constants.MEMBER, member);
-			if (member.isRole())
+			if (member.isRole()) {
 				return WebConstants.SUCCESS_ADMIN;
+			}
 			Object object = session.get(Constants.PAGE_INDEX);
 			if (object != null) {
 				index = (int) object;
@@ -62,8 +63,10 @@ public class LoginAction extends ActionSupport implements SessionAware, Preparab
 					return WebConstants.MEMBER_PRODUCT_DETAIL;
 				} else if (index == Constants.SHOPPING_CART) {
 					return WebConstants.MEMBER_SHOPPING_CART;
-				} else {
+				} else if (index == Constants.CHECKOUT){
 					return WebConstants.MEMBER_CHECKOUT;
+				}else {
+					return WebConstants.SUCCESS_ADMIN;
 				}
 			}
 		}
@@ -83,6 +86,14 @@ public class LoginAction extends ActionSupport implements SessionAware, Preparab
 
 	public int getProductId() {
 		return productId;
+	}
+
+	public String getRedirectURL() {
+		return redirectURL;
+	}
+
+	public void setRedirectURL(String redirectURL) {
+		this.redirectURL = redirectURL;
 	}
 
 	public void setProductId(int productId) {

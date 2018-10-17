@@ -6,11 +6,6 @@
 <struts>
 
 	<constant name="struts.devMode" value="true" />
-	
-	<constant name="struts.action.extension" value=",,action" />
-	<constant name="struts.mapper.alwaysSelectFullNamespace" value="false" />
-	<constant name="struts.enable.SlashesInActionNames" value="true" />
-	<constant name="struts.patternMatcher" value="regex" />
 
 	<package name="sercurity" extends="struts-default">
 		<interceptors>
@@ -19,16 +14,16 @@
 			<interceptor-stack name="myStack">
 				<interceptor-ref name="authentication" />
 				<interceptor-ref name="defaultStack">
-
 				</interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
 		<default-interceptor-ref name="myStack" />
 		<global-results>
-			<result>/page/login.jsp</result>
+			<result name="FAIL">/page/login.jsp</result>
+			
 		</global-results>
-		<action name="/admin*">
-			<result name="FAIL" type="redirect">/page/login.jsp</result>
+		<action name="admin*" >	
+			<result name="SUCCESS_ADMIN">/page/admin.jsp</result>		
 		</action>
 	</package>
 
@@ -67,14 +62,15 @@
 
 		<action name="logout"
 			class="com.fsoft.project.action.LogoutAction">
-			<result type="redirect">home</result>
+			<result name="success" type="redirect">page/login.jsp</result>
+			<result name="input" type="redirect">home</result>
 		</action>
-		
+
 		<action name="myaccount"
 			class="com.fsoft.project.action.ProfileAction">
 			<result>/page/edit-profile.jsp</result>
 		</action>
-		
+
 		<action name="add_product"
 			class="com.fsoft.project.action.AddProductAction" method="loadData">
 			<result>/page/addProduct.jsp</result>
@@ -83,6 +79,15 @@
 	</package>
 
 	<package name="json" extends="json-default">
+		<interceptors>
+			<interceptor name="authentication"
+				class="com.fsoft.project.interceptor.Authentication" />
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="authentication" />
+				<interceptor-ref name="defaultStack">
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
 		<action name="getListProductAction"
 			class="com.fsoft.project.action.HomeAction" method="listProduct">
 			<result type="json"></result>
@@ -121,8 +126,7 @@
 			<result type="json"></result>
 		</action>
 		<action name="getMember"
-			class="com.fsoft.project.action.LoginAction"
-			method="getMember">
+			class="com.fsoft.project.action.LoginAction" method="getMember">
 			<result type="json"></result>
 		</action>
 		<action name="login"
@@ -132,7 +136,7 @@
 			<result name="FAIL" type="json"></result>
 			<result name="MEMBER_INDEX" type="json"></result>
 			<result name="MEMBER_PRODUCT_DETAIL" type="json"></result>
-			<result name="MEMBER_SHOPPING_CART" type ="json"></result>
+			<result name="MEMBER_SHOPPING_CART" type="json"></result>
 			<result name="MEMBER_CHECKOUT" type="json"></result>
 		</action>
 		<action name="update-profile"

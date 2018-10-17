@@ -121,8 +121,8 @@
 													<a href="${productAction }"><s:property
 															value="productName" /></a>
 												</h3>
-												<h4 class="product-price">
-													<s:property value="price"/>$
+												<h4 class="product-price">$
+													<s:property value="price"/>
 												</h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -179,7 +179,7 @@
 					<div class="col-md-2">
 						<label>Category </label>
 						<select name="categoryId">
-							<option value="Default">All</option>
+							<option value="0">All</option>
 							<s:iterator value="listCategory">
 								<option value='<s:property value="id"/>'><s:property value="name"/></option>
 							</s:iterator>
@@ -257,7 +257,7 @@
 									<a href="${productAction }"><s:property value="productName" /></a>
 								</h3>
 								<h4 class="product-price">
-									<s:property value="price"/>$
+									$<s:property value="price"/>
 
 								</h4>
 								<div class="product-rating">
