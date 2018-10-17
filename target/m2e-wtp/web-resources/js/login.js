@@ -26,8 +26,10 @@ $("#loginform").validate({
 	            			window.location.href = 'http://localhost:8080/HN_FR_JAVA_18_08_G3/product.action?productId='+data.productId;
 	            		}else if(data.index === 3){
 	            			window.location.href = 'shopping-cart';
-	            		}else{
+	            		}else if(data.index == 4){
 	            			window.location.href = 'checkout';
+	            		}else{
+	            			window.location.href = 'admin.jsp';
 	            		}
 	            	}else{
 	            		$("#error").show();

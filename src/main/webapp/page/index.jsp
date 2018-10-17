@@ -179,7 +179,7 @@
 					<div class="col-md-2">
 						<label>Category </label>
 						<select name="categoryId">
-							<option value="Default">All</option>
+							<option value="0">All</option>
 							<s:iterator value="listCategory">
 								<option value='<s:property value="id"/>'><s:property value="name"/></option>
 							</s:iterator>
