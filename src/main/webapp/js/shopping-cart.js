@@ -1,9 +1,6 @@
 $(document).ready(function(){
 	var sum = 0;
 	$(".total").each(function(){
-		$(this).text(convertFormatNumber($(this).text()));
-	});
-	$(".total").each(function(){
 		sum += parseInt(convertTypeMoneyLineItem($(this).text().toString()));
 	});
 	$("div > .total-price").text("$"+convertFormatNumber(sum.toString()));

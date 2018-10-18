@@ -20,11 +20,15 @@
 		<default-interceptor-ref name="myStack" />
 		<global-results>
 			<result name="FAIL">/page/login.jsp</result>
-			
 		</global-results>
 		<action name="admin*" >	
 			<result name="SUCCESS_ADMIN">/page/admin.jsp</result>	
 			<result name="SUCCESS_MEMBER" type="redirect">home</result>	
+		</action>
+		<action name="confirm-checkout"
+			class="com.fsoft.project.action.CheckoutAction">
+			<result type="redirect">checkout</result>
+			<result name="FAIL">/page/login.jsp</result>
 		</action>
 	</package>
 
@@ -32,7 +36,9 @@
 		<action name="">
 			<result type="redirect">home</result>
 		</action>
-
+		<action name="checkout" class="com.fsoft.project.action.CheckoutAction">
+			<result>/page/checkout.jsp</result>
+		</action>
 		<action name="home" class="com.fsoft.project.action.HomeAction">
 			<result>/page/index.jsp</result>
 		</action>
@@ -49,11 +55,6 @@
 		<action name="shopping-cart"
 			class="com.fsoft.project.action.ShoppingCartAction">
 			<result name="SUCCESS">/page/shopping-cart.jsp</result>
-		</action>
-
-		<action name="checkout"
-			class="com.fsoft.project.action.CheckoutAction">
-			<result>/page/checkout.jsp</result>
 		</action>
 
 		<action name="continue-shopping"
@@ -144,10 +145,13 @@
 			class="com.fsoft.project.action.ProfileAction" method="updateProfile">
 			<result type="json"></result>
 		</action>
-
 		<action name="checkProductNameExits"
 			class="com.fsoft.project.action.AddProductAction"
 			method="exitsProduct">
+			<result type="json"></result>
+		</action>
+		<action name="confirm-payment"
+			class="com.fsoft.project.action.CheckoutAction" method="confirmPayment">
 			<result type="json"></result>
 		</action>
 	</package>

@@ -3,11 +3,13 @@
  */
 package com.fsoft.project.entity;
 
+import java.io.Serializable;
+
 /**
  * @author hungcoutinho
  *
  */
-public class LineItem {
+public class LineItem implements Serializable{
 
 	private OrderProduct order;
 	private Product product;

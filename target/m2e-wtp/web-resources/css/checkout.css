@@ -15,4 +15,8 @@
     transition: 0.2s all;
 }
 
+label.error {
+      color: red;
+}
+
 
