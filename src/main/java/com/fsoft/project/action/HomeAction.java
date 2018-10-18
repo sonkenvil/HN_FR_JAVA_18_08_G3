@@ -132,7 +132,6 @@ public class HomeAction implements SessionAware, Preparable {
 			listProduct = productService.selectListProductByValue(Integer.parseInt(categoryId), sortName, sortPrice,
 					priceBigMin, priceBigMax, (currentPage - 1) * 8, 8);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
