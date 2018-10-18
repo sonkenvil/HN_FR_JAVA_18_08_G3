@@ -12,12 +12,12 @@ import java.sql.Date;
 public class OrderProduct {
 
 	private int id;
-	private double totalPrice;
+	private int totalPrice;
 	private Member member;
 	private Date createDate;
 	private Date updateTime;
 
-	public OrderProduct(int id, double totalPrice, Member member, Date createDate, Date updateTime) {
+	public OrderProduct(int id, int totalPrice, Member member, Date createDate, Date updateTime) {
 		super();
 		this.id = id;
 		this.totalPrice = totalPrice;
@@ -38,11 +38,11 @@ public class OrderProduct {
 		this.id = id;
 	}
 
-	public double getTotalPrice() {
+	public int getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(double totalPrice) {
+	public void setTotalPrice(int totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 

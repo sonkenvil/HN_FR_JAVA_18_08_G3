@@ -47,7 +47,6 @@ public class AddProductAction {
 	}
 
 	public String exitsProduct() {
-		System.out.println("ProductName " + product.getProductName());
 		exitsProductName = true;
 		return Action.SUCCESS;
 	}

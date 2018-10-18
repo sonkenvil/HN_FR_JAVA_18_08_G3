@@ -44,80 +44,97 @@ $(document).ready(function() {
 		}
 		return result;
 	}
+	$("#form-infor").validate({
+		rules: {
+			username:{
+				required : true,
+				minlength:10,
+				maxlength:20
+			},
+			cardNumber:{
+				required : true,
+				digits : true,
+				minlength:16,
+				maxlength:16
+			},
+			month:{
+				required : true,
+				digits : true,
+				minlength: 2,
+				maxlength: 2
+			},
+			year:{
+				required: true,
+				digits : true,
+				minlength: 2,
+				maxlength: 2
+			},
+			cvv:{
+				required: true,
+				digits : true,
+				minlength: 3,
+				maxlength: 3
+			}
+		},
+		message:{
+			username:{
+				required : "This field is required",
+				minlength: "You first full name must consist of at least 10 characters",
+				maxlength: "You first full name less than  or equal 20 characters"
+			},
+			cardNumber:{
+				required : "This field is required",
+				digits: "Please enter only digits",
+				minlength: "Cart number must have enough 16 digits",
+				maxlength: "Cart number must have enough 16 digits"
+			},
+			month:{
+				required : "This field is required",
+				digits: "Please enter only digits",
+				minlength: "You phone must have 2 digits",
+				maxlength: "You phone must have 2 digits"
+			},
+			year:{
+				required : "This field is required",
+				digits: "Please enter only digits",
+				minlength: "You phone must have 2 digits",
+				maxlength: "You phone must have 2 digits"
+			},
+			cvv:{
+				required : "This field is required",
+				digits: "Please enter only digits",
+				minlength: "You phone must have 3 digits",
+				maxlength: "You phone must have 3 digits"
+			}
+		},
+		submitHandler: function(form){
+			var price = $(".order-col > div > .order-total").text();
+			if(price !== "$0"){
+				$.ajax({
+			        url: 'confirm-payment',
+			        type: 'POST',
+			        data: { 
+			        	},
+			        success: function(data) {
+			        	if(data.message){
+			        		swal({ title:"Thank you!",
+			        			 text:"Please wait for the product to be shipped within 2-3 days",
+			        			 type:"success",
+			        			 showCloseButton: true,
+			        			 focusConfirm: false,
+			        			 showConfirmButton: false,
+			        			 footer: "<a href=home><i class='fa fa-shopping-cart' class='btn btn-warning'></i> Continue Shopping</a>"}).then(function(){
+			        			 location.reload();
+			        		});
+			        	}else{
+			        		alert("fail")
+			        	}
+			        }
+			 });
+			}else{
+				alert("Can't processing orders");
+			}
+		}
+	});
 });
 
-$("#form-infor").validate({
-	rules: {
-		username:{
-			required : true,
-			minlength:10,
-			maxlength:20
-		},
-		cardNumber:{
-			required : true,
-			digits : true,
-			minlength:16,
-			maxlength:16
-		},
-		month:{
-			required : true,
-			digits : true,
-			minlength: 2,
-			maxlength: 2
-		},
-		year:{
-			required: true,
-			digits : true,
-			minlength: 2,
-			maxlength: 2
-		},
-		cvv:{
-			required: true,
-			digits : true,
-			minlength: 3,
-			maxlength: 3
-		}
-	},
-	message:{
-		username:{
-			required : "This field is required",
-			minlength: "You first full name must consist of at least 10 characters",
-			maxlength: "You first full name less than  or equal 20 characters"
-		},
-		cardNumber:{
-			required : "This field is required",
-			digits: "Please enter only digits",
-			minlength: "Cart number must have enough 16 digits",
-			maxlength: "Cart number must have enough 16 digits"
-		},
-		month:{
-			required : "This field is required",
-			digits: "Please enter only digits",
-			minlength: "You phone must have 2 digits",
-			maxlength: "You phone must have 2 digits"
-		},
-		year:{
-			required : "This field is required",
-			digits: "Please enter only digits",
-			minlength: "You phone must have 2 digits",
-			maxlength: "You phone must have 2 digits"
-		},
-		cvv:{
-			required : "This field is required",
-			digits: "Please enter only digits",
-			minlength: "You phone must have 3 digits",
-			maxlength: "You phone must have 3 digits"
-		}
-	},
-	submitHandler: function(form){
-		$.ajax({
-	        url: 'confirm-payment',
-	        type: 'POST',
-	        data: { 
-	        	},
-	        success: function(data) {
-	        	
-	        }
-	 });
-	}
-});

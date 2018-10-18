@@ -43,7 +43,6 @@ public class ProductAction implements SessionAware{
 		product = productService.getProductById(productId);
 		listImageDetail = imageDetailService.getListImageDetailByProductId(productId);
 		listRelateProduct = productService.getListProductRelated(product);
-		String name = product.getProductName();
 		session.put(Constants.PRODUCT, productId);
 		session.put(Constants.PAGE_INDEX, Constants.PRODUCT_DETAIL);
 		return Action.SUCCESS;

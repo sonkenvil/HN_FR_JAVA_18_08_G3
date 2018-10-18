@@ -23,34 +23,48 @@ public class CategoryDaoImpl implements CategoryDao {
 
 	private Connection conn;
 	private PreparedStatement pre;
+	private ResultSet rs;
 
 	@Override
-	public Category getCategoryById(int id) throws SQLException {
+	public Category getCategoryById(int id){
 		// TODO Auto-generated method stub
 		Category category = null;
 		conn = DbHelper.getConnection();
 		if (conn != null) {
-			pre = conn.prepareStatement(QueryConstants.SELECT_CATEGORY_BY_ID);
-			pre.setInt(1, id);
-			ResultSet rs = pre.executeQuery();
-			if (rs.next()) {
-				category = new Category(rs.getInt("Id"), rs.getString("Name"));
+			try {
+				pre = conn.prepareStatement(QueryConstants.SELECT_CATEGORY_BY_ID);
+				pre.setInt(1, id);
+				rs = pre.executeQuery();
+				if (rs.next()) {
+					category = new Category(rs.getInt("Id"), rs.getString("Name"));
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				DbHelper.closeConnection(conn, pre, rs);
 			}
 		}
 		return category;
 	}
 
 	@Override
-	public List<Category> getListCategory() throws SQLException {
-		// TODO Auto-generated method stub
+	public List<Category> getListCategory(){
 		List<Category> listC = null;
 		conn = DbHelper.getConnection();
 		if(conn != null) {
 			listC = new LinkedList<>();
-			pre = conn.prepareStatement(QueryConstants.SELECT_CATEGORY);
-			ResultSet rs = pre.executeQuery();
-			while(rs.next()) {
-				listC.add(new Category(rs.getInt("Id"), rs.getString("Name")));
+			try {
+				pre = conn.prepareStatement(QueryConstants.SELECT_CATEGORY);
+				ResultSet rs = pre.executeQuery();
+				while(rs.next()) {
+					listC.add(new Category(rs.getInt("Id"), rs.getString("Name")));
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				DbHelper.closeConnection(conn, pre);
 			}
 		}
 		return listC;

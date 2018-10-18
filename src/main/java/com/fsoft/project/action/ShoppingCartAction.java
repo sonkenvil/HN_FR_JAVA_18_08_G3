@@ -117,7 +117,7 @@ public class ShoppingCartAction extends ActionSupport implements SessionAware {
 		LineItem  lineItem = null;
 		OrderProduct orderProduct = new OrderProduct();
 		try {
-			orderProduct.setId(orderService.getCurrentIdentity());
+			orderProduct.setId(orderService.getCurrentIdentity()+1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

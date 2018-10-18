@@ -14,7 +14,7 @@ public class LineItemServiceImpl implements LineItemService{
 		this.lineItemDao = dao;
 	}
 	@Override
-	public int addLineItem(List<LineItem> listItem) throws SQLException {
+	public int addLineItem(List<LineItem> listItem){
 		return lineItemDao.addLineItem(listItem);
 	}
 

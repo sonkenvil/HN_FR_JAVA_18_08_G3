@@ -16,24 +16,31 @@ public class LineItemDaoImpl implements LineItemDao{
 	private Connection connection;
 	private PreparedStatement ps;
 	@Override
-	public int addLineItem(List<LineItem> listItem) throws SQLException {
-		/*
-		 *  private OrderProduct order;
-			private Product product;
-			private int numberProduct;*/
+	public int addLineItem(List<LineItem> listItem){
 		int affected = 0;
 		connection = DbHelper.getConnection();
 		if(connection != null) {
-			ps = connection.prepareStatement(QueryConstants.ADD_LINEITEM);
-			for(LineItem i : listItem) {
-				affected ++;
-				ps.setInt(1, i.getOrder().getId());
-				ps.setInt(2, i.getProduct().getId());
-				ps.setInt(3, i.getNumberProduct());
-				ps.executeUpdate();
+			try {
+				connection.setAutoCommit(false);
+				ps = connection.prepareStatement(QueryConstants.ADD_LINEITEM);
+				for(LineItem i : listItem) {
+					affected ++;
+					ps.setInt(1, i.getOrder().getId());
+					ps.setInt(2, i.getProduct().getId());
+					ps.setInt(3, i.getNumberProduct());
+					ps.executeUpdate();
+				}
+				connection.commit();
+			} catch (SQLException e) {
+				affected = 0;
+				e.printStackTrace();
+				try {
+					connection.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 			}
 		}
 		return affected;
 	}
-
 }
