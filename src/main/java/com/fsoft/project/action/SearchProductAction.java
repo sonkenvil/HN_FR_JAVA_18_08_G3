@@ -27,7 +27,6 @@ public class SearchProductAction {
 		try {
 			listProduct = productService.getListProductByValue(val);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;

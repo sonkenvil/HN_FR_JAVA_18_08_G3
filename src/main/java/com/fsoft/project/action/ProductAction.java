@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.fsoft.project.base.BaseAction;
 import com.fsoft.project.dao.impl.ImageDetailDaoImpl;
 import com.fsoft.project.dao.impl.ProductDaoImpl;
 import com.fsoft.project.entity.ImageDetail;
@@ -19,37 +20,43 @@ import com.fsoft.project.service.impl.ImageDetailServiceImpl;
 import com.fsoft.project.service.impl.ProductServiceImpl;
 import com.fsoft.project.utils.constants.Constants;
 import com.opensymphony.xwork2.Action;
+import com.opensymphony.xwork2.Preparable;
 
 /**
  * @author hungcoutinho
  *
  */
-public class ProductAction implements SessionAware{
+public class ProductAction extends BaseAction implements Preparable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5903240637301411070L;
 	private int productId;
 	private ProductService productService;
 	private ImageDetailService imageDetailService;
 	private Product product;
 	private List<ImageDetail> listImageDetail;
 	private List<Product> listRelateProduct;
-	private Map<String,Object> session;
 	
-	public ProductAction() throws SQLException {
+	@Override
+	public void prepare() throws Exception {
 		productService = new ProductServiceImpl(new ProductDaoImpl());
 		imageDetailService = new ImageDetailServiceImpl(new ImageDetailDaoImpl());
 	}
+
 	public String execute() throws SQLException {
-		if(productId == 0) productId = (int) session.get(Constants.PRODUCT);
+		if(productId == 0) productId = (int) getSession().get(Constants.PRODUCT);
 		product = productService.getProductById(productId);
 		listImageDetail = imageDetailService.getListImageDetailByProductId(productId);
 		listRelateProduct = productService.getListProductRelated(product);
-		session.put(Constants.PRODUCT, productId);
-		session.put(Constants.PAGE_INDEX, Constants.PRODUCT_DETAIL);
+		getSession().put(Constants.PRODUCT, productId);
+		getSession().put(Constants.PAGE_INDEX, Constants.PRODUCT_DETAIL);
 		return Action.SUCCESS;
 	}
 	
 	public String productDetail() throws SQLException {
-		Object object = session.get(Constants.PRODUCT);
+		Object object = getSession().get(Constants.PRODUCT);
 		if(object != null) {
 			int productId = (int) object;
 			product = productService.getProductById(productId);
@@ -91,10 +98,4 @@ public class ProductAction implements SessionAware{
 	public void setListRelateProduct(List<Product> listRelateProduct) {
 		this.listRelateProduct = listRelateProduct;
 	}
-
-	@Override
-	public void setSession(Map<String, Object> session) {
-		this.session = session;
-	}
-
 }

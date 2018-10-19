@@ -3,14 +3,19 @@
  */
 package com.fsoft.project.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
  * @author hungcoutinho
  *
  */
-public class OrderProduct {
+public class OrderProduct implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2680674063678810502L;
 	private int id;
 	private int totalPrice;
 	private Member member;

@@ -223,7 +223,7 @@
 							</div>
 							<div class="add-cart">
 								<button class="btn btn-warning btn-cart"
-									data-id='<s:property value="id"/>'>
+									data-id='<s:property value="product.id"/>'>
 									<a><i class="fa fa-shopping-cart"></i> Add to cart</a>
 								</button>
 								<button class="btn btn-danger">

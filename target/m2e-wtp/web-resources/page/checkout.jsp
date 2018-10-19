@@ -11,7 +11,6 @@
 <link type="text/css" rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/checkout.css" />
 	<script src="https://unpkg.com/sweetalert2@7.17.0/dist/sweetalert2.all.js"></script>
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
 	<s:include value="/page/header.jsp"></s:include>

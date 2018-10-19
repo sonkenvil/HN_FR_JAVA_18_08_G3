@@ -42,7 +42,6 @@ jQuery(document).ready(function($) {
 			},
 			success : function(result) {
 				let isAddProduct = result.addProduct;
-				console.log(result);
 				if (isAddProduct) {
 					let cartNumber = parseInt($("#cartNumber").html());
 					$("#cartNumber").html(result.cartNumber);

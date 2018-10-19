@@ -1,4 +1,4 @@
-package com.fsoft.project.utils.constants;
+package com.fsoft.project.utils;
 
 import java.sql.Date;
 import java.util.Calendar;

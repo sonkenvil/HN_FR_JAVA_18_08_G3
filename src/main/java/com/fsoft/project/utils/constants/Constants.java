@@ -21,4 +21,6 @@ public class Constants {
 	
 	public static final int CHECKOUT = 4;
 	
+	public static final String URL_LIST_PRODUCT = "getListProductAction";
+	
 }

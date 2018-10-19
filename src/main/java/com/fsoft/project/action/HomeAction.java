@@ -3,13 +3,8 @@ package com.fsoft.project.action;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
-import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.interceptor.SessionAware;
-
+import com.fsoft.project.base.BaseAction;
 import com.fsoft.project.dao.impl.CategoryDaoImpl;
 import com.fsoft.project.dao.impl.ProductDaoImpl;
 import com.fsoft.project.entity.Category;
@@ -27,15 +22,18 @@ import com.opensymphony.xwork2.Preparable;
  * @author hungcoutinho
  *
  */
-public class HomeAction implements SessionAware, Preparable {
+public class HomeAction extends BaseAction implements Preparable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3391172537723552251L;
 	private List<Product> listNewProduct;
 	private List<Product> listProduct;
 	private List<Category> listCategory;
 	private int totalPages;
 	private int currentPage;
 	private int productId;
-	private Map<String, Object> session;
 	private String categoryId = WebConstants.CATEGORY_ALL;
 	private String sortName = WebConstants.DEFAULT;
 	private String sortPrice = WebConstants.DEFAULT;
@@ -46,20 +44,26 @@ public class HomeAction implements SessionAware, Preparable {
 	private CategoryService categoryService = null;
 
 
-	public String execute() {
-		session.put(Constants.PAGE_INDEX, Constants.INDEX);
+
+	@Override
+	public void prepare() throws Exception {
 		productService = new ProductServiceImpl(new ProductDaoImpl());
+		categoryService = new CategoryServiceImpl(new CategoryDaoImpl());
+	}
+	
+	public String execute() {
+		getSession().put(Constants.PAGE_INDEX, Constants.INDEX);
 		categoryService = new CategoryServiceImpl(new CategoryDaoImpl());
 		try {
 			listNewProduct = productService.getListNewProduct();
 			int totalProduct = productService.getTotalProduct();
 			totalPages = (totalProduct % 8 == 0) ? (totalProduct / 8) : (totalProduct / 8 + 1);
 			listProduct = productService.getListProduct(0);
-			if(session.get(Constants.CART_NUMBER) == null) {
-				session.put(Constants.CART_NUMBER, 0);
+			if(getSession().get(Constants.CART_NUMBER) == null) {
+				getSession().put(Constants.CART_NUMBER, 0);
 			}
 			listCategory = categoryService.getListCategory();
-			url = "getListProductAction";
+			url = Constants.URL_LIST_PRODUCT;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -67,7 +71,6 @@ public class HomeAction implements SessionAware, Preparable {
 	}
 
 	public String listProduct() {
-		productService = new ProductServiceImpl(new ProductDaoImpl());
 		try {
 			listProduct = productService.getListProduct((currentPage - 1) * 8);
 		} catch (SQLException e) {
@@ -82,8 +85,6 @@ public class HomeAction implements SessionAware, Preparable {
 	}
 
 	public String listProductByValue() {
-		productService = new ProductServiceImpl(new ProductDaoImpl());
-		categoryService = new CategoryServiceImpl(new CategoryDaoImpl());
 		if (!WebConstants.DEFAULT.equals(sortName) && !WebConstants.ASC.equals(sortName)
 				&& !WebConstants.DESC.equals(sortName)) {
 			execute();
@@ -118,21 +119,18 @@ public class HomeAction implements SessionAware, Preparable {
 					priceBigMin, priceBigMax, 0, 8);
 			url = "loadProductByValueAction";
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
 	}
 
 	public String loadListProductByValue() {
-		productService = new ProductServiceImpl(new ProductDaoImpl());
 		BigDecimal priceBigMin = new BigDecimal(priceMin);
 		BigDecimal priceBigMax = new BigDecimal(priceMax);
 		try {
 			listProduct = productService.selectListProductByValue(Integer.parseInt(categoryId), sortName, sortPrice,
 					priceBigMin, priceBigMax, (currentPage - 1) * 8, 8);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return Action.SUCCESS;
@@ -178,15 +176,6 @@ public class HomeAction implements SessionAware, Preparable {
 		this.productId = productId;
 	}
 
-	@Override
-	public void setSession(Map<String, Object> session) {
-		this.session = session;
-	}
-
-	@Override
-	public void prepare() throws Exception {
-		
-	}
 	public String getCategoryId() {
 		return categoryId;
 	}

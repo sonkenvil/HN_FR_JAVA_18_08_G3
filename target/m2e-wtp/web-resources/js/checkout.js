@@ -121,10 +121,11 @@ $(document).ready(function() {
 			        			 text:"Please wait for the product to be shipped within 2-3 days",
 			        			 type:"success",
 			        			 showCloseButton: true,
-			        			 focusConfirm: false,
+			        			 focusConfirm: true,
 			        			 showConfirmButton: false,
-			        			 footer: "<a href=home><i class='fa fa-shopping-cart' class='btn btn-warning'></i> Continue Shopping</a>"}).then(function(){
-			        			 location.reload();
+			        			 footer: "<a id='continue-shop' href=home><i class='fa fa-shopping-cart' class='btn btn-warning'></i> Continue Shopping</a>"}).
+			        			 then(function(){
+			        				 window.location.href = 'home';
 			        		});
 			        	}else{
 			        		alert("fail")

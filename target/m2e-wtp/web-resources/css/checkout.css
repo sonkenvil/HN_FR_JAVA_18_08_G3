@@ -19,19 +19,17 @@ label.error {
       color: red;
 }
 
-a {
+#continue-shop {
   text-decoration:none;
   padding: 0.5rem;
   border: 1px solid #ccc;
   background: #fff;
-  font-size: 110%;
   color: DodgerBlue;
 }
 
-a:hover {
+#continue-shop:hover {
   background-color: DodgerBlue;  
   color: #fff;
 }
-
 
 

@@ -31,4 +31,5 @@ public interface ProductService {
 			BigDecimal priceMax, int offset, int fetch) throws SQLException;
 
 	int getTotalProductSelectByValue(int categoryId, BigDecimal priceMin, BigDecimal priceMax) throws SQLException;
+	
 }
