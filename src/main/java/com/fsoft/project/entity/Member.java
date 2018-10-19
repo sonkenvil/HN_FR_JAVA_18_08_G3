@@ -17,6 +17,7 @@ public class Member {
 	private boolean role;
 	private String email;
 	private String password;
+	
 
 	public Member() {
 		super();

@@ -3,7 +3,7 @@ package com.fsoft.project;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.junit.Test;
+//import org.junit.Test;
 
 import com.fsoft.project.dao.impl.ProductDaoImpl;
 import com.fsoft.project.entity.Product;
@@ -62,7 +62,7 @@ public class TestProductService extends TestCase{
 	
 	*/
 	
-	@Test
+	//@Test
 	public void testGetProductByValue() throws SQLException {
 		ProductService productService = new ProductServiceImpl(new ProductDaoImpl());
 		List<Product> listP = productService.getListProductByValue("i");

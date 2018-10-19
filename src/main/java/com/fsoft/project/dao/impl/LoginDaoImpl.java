@@ -8,7 +8,9 @@ import java.sql.SQLException;
 import com.fsoft.project.dao.LoginDao;
 import com.fsoft.project.db.DbHelper;
 import com.fsoft.project.entity.Member;
+import com.fsoft.project.security.Sha1Security;
 import com.fsoft.project.utils.constants.QueryConstants;
+import com.fsoft.project.utils.constants.WebConstants;
 
 public class LoginDaoImpl implements LoginDao{
   private Connection connection;
@@ -22,7 +24,7 @@ public class LoginDaoImpl implements LoginDao{
     try {
       ps = connection.prepareStatement(QueryConstants.GET_MEMBER);
       ps.setString(1, email);
-      ps.setString(2, password);
+      ps.setString(2, Sha1Security.SHA1(password));
       rs = ps.executeQuery();
       if(rs.next()) {
         member = new Member();

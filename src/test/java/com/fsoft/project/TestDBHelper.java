@@ -1,26 +1,11 @@
-/**
- * 
- */
 package com.fsoft.project;
 
-import java.sql.Connection;
-
-import org.junit.Test;
-
-import com.fsoft.project.db.DbHelper;
+import org.junit.experimental.theories.suppliers.TestedOn;
 
 import junit.framework.TestCase;
 
-/**
- * @author hungcoutinho
- *
- */
-public class TestDBHelper extends TestCase {
+public class TestDbHelper extends TestCase{
 
-	@Test
-	public void testConnection() {
-		Connection conn = DbHelper.getConnection();
-		assertTrue(conn != null);
-	}
-
+//	@TestedOn
+	
 }

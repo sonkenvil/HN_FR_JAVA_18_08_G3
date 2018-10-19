@@ -52,4 +52,37 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.getListProductByValue(val);
 	}
 
+	@Override
+	public int addProduct(Product product) throws SQLException {
+		return productDao.addProduct(product);
+	}
+
+	@Override
+	public List<Product> allProduct() throws SQLException {
+		
+		return productDao.allProduct();
+	}
+
+	@Override
+	public int updateProduct(Product product) throws SQLException, Exception {
+		
+		return productDao.updateProduct(product);
+	}
+
+	@Override
+	public Product fetchProduct(int id) throws SQLException {
+		
+		return productDao.fetchProduct(id);
+	}
+
+	@Override
+	public int deleteProduct(int id) throws SQLException, Exception {
+		
+		return productDao.deleteProduct(id);
+	}
+
+	
+
+	
+
 }

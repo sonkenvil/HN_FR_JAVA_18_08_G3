@@ -1,15 +1,19 @@
-.page-header{
+.page-header {
 	border-bottom: 1px solid #b76d6d !important;
-    color: #675c5c !important;
+	color: #675c5c !important;
 }
-.panel-default{
+
+.panel-default {
 	margin-top: 15px;
 }
-.panel-heading{
+
+.panel-heading {
 	color: #5bc0de !important;
 }
-#show_passowrd{
+
+#show_passowrd {
 	/* margin-left: 15px; */
+	
 }
 
 .mycheckbox {
@@ -17,34 +21,35 @@
 	justify-content: space-around;
 }
 
-.forget{
+.forget {
 	margin-left: 17px;
 }
-.forget a{
+
+.forget a {
 	color: black;
 }
 
-.panel-title{
+.panel-title {
 	text-align: center;
 }
-.alert-danger, .alert-success{
-	
+
+.alert-danger, .alert-success {
 	padding: 5px 15px;
 }
-.td_all{
+
+.td_all {
 	text-align: center;
 }
-.td_all{
+
+.td_all {
 	padding: 0px 5px;
 }
-.form_image_multil{
-	padding-left: 120px;
-    padding-top: 20px;
-    padding-bottom: 759px;
-}
-.btn_submit_button{
+
+.btn_submit_button {
 	margin-left: 30px;
 }
-.btn_close_modal{
+
+.btn_close_modal {
 	background-color: #f18585;
 }
+

@@ -23,5 +23,26 @@ public interface ProductService {
 	int getTotalProduct() throws SQLException;
 	
 	List<Product> getListProductByValue(String val) throws SQLException;
+	
+	
+ 
+	
+	/**
+	 * @param product
+	 * @return
+	 * {trong} 
+	 * @throws SQLException
+	 */
+	int addProduct(Product product) throws SQLException;
+	
+	public List<Product> allProduct() throws SQLException;
+	
+	public Product fetchProduct(int id) throws SQLException;
+	
+	public int updateProduct(Product product)
+			throws SQLException, Exception;
+	
+	public int deleteProduct(int id) throws SQLException, Exception;
+
 
 }

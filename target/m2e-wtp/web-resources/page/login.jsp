@@ -57,12 +57,12 @@
                                     
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                        <input id="login-username" type="text" class="form-control" name="email" value="" placeholder="email">                                        
+                                        <input id="login-username" type="text" class="form-control" name="email" value="${sessionScope.REGISTER_MEMBER.email}" placeholder="email">                                        
                                     </div>
                                 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
-                                        <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
+                                        <input id="login-password" type="password" class="form-control" name="password"value ="${sessionScope.REGISTER_MEMBER.password}" placeholder="password">
                                     </div>
                                     
 

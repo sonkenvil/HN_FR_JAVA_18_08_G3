@@ -12,7 +12,7 @@
 						Ha Noi, Viet Nam</a></li>
 			</ul>
 			<ul class="header-links pull-right">
-				<li><a href="#"><i class="fa fa-dollar"></i> VND</a></li>
+				<li><a href="<%=request.getContextPath()%>/page/register.jsp""><i class="fa fa-pencil fa-fw"></i>Contact</a></li>
 				<li><a href="<%=request.getContextPath()%>/page/login.jsp"><i class="fa fa-user-o"></i> My Account</a></li>
 			</ul>
 		</div>

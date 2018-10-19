@@ -19,7 +19,8 @@ public class ShoppingCartAction extends ActionSupport implements SessionAware{
 	
 	private Map<String,Object> session;
 	private List<LineItem> listLineItem;
-	 @Override
+	
+	@Override
 	public String execute() throws Exception {
 		 	List<LineItem> lineItems = new ArrayList<>();
 			Product product = null;

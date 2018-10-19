@@ -32,7 +32,9 @@
 <!-- Custom stlylesheet -->
 <link type="text/css" rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/style.css" />
-	
+
 <!-- Custom css header -->
 <link type="text/css" rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/header.css" />
+
+<div id="fb-root"></div>

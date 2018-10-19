@@ -1,0 +1,11 @@
+#h2_register{
+	color: #ce7774;
+	margin-left: -165px;
+}
+
+#ShowPassword{
+	margin-left: 30px;
+}
+.error{
+	color: red;
+}

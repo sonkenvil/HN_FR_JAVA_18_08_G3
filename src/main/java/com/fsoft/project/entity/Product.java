@@ -3,6 +3,7 @@
  */
 package com.fsoft.project.entity;
 
+import java.io.File;
 import java.sql.Date;
 
 /**
@@ -12,13 +13,29 @@ import java.sql.Date;
 public class Product {
 
 	private int id;
+	private int hidden;
+	
+	private int categoryId;
+	private int manuFacturerId;
+	
 	private String productName;
+	
+	
+	private File myFile;
+	
+	private String myFileContentType;
+	
 	private String imagePath;
+	
+	
 	private ManuFacturer manuFacturer;
 	private Category category;
+	
 	private Date createDate;
 	private String color;
 	private double price;
+	
+	
 	public Product() {
 		super();
 	}
@@ -54,13 +71,25 @@ public class Product {
 		this.productName = productName;
 	}
 
+	
+	
+	
+
 	public String getImagePath() {
 		return imagePath;
 	}
 
+
+
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
+
+
+
+	
+
+
 
 	public ManuFacturer getManuFacturer() {
 		return manuFacturer;
@@ -102,4 +131,66 @@ public class Product {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
+	public int getHidden() {
+		return hidden;
+	}
+
+
+
+	public void setHidden(int hidden) {
+		this.hidden = hidden;
+	}
+
+
+
+	public int getCategoryId() {
+		return categoryId;
+	}
+
+
+
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
+
+
+
+	public int getManuFacturerId() {
+		return manuFacturerId;
+	}
+
+
+
+	public void setManuFacturerId(int manuFacturerId) {
+		this.manuFacturerId = manuFacturerId;
+	}
+
+
+
+	public File getMyFile() {
+		return myFile;
+	}
+
+
+
+	public void setMyFile(File myFile) {
+		this.myFile = myFile;
+	}
+
+
+
+	public String getMyFileContentType() {
+		return myFileContentType;
+	}
+
+
+
+	public void setMyFileContentType(String myFileContentType) {
+		this.myFileContentType = myFileContentType;
+	}
+
+
+
+	
 }
