@@ -348,8 +348,6 @@ public class ProductDaoImpl implements ProductDao{
 		return i;
 	}
 
-	public static void main(String[] args) {
-		Timestamp y = new Timestamp(System.currentTimeMillis());
-		System.out.println(y);
-	}
+	
+
 }
