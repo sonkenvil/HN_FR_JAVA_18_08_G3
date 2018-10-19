@@ -140,11 +140,7 @@
 			class="com.fsoft.project.action.ProfileAction" method="updateProfile">
 			<result type="json"></result>
 		</action>
-		<action name="checkProductNameExits"
-			class="com.fsoft.project.action.AddProductAction"
-			method="exitsProduct">
-			<result type="json"></result>
-		</action>
+		
 		<action name="confirm-payment"
 			class="com.fsoft.project.action.CheckoutAction" method="confirmPayment">
 			<result type="json"></result>
