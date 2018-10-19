@@ -24,13 +24,11 @@ public class ManuFacturerServiceImpl implements ManuFacturerService{
 	
 	@Override
 	public ManuFacturer getManuFacturerById(int id) throws SQLException {
-		// TODO Auto-generated method stub
 		return manuFacturerDao.getManuFacturerById(id);
 	}
 
 	@Override
 	public List<ManuFacturer> getListManuFacturerService() throws SQLException {
-		// TODO Auto-generated method stub
 		return manuFacturerDao.getListManuFacturer();
 	}
 
