@@ -5,9 +5,6 @@ package com.fsoft.project.action;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
-
-import org.apache.struts2.interceptor.SessionAware;
 
 import com.fsoft.project.base.BaseAction;
 import com.fsoft.project.dao.impl.ImageDetailDaoImpl;

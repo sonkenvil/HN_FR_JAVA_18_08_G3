@@ -10,7 +10,7 @@ import com.fsoft.project.utils.constants.WebConstants;
 
 public class LoginServiceImpl implements LoginService {
 	private LoginDao loginDao;
-
+	private int productId;
 	public LoginServiceImpl() {
 
 	}
@@ -25,7 +25,7 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public String loginPage(Map<String, Object> session, int index, int productId) {
+	public String loginPage(Map<String, Object> session, int index) {
 		if (index == Constants.INDEX) {
 			return WebConstants.MEMBER_INDEX;
 		} else if (index == Constants.PRODUCT_DETAIL) {
@@ -38,5 +38,13 @@ public class LoginServiceImpl implements LoginService {
 		} else {
 			return WebConstants.SUCCESS_ADMIN;
 		}
+	}
+
+	public int getProductId() {
+		return productId;
+	}
+
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 }

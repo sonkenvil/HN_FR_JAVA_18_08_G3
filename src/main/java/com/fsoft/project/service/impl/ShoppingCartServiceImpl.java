@@ -34,6 +34,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		this.productService = productService;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public String removeLineItem(Map<String, Object> session, List<Product> listProduct, List<LineItem> listItem,
 			int productId, int refreshNumberCart) {
@@ -120,57 +121,53 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 			listP = new LinkedList<>();
 		}
 		productService = new ProductServiceImpl(new ProductDaoImpl());
-		try {
-			Product product = productService.getProductById(productId);
-			if (product != null) {
-				listP.add(product);
-				message = true;
-				session.put(WebConstants.LIST_PRODUCT, listP);
-			}
+		Product product = productService.getProductById(productId);
+		if (product != null) {
+			listP.add(product);
+			message = true;
+			session.put(WebConstants.LIST_PRODUCT, listP);
+		}
 
-			listLineItem = (Map<Integer, Integer>) session.get(WebConstants.LIST_LINEITEM);
-			if (listLineItem == null) {
-				listLineItem = new HashMap<>();
-			}
+		listLineItem = (Map<Integer, Integer>) session.get(WebConstants.LIST_LINEITEM);
+		if (listLineItem == null) {
+			listLineItem = new HashMap<>();
+		}
 
-			for (int i = 0; i < listP.size(); i++) {
-				if (numberProductDetail == 0) {
-					int number = 1;
-					if (listLineItem.get(listP.get(i).getId()) == null) {
+		for (int i = 0; i < listP.size(); i++) {
+			if (numberProductDetail == 0) {
+				int number = 1;
+				if (listLineItem.get(listP.get(i).getId()) == null) {
+					listLineItem.put(listP.get(i).getId(), number);
+				}
+				for (int j = i + 1; j < listP.size(); j++) {
+					if (listP.get(i).getId() == listP.get(j).getId()) {
+						listP.remove(j);
+						number = listLineItem.get(listP.get(i).getId());
+						listLineItem.put(listP.get(i).getId(), ++number);
+					}
+				}
+			} else {
+				if (listLineItem.get(listP.get(i).getId()) == null) {
+					listLineItem.put(listP.get(i).getId(), numberProductDetail);
+				}
+				for (int j = i + 1; j < listP.size(); j++) {
+					int number;
+					if (listP.get(i).getId() == listP.get(j).getId()) {
+						listP.remove(j);
+						number = listLineItem.get(listP.get(i).getId());
+						number += numberProductDetail;
 						listLineItem.put(listP.get(i).getId(), number);
-					}
-					for (int j = i + 1; j < listP.size(); j++) {
-						if (listP.get(i).getId() == listP.get(j).getId()) {
-							listP.remove(j);
-							number = listLineItem.get(listP.get(i).getId());
-							listLineItem.put(listP.get(i).getId(), ++number);
-						}
-					}
-				} else {
-					if (listLineItem.get(listP.get(i).getId()) == null) {
-						listLineItem.put(listP.get(i).getId(), numberProductDetail);
-					}
-					for (int j = i + 1; j < listP.size(); j++) {
-						int number;
-						if (listP.get(i).getId() == listP.get(j).getId()) {
-							listP.remove(j);
-							number = listLineItem.get(listP.get(i).getId());
-							number += numberProductDetail;
-							listLineItem.put(listP.get(i).getId(), number);
-						}
 					}
 				}
 			}
-			session.put(WebConstants.LIST_LINEITEM, listLineItem);
-			if (numberProductDetail == 0)
-				session.put(Constants.CART_NUMBER, ++cartNumber);
-			else {
-				int numberProduct = (int) session.get(Constants.CART_NUMBER);
-				cartNumber = numberProduct + numberProductDetail;
-				session.put(Constants.CART_NUMBER, cartNumber);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		}
+		session.put(WebConstants.LIST_LINEITEM, listLineItem);
+		if (numberProductDetail == 0)
+			session.put(Constants.CART_NUMBER, ++cartNumber);
+		else {
+			int numberProduct = (int) session.get(Constants.CART_NUMBER);
+			cartNumber = numberProduct + numberProductDetail;
+			session.put(Constants.CART_NUMBER, cartNumber);
 		}
 		return Action.SUCCESS;
 	}

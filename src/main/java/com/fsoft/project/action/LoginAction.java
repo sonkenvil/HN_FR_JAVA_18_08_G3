@@ -33,7 +33,7 @@ public class LoginAction extends BaseAction implements  Preparable {
 	private MemberDao memberDao;
 	private MemberService memberService;
 	private String redirectURL;
-	private LoginService loginService;
+	private LoginServiceImpl loginService;
 
 	@Override
 	public void prepare() throws Exception {
@@ -58,7 +58,7 @@ public class LoginAction extends BaseAction implements  Preparable {
 			if (object != null) {
 				index = (int) object;
 			}
-			return loginService.loginPage(getSession(), index, productId);
+			return loginService.loginPage(getSession(), index);
 		}
 		
 	}
@@ -75,7 +75,7 @@ public class LoginAction extends BaseAction implements  Preparable {
 	}
 
 	public int getProductId() {
-		return productId;
+		return loginService.getProductId();
 	}
 
 	public String getRedirectURL() {
@@ -87,7 +87,7 @@ public class LoginAction extends BaseAction implements  Preparable {
 	}
 
 	public void setProductId(int productId) {
-		this.productId = productId;
+		loginService.setProductId(productId);
 	}
 
 	public boolean isNotification() {

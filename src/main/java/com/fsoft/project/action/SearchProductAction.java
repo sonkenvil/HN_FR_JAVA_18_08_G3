@@ -3,7 +3,6 @@
  */
 package com.fsoft.project.action;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import com.fsoft.project.dao.impl.ProductDaoImpl;
@@ -24,11 +23,7 @@ public class SearchProductAction {
 
 	public String searchProductByValue() {
 		productService = new ProductServiceImpl(new ProductDaoImpl());
-		try {
-			listProduct = productService.getListProductByValue(val);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		listProduct = productService.getListProductByValue(val);
 		return Action.SUCCESS;
 	}
 

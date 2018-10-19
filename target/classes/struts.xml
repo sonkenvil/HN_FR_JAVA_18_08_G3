@@ -73,11 +73,6 @@
 			<result>/page/edit-profile.jsp</result>
 		</action>
 
-		<action name="add_product"
-			class="com.fsoft.project.action.AddProductAction" method="loadData">
-			<result>/page/addProduct.jsp</result>
-		</action>
-
 	</package>
 
 	<package name="json" extends="json-default">

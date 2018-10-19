@@ -75,7 +75,6 @@ $("#editform").validate({
 		        url: 'update-profile',
 		        type: 'POST',
 		        data: { 
-		        	name : "a",
 		        	json: JSON.stringify({
 		        		id : $('#editform #id').val(),
 			            firstName : $('#editform  #firstname').val(),

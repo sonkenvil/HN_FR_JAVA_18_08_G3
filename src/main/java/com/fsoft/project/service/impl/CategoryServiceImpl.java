@@ -3,7 +3,6 @@
  */
 package com.fsoft.project.service.impl;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import com.fsoft.project.dao.CategoryDao;
@@ -23,13 +22,13 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 	
 	@Override
-	public Category getCategoryById(int id) throws SQLException {
+	public Category getCategoryById(int id){
 		// TODO Auto-generated method stub
 		return categoryDao.getCategoryById(id);
 	}
 
 	@Override
-	public List<Category> getListCategory() throws SQLException {
+	public List<Category> getListCategory(){
 		// TODO Auto-generated method stub
 		return categoryDao.getListCategory();
 	}

@@ -189,8 +189,8 @@
 						<label>Name </label>
 						<select name="sortName">
 							<option value="Default">Default</option>
-							<option value="asc">ASC</option>
-							<option value="desc">DESC</option>
+							<option value="ASC">ASC</option>
+							<option value="DESC">DESC</option>
 						</select>
 					</div>
 					

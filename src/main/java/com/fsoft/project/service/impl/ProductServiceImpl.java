@@ -4,12 +4,10 @@
 package com.fsoft.project.service.impl;
 
 import java.math.BigDecimal;
-import java.sql.SQLException;
 import java.util.List;
 
 import com.fsoft.project.dao.ProductDao;
 import com.fsoft.project.entity.Product;
-import com.fsoft.project.service.CategoryService;
 import com.fsoft.project.service.ProductService;
 
 /**
@@ -25,44 +23,43 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> getListNewProduct() throws SQLException {
+	public List<Product> getListNewProduct() {
 		return productDao.getListNewProduct();
 	}
 
 	@Override
-	public List<Product> getListProduct(int n) throws SQLException {
+	public List<Product> getListProduct(int n) {
 		return productDao.getListProduct(n);
 	}
 
 	@Override
-	public int getTotalProduct() throws SQLException {
+	public int getTotalProduct() {
 		return productDao.getTotalProduct();
 	}
 
 	@Override
-	public Product getProductById(int id) throws SQLException {
+	public Product getProductById(int id) {
 		return productDao.getProductById(id);
 	}
 
 	@Override
-	public List<Product> getListProductByValue(String val) throws SQLException {
+	public List<Product> getListProductByValue(String val) {
 		return productDao.getListProductByValue(val);
 	}
 
 	@Override
-	public List<Product> getListProductRelated(Product product) throws SQLException {
+	public List<Product> getListProductRelated(Product product) {
 		return productDao.getListProductRelated(product);
 	}
 
 	@Override
 	public List<Product> selectListProductByValue(int categoryId, String sortName, String sortPrice,
-			BigDecimal priceMin, BigDecimal priceMax, int offset, int fetch) throws SQLException {
+			BigDecimal priceMin, BigDecimal priceMax, int offset, int fetch) {
 		return productDao.selectListProductByValue(categoryId, sortName, sortPrice, priceMin, priceMax, offset, fetch);
 	}
 
 	@Override
-	public int getTotalProductSelectByValue(int categoryId, BigDecimal priceMin, BigDecimal priceMax)
-			throws SQLException {
+	public int getTotalProductSelectByValue(int categoryId, BigDecimal priceMin, BigDecimal priceMax){
 		return productDao.getTotalProductSelectByValue(categoryId, priceMin, priceMax);
 	}
 }

@@ -6,5 +6,5 @@ import com.fsoft.project.entity.Member;
 
 public interface LoginService {
   Member getMember(String email, String password);
-  String loginPage(Map<String, Object> session, int index, int productId);
+  String loginPage(Map<String, Object> session, int index);
 }

@@ -227,7 +227,7 @@
 									<a><i class="fa fa-shopping-cart"></i> Add to cart</a>
 								</button>
 								<button class="btn btn-danger">
-									<a href="<%=request.getContextPath()%>/page/checkout.jsp"><i
+									<a href="confirm-checkout"><i
 										class="fa fa-usd"></i> Buy now</a>
 								</button>
 							</div>

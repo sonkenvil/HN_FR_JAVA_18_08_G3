@@ -23,4 +23,6 @@ public class Constants {
 	
 	public static final String URL_LIST_PRODUCT = "getListProductAction";
 	
+	public static final String URL_LOAD_LIST_PRODUCT = "loadProductByValueAction";
+	
 }

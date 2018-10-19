@@ -2,6 +2,7 @@ package com.fsoft.project.db;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -56,10 +57,27 @@ public class DbHelper {
 			e.printStackTrace();
 		}
 	}
+
 	public static void closeConnection(Connection connection, PreparedStatement ps) {
 		try {
 			if (ps != null)
 				ps.close();
+			if (connection != null)
+				connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void closeConnection(Connection connection, CallableStatement cstm,
+			ResultSet rs) {
+		try {
+			if (cstm != null)
+				cstm.close();
+			if (rs != null)
+				rs.close();
+			if (cstm != null)
+				cstm.close();
 			if (connection != null)
 				connection.close();
 		} catch (SQLException e) {
