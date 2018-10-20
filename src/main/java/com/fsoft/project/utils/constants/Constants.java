@@ -25,4 +25,5 @@ public class Constants {
 	
 	public static final String URL_LOAD_LIST_PRODUCT = "loadProductByValueAction";
 	
+	public static final String FEATURE_LOCATION = "C:\\Users\\Nguyen Son\\Documents\\GitHub\\HN_FR_JAVA_18_08_G3\\src\\main\\webapp\\image";
 }

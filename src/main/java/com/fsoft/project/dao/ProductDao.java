@@ -3,6 +3,7 @@
  */
 package com.fsoft.project.dao;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -31,4 +32,13 @@ public interface ProductDao {
 
 	int getTotalProductSelectByValue(int categoryId, BigDecimal priceMin, BigDecimal priceMax);
 
+	int addProduct(Product product, File myFile);
+
+	List<Product> allProduct();
+
+	Product fetchProduct(int id);
+
+	int updateProduct(Product product , File myFile);
+
+	int deleteProduct(int id);
 }

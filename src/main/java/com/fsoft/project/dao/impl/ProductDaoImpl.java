@@ -3,17 +3,21 @@
  */
 package com.fsoft.project.dao.impl;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import com.fsoft.project.dao.ProductDao;
 import com.fsoft.project.db.DbHelper;
+import com.fsoft.project.design.DesignProduct;
 import com.fsoft.project.entity.Category;
 import com.fsoft.project.entity.ManuFacturer;
 import com.fsoft.project.entity.Product;
@@ -268,5 +272,129 @@ public class ProductDaoImpl implements ProductDao {
 		}
 		return rows;
 	}
+
+	@Override
+	public int addProduct(Product product,File myFile){
+
+		int result=0;
+		try {
+			conn=DbHelper.getConnection();
+			if(conn!=null) {
+				pre = conn.prepareStatement(QueryConstants.ADD_PRODUCT);
+				DesignProduct.sameProduct(pre, product,myFile);
+				result=pre.executeUpdate();
+			}
+		} catch (Exception e) {
+		} finally {
+			DbHelper.closeConnection(conn, pre, rs);
+			
+		}
+		return result;
+	}
+
+	@Override
+	public List<Product> allProduct(){
+
+		List<Product> listProduct = new ArrayList<>();
+		try {
+			conn=DbHelper.getConnection();
+			if(conn!=null) {
+				pre=conn.prepareStatement(QueryConstants.ALL_PRODUCT);
+				rs=pre.executeQuery();
+				if (rs != null) {
+					while (rs.next()) {
+						Product product = new Product();
+						DesignProduct.fetchProduct(product, rs);
+						listProduct.add(product);
+					}
+				}
+			}
+		} catch (SQLException e) {
+		}finally {
+			DbHelper.closeConnection(conn, pre, rs);
+		}
+		return listProduct;
+	}
+
+
+	@Override
+	public  Product fetchProduct(int  id){
+		Product product = null;
+		ManuFacturer manuFacturer = null;
+		Category category = null;
+		try {
+			conn=DbHelper.getConnection();
+			if(conn!=null) {
+				pre=conn.prepareStatement(QueryConstants.PRE_SELECT_UPDATE_PRODUCT);
+				pre.setInt(1, id);
+				rs=pre.executeQuery();
+				if (rs.next()) {
+					product = new Product();
+					manuFacturer = new ManuFacturer();
+					category = new Category();
+					DesignProduct.fetchProduct(product, rs);
+					manuFacturer.setId(rs.getInt("ManuFacturerId"));
+					category.setId(rs.getInt("CategoryId"));
+					product.setManuFacturer(manuFacturer);
+					product.setCreateDate(rs.getDate("CreateDate"));
+					return product;
+				}
+			}
+		} catch (SQLException e) {
+		}finally {
+			DbHelper.closeConnection(conn, pre, rs);
+			
+		}
+		return product;
+	}
+
+
+
+
+	@Override
+	public int updateProduct(Product product, File myFile){
+		int i=0;
+		try {
+			conn=DbHelper.getConnection();
+			if(conn!=null) {
+				pre = conn.prepareStatement(QueryConstants.UPDATE_PRODUCT);
+				try {
+					DesignProduct.sameProduct(pre, product, myFile);
+					pre.setInt(8, product.getId());
+					i=pre.executeUpdate();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		} catch (SQLException e) {
+
+		} finally {
+			DbHelper.closeConnection(conn, pre, rs);
+		}
+		return i;
+
+
+	}
+
+	@Override
+
+	public int deleteProduct(int id){
+		int i = 0;
+		try {
+			conn=DbHelper.getConnection();
+			conn.setAutoCommit(false);
+			if(conn!=null) {
+				pre= conn.prepareStatement(QueryConstants.DELETE_PRODUCT);
+				pre.setInt(1, id);
+				i = pre.executeUpdate();
+			}
+			conn.commit();
+		} catch (SQLException e) {
+		} finally {
+			DbHelper.closeConnection(conn, pre, rs);
+		}
+		return i;
+	}
+
 
 }

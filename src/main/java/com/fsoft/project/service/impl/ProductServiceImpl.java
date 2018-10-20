@@ -3,6 +3,7 @@
  */
 package com.fsoft.project.service.impl;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -61,5 +62,30 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int getTotalProductSelectByValue(int categoryId, BigDecimal priceMin, BigDecimal priceMax){
 		return productDao.getTotalProductSelectByValue(categoryId, priceMin, priceMax);
+	}
+
+	@Override
+	public int addProduct(Product product, File myFile) {
+		return productDao.addProduct(product, myFile);
+	}
+
+	@Override
+	public List<Product> allProduct() {
+		return productDao.allProduct();
+	}
+
+	@Override
+	public Product fetchProduct(int id) {
+		return productDao.fetchProduct(id);
+	}
+
+	@Override
+	public int updateProduct(Product product, File myFile) {
+		return productDao.updateProduct(product, myFile);
+	}
+
+	@Override
+	public int deleteProduct(int id) {
+		return productDao.deleteProduct(id);
 	}
 }

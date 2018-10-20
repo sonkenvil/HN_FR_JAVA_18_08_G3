@@ -3,6 +3,7 @@
  */
 package com.fsoft.project.entity;
 
+import java.io.File;
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -21,6 +22,7 @@ public class Product implements Serializable{
 	private String color;
 	private int price;
 	private String description;
+	
 
 	public Product() {  
 		super();
@@ -111,5 +113,4 @@ public class Product implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 }
