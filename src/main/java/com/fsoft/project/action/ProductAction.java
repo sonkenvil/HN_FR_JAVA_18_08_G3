@@ -8,18 +8,16 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
 import com.fsoft.project.dao.ProductDao;
 import com.fsoft.project.dao.impl.ProductDaoImpl;
+import com.fsoft.project.design.DesignProduct;
 import com.fsoft.project.entity.Category;
 import com.fsoft.project.entity.ManuFacturer;
 import com.fsoft.project.entity.Product;
-import com.fsoft.project.entity.UploadEntity;
 import com.fsoft.project.service.ProductService;
 import com.fsoft.project.service.impl.ProductServiceImpl;
-import com.fsoft.project.utils.constants.StorageUtils;
 import com.fsoft.project.utils.constants.WebConstants;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
@@ -34,16 +32,13 @@ public class ProductAction extends ActionSupport{
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private int hidden;
-
 	private ProductService productService;
-
 	private Product product;
 	private String productName;
 	private String imagePath;
 	private File myFile;
 	private String myFileFileName;
 	private String myFileContentType;
-
 	List<Product> listProduct = null;
 	private boolean noData = false;
 	private int manuFacturerId;
@@ -54,16 +49,10 @@ public class ProductAction extends ActionSupport{
 	private int result;
 	private String msg;
 	private String submitType;
-
 	private ManuFacturer manuFacturer;
 	private Category category;
 	private Date createDate;
-
-
-
-
-	// private ManuFacturer manuFacturer;
-	// private Category category;
+	
 
 	public String execute() throws SQLException {
 		productService = new ProductServiceImpl(new ProductDaoImpl());
@@ -71,25 +60,27 @@ public class ProductAction extends ActionSupport{
 		return Action.SUCCESS;
 	}
 
+	
 	public String addProduct() throws SQLException {
-
 		Product product = new Product();
-
+		
+		
 		product.setMyFileContentType(myFileContentType);
 		product.setMyFile(myFile);
 		product.setImagePath(myFileFileName);
-
+		
 		product.setProductName(productName);
 		product.setManuFacturerId(manuFacturerId);
 		product.setCategoryId(categoryId);
 		product.setColor(color);
 		product.setCreateDate(createDate);
 		product.setPrice(price);
-
+		
+	
+		
 		productDao = new ProductDaoImpl();
 		productService = new ProductServiceImpl(productDao);
 		result = productService.addProduct(product);
-
 		if (result > 0) {
 			msg = "success";
 		} else {
@@ -99,10 +90,8 @@ public class ProductAction extends ActionSupport{
 	}
 
 	public String allProduct() throws SQLException {
-
 		productDao = new ProductDaoImpl();
 		productService = new ProductServiceImpl(productDao);
-
 		listProduct = productService.allProduct();
 		if (listProduct.size() == 0) {
 			noData = false;
@@ -113,64 +102,58 @@ public class ProductAction extends ActionSupport{
 	}
 
 	public String fetchProduct() throws SQLException {
-		
 		productDao = new ProductDaoImpl();
 		productService = new ProductServiceImpl(productDao);
 		product =  productService.fetchProduct(id);
 		return WebConstants.UPDATE_PRODUCT;
 	}
-	
-	
-	public String updateProduct() throws Exception {
 
+
+	public String updateProduct() throws Exception {
 		productDao = new ProductDaoImpl();
 		productService = new ProductServiceImpl(productDao);
+		String idStr = ServletActionContext.getRequest().getParameter("id");
+		Product product = new Product();
 		
-				String idStr = ServletActionContext.getRequest().getParameter("id");
-				
-				Product product = new Product();
-				
-				if (idStr != null) {
-					System.out.println(idStr);
-					product = productDao.getProductById(id);
-					product.setMyFileContentType(myFileContentType);
-					product.setMyFile(myFile);
-					product.setImagePath(myFileFileName);
-					
-				}
-
-//			product.setMyFileContentType(myFileContentType);
-//			product.setMyFile(myFile);
-//			product.setImagePath(myFileFileName);
-
-			product.setProductName(productName);
-			product.setManuFacturerId(manuFacturerId);
-			product.setCategoryId(categoryId);
-			product.setColor(color);
-			product.setCreateDate(createDate);
-			product.setHidden(hidden);
-			product.setPrice(price);
-
-			System.out.println(myFileFileName+ productName +color);
-
-			productService.updateProduct(product);
+		if (idStr != null) {
+			System.out.println(idStr);
+			product = productDao.getProductById(id);
+			
+			product.setMyFileContentType(myFileContentType);
+			product.setMyFile(myFile);
+			product.setImagePath(myFileFileName);
+			
 		
 
+		}
+
+		
+		
+		product.setProductName(productName);
+		product.setManuFacturerId(manuFacturerId);
+		product.setCategoryId(categoryId);
+		product.setColor(color);
+		product.setCreateDate(createDate);
+		product.setPrice(price);
+		
+		product.setHidden(hidden);
+		
+		System.out.println(myFileFileName+ productName +color);
+		result=productService.updateProduct(product);
+		if (result > 0) {
+			msg = "success";
+		} else {
+			msg = "false";
+		}
 		return WebConstants.UPDATE_PRODUCT;
 	}
 
 
-
-
-
-
 	public String deleteProduct() throws SQLException, Exception {
-
 		productDao = new ProductDaoImpl();
-
 		productService = new ProductServiceImpl(productDao);
-		int isDeleted = productService.deleteProduct(id);
-		if (isDeleted > 0) {
+		result = productService.deleteProduct(id);
+		if (result > 0) {
 			msg = "Record deleted successfully";
 		} else {
 			msg = "Some error";
@@ -178,8 +161,8 @@ public class ProductAction extends ActionSupport{
 		return WebConstants.DELETE_PRODUCT;
 	}
 
-	
-	
+
+
 	public int getId() {
 		return id;
 	}
@@ -362,7 +345,6 @@ public class ProductAction extends ActionSupport{
 		this.myFileFileName = myFileFileName;
 	}
 
-
-
-
+	
+    
 }

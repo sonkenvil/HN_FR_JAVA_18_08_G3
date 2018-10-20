@@ -8,9 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.fsoft.project.dao.ManuFacturerDao;
 import com.fsoft.project.db.DbHelper;
-import com.fsoft.project.entity.Category;
 import com.fsoft.project.entity.ManuFacturer;
 import com.fsoft.project.utils.constants.QueryConstants;
 
@@ -20,56 +21,54 @@ public class ManuFacturerDaoImpl implements ManuFacturerDao{
 	CallableStatement cs=null;
 	ResultSet rs=null;
 	Connection conn=null;
+	public static Logger LOG=Logger.getLogger(ManuFacturerDaoImpl.class);
 	
 	@Override
 	public int addManuFacturer(String name) throws SQLException, Exception {
-		
 		int result=0;
 		try {
 			conn=DbHelper.getConnection();
+			conn.setAutoCommit(false);
 			if(conn!=null) {
 				ps = conn.prepareStatement(QueryConstants.ADD_MANUFACTURER);
-				
 				ps.setString(1, name);
 				result=ps.executeUpdate();
 			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
+			conn.commit();
+		} catch (SQLException e) {
+			LOG.error("error at addFactory",e);
 		} finally {
 			DbHelper.closeConnection(conn, ps, cs, rs);
+			conn.rollback();
 		}
 		return result;
 	}
 
 	@Override
 	public List<ManuFacturer> allManuFacturer() throws SQLException, Exception {
-List<ManuFacturer> listManuFacturer = new ArrayList<ManuFacturer>();
-		
+		List<ManuFacturer> listManuFacturer = new ArrayList<ManuFacturer>();
 		try {
-			
 			conn=DbHelper.getConnection();
+			conn.setAutoCommit(false);
 			if(conn!=null) {
-				
 				ps=conn.prepareStatement(QueryConstants.ALL_MANUFACTURER);
 				rs = ps.executeQuery();
 				int i = 0;
-				
 				if (rs != null) {
 					while (rs.next()) {
 						i++;
-						
 						ManuFacturer manuFacturer = new ManuFacturer();
 						manuFacturer.setId(i);
 						manuFacturer.setName(rs.getString("Name"));
-						
 						listManuFacturer.add(manuFacturer);
 					}
 				}
 			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
+			conn.commit();
+
+		} catch (SQLException e) {
+			LOG.error("error at list factory",e);
+			conn.rollback();
 		} finally {
 			DbHelper.closeConnection(conn, ps, cs, rs);
 		}
@@ -77,47 +76,48 @@ List<ManuFacturer> listManuFacturer = new ArrayList<ManuFacturer>();
 	}
 
 	@Override
-	public String updateManuFacturer(String name, String hidden) throws SQLException, Exception {
-		
+	public int updateManuFacturer(String name, String hidden) throws SQLException, Exception {
+		int result=0;
 		try {
 			conn=DbHelper.getConnection();
+			conn.setAutoCommit(false);
 			if(conn!=null) {
 				ps = conn.prepareStatement(QueryConstants.UPDATE_MANUFACTURER);
 				ps.setString(1, name);
 				ps.setString(2, hidden);
-				ps.executeUpdate();
+				result= ps.executeUpdate();
 			}
-			return "Update Successful";
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			return e.getMessage();
+			conn.commit();
+
+		} catch (SQLException e) {
+			LOG.error("error at update factory",e);
+			conn.rollback();
 		} finally {
 			DbHelper.closeConnection(conn, ps, cs, rs);
 		}
-		
-		
+		return result;
 	}
 
 	@Override
 	public int deleteManuFacturer(String Name) throws SQLException, Exception {
-		
-		conn=DbHelper.getConnection();
-		DbHelper.getConnection().setAutoCommit(false);
-		int i = 0;
+
+		int result =0;
 		try {
-			ps=conn.prepareStatement(QueryConstants.DELETE_MANUFACTURER);
-			ps.setString(1, Name);
-			i = ps.executeUpdate();
-			return i;
-	
-		} catch (Exception e) {
-			e.printStackTrace();
-			DbHelper.getConnection().rollback();
-			return 0;
+			conn=DbHelper.getConnection();
+			DbHelper.getConnection().setAutoCommit(false);
+			if(conn!=null) {
+				ps=conn.prepareStatement(QueryConstants.DELETE_MANUFACTURER);
+				ps.setString(1, Name);
+				result = ps.executeUpdate();
+			}
+			conn.commit();
+
+		} catch (SQLException e) {
+			LOG.error("error at update factory",e);
+			conn.rollback();
 		} finally {
 			DbHelper.closeConnection(conn, ps, cs, rs);
 		}
+		return result;
 	}
-
 }

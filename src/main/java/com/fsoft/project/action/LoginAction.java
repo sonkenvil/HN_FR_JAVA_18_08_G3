@@ -26,6 +26,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
 	 * */
 	private LoginDao loginDao;
 	private LoginService loginService;
+	@SuppressWarnings("unused")
 	private Map<String, Object> session;
 
 	public LoginAction() {

@@ -1,15 +1,26 @@
 package com.fsoft.project.action;
 
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.fsoft.project.dao.RegisterDao;
 import com.fsoft.project.dao.impl.RegisterDaoImpl;
+import com.fsoft.project.db.DbHelper;
 import com.fsoft.project.entity.Member;
 import com.fsoft.project.service.RegisterService;
 import com.fsoft.project.service.impl.RegisterServiceImpl;
+import com.fsoft.project.utils.constants.QueryConstants;
 import com.fsoft.project.utils.constants.WebConstants;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
@@ -32,8 +43,8 @@ public class RegisterMemberAction extends ActionSupport implements SessionAware{
 	private Map<String, Object> session;
 	private RegisterDao registerDao; 
 	private RegisterService registerService;
-	
-	
+	private String lang;
+
 	public String registerMember() throws SQLException {
 		member = new Member();
 		member.setEmail(email);
@@ -42,27 +53,36 @@ public class RegisterMemberAction extends ActionSupport implements SessionAware{
 		member.setPassword(password);
 		member.setPhone(phone);
 		member.setAddress(address);
+
 		registerDao = new RegisterDaoImpl();
 		registerService = new RegisterServiceImpl(registerDao);
-		result = registerService.registerMember(member);
-		
-		if(result>0) {
-			msg = "Registration Successfull";
-			session.put(WebConstants.REGISTER_MEMBER, member);
-		}else {
-			msg = "Registration False";
+
+		if(registerService.checkEmail(member)) {
+			
+		}
+		else {
+
+			result = registerService.registerMember(member);
+
+			if(result>0) {
+				msg = "Registration Successfull";
+				session.put(WebConstants.REGISTER_MEMBER, member);
+			}else {
+				msg = "Registration False";
+			}
 		}
 		return Action.SUCCESS;
+
 	}
-	
-	
-	
+
+
+
 	@Override
 	public void validate() {
 	}
-	
-	
-	
+
+
+
 	public int getId() {
 		return id;
 	}
@@ -127,11 +147,38 @@ public class RegisterMemberAction extends ActionSupport implements SessionAware{
 	public void setResult(int result) {
 		this.result = result;
 	}
+	
+	
+
+	public RegisterMemberAction() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+	public RegisterMemberAction(String lang) {
+		super();
+		this.lang = lang;
+	}
+
+
+
+	public String getLang() {
+		return lang;
+	}
+
+
+
+	public void setLang(String lang) {
+		this.lang = lang;
+	}
+
 
 
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
-	
+
 }

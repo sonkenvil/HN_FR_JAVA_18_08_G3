@@ -96,7 +96,7 @@
 										</div>
 
 										<div class="form-group">
-											<label>Color</label> <input type="text"
+											<label>Color</label> <input type="color"
 												value='<s:property value="product.color"/>' name="color"
 												class="form-control">
 

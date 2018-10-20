@@ -1,3 +1,6 @@
+<%@taglib prefix="s" uri="/struts-tags"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="/struts-json-tags" prefix="json"%>
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -12,8 +15,7 @@
 <jsp:include page="head.jsp"></jsp:include>
 
 <style type="text/css">
-
-.error{
+.error {
 	color: red;
 }
 </style>
@@ -46,6 +48,8 @@
 				<div class="col-lg-12">
 					<div class="panel panel-default">
 						<div class="panel-body">
+							
+							
 							<form role="form" id="add_category">
 
 								<div class="row">
@@ -54,7 +58,7 @@
 										<div class="form-group">
 											<label>name</label> <input type="text" class="form-control"
 												name="name" id="name">
-											<p class="help-block">enter name category</p>
+											<p class="help-block">enter name factory</p>
 										</div>
 
 										<button type="submit"
@@ -63,15 +67,11 @@
 										<button type="reset" class="btn btn-default">Reset
 											Button</button>
 
-										<div class="text-center" id="responseCategory"
+										<div class="text-center" id="responseManuFacturer"
 											style="margin-top: 14px;"></div>
-
 									</div>
-									<!-- /.row (nested) -->
 								</div>
-
 							</form>
-							<!-- /.panel-body -->
 						</div>
 						<!-- /.panel -->
 					</div>

@@ -91,8 +91,6 @@ function registerMember() {
 	var Email = $("#Email").val();
 	var Password = $("#Password").val();
 
-	alert(FirstName);
-
 	if(FirstName=="" || LastName=="" || Address=="" || Phone=="" || Email=="" || Password =="" ){
 		return false;
 	}
@@ -120,7 +118,7 @@ function registerMember() {
 				});
 
 			}else{
-				alert("Fail");
+				swal("Email already exists please check email");
 			}
 
 		},
@@ -166,7 +164,7 @@ function addCategory() {
 			if (data.result ===1) {
 				window.location.href = 'allCategory.jsp';
 			}
-			
+
 		},
 		error : function(data) {
 			alert("There are some errors please check again");
@@ -215,15 +213,15 @@ function updateCategory() {
 	$.ajax({
 		type : "POST",
 		url : "updateCategory.action",
-
 		data : "name=" + $("#name").val()
 		+"&hidden="+ $("#hidden").val(),
-
-
 		success : function(data) {
 			var ht = data.msg;
+			alert(ht+ "kkkk")
 			
-			if (data.result ===1 ) {
+			if (ht ==="Successfull" ) {
+				
+				alert(data.result+ "1212")
 				window.location.href = 'allCategory.jsp';
 			}
 		},
@@ -241,28 +239,25 @@ function deleteCategory(that) {
 	}
 
 	$.ajax({
+		
+		
+		
 		type : "POST",
 		url : "deleteCategory.action",
 		data : "name=" + $(that).parent().prev().text(),
+		
 		success : function(data) {
-			if (data.msg === "Delete Successful") {
-				alert(data.msg)
-				$(that).closest('tr').remove();
-				if (data === 1) {
-					window.location.href = 'allCategory.jsp';
-				}
-
-			} else {
-				alert(data.msg)
+			var ht = data.msg;
+			alert(ht+ " delete ok")
+			if (data.result ===1 ) {
+				alert(ht+" ok")
+				window.location.href = 'allCategory.jsp';
 			}
 		},
 		error : function(data) {
 			alert("Some error occured.");
 		}
 	});
-	
-	allCategory();
-
 }
 
 

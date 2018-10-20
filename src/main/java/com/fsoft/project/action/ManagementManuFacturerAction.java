@@ -3,6 +3,8 @@ package com.fsoft.project.action;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.fsoft.project.dao.ManuFacturerDao;
 import com.fsoft.project.dao.impl.ManuFacturerDaoImpl;
 import com.fsoft.project.entity.ManuFacturer;
@@ -22,20 +24,16 @@ public class ManagementManuFacturerAction extends ActionSupport{
 	private boolean noData = false;
 
 
-
 	private int result;
 	List<ManuFacturer> listManuFacturer = null;
-
 	private ManuFacturerDao manuFacturerDao = new ManuFacturerDaoImpl();
-	
 	private ManuFacturerService manuFacturerService= new ManuFacturerServiceImpl(manuFacturerDao);
-
+	public static Logger LOG=Logger.getLogger(ManagementManuFacturerAction.class);
 
 
 	public String addManuFacturer() throws SQLException, Exception {
 
 		result=manuFacturerService.addManuFacturer(Name);
-
 		if (result > 0) {
 			msg = "Registration Successfull";
 		} else {
@@ -45,46 +43,54 @@ public class ManagementManuFacturerAction extends ActionSupport{
 	}
 
 
-
 	public String allManuFacturer() {
-
 		try {
 			listManuFacturer = manuFacturerService.allManuFacturer();
-
 			if (listManuFacturer.size() == 0) {
 				noData = false;
 			} else {
 				noData = true;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error("error at all ManuFacturer action",e);
 		}
 		return WebConstants.ALL_MANUFACTURER;
 	}
 
 	public String updateManuFacturer() throws SQLException, Exception {
-		msg = manuFacturerService.updateManuFacturer(Name, hidden);
+		result = manuFacturerService.updateManuFacturer(Name, hidden);
+		if(result>0) {
+			msg="success";
+		}
+		else {
+			msg="false";
+		}
 		return WebConstants.UPDATE_MANUFACTURER;
 
 	}
 
 	public String deleteManuFacturer() throws SQLException, Exception {
-
 		try {
-			
-			int isDeleted = manuFacturerService.deleteManuFacturer(Name);
-			if (isDeleted > 0) {
+			result = manuFacturerService.deleteManuFacturer(Name);
+			if (result > 0) {
 				msg = "Record deleted successfully";
 			} else {
 				msg = "Some error";
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (SQLException e) {
+			LOG.error("error at all ManuFacturer action",e);
 		}
 
 		return WebConstants.DELETE_MANUFACTURER;
 	}
 
+	
+	public void validate(){
+	    if (getName().length() == 0) {
+	        addFieldError("getName", "First name is required.");
+	    }
+	}
+	
 
 	public int getId() {
 		return id;

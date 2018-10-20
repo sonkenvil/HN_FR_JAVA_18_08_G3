@@ -10,27 +10,19 @@ import java.sql.Date;
  * @author hungcoutinho
  *
  */
-public class Product {
 
+public class Product {
 	private int id;
 	private int hidden;
-	
 	private int categoryId;
 	private int manuFacturerId;
-	
 	private String productName;
-	
-	
+	private String name;
 	private File myFile;
-	
 	private String myFileContentType;
-	
 	private String imagePath;
-	
-	
 	private ManuFacturer manuFacturer;
 	private Category category;
-	
 	private Date createDate;
 	private String color;
 	private double price;
@@ -136,61 +128,48 @@ public class Product {
 		return hidden;
 	}
 
-
-
 	public void setHidden(int hidden) {
 		this.hidden = hidden;
 	}
-
-
 
 	public int getCategoryId() {
 		return categoryId;
 	}
 
-
-
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
-
-
 
 	public int getManuFacturerId() {
 		return manuFacturerId;
 	}
 
-
-
 	public void setManuFacturerId(int manuFacturerId) {
 		this.manuFacturerId = manuFacturerId;
 	}
-
-
 
 	public File getMyFile() {
 		return myFile;
 	}
 
-
-
 	public void setMyFile(File myFile) {
 		this.myFile = myFile;
 	}
-
-
 
 	public String getMyFileContentType() {
 		return myFileContentType;
 	}
 
-
-
 	public void setMyFileContentType(String myFileContentType) {
 		this.myFileContentType = myFileContentType;
 	}
 
+	public String getName() {
+		return name;
+	}
 
-
+	public void setName(String name) {
+		this.name = name;
+	}
 	
 }

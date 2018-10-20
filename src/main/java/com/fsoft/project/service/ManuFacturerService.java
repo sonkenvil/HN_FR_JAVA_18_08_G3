@@ -11,7 +11,7 @@ public interface ManuFacturerService {
 
 	public List<ManuFacturer> allManuFacturer() throws SQLException, Exception;
 
-	public String updateManuFacturer(String name, String hidden)
+	public int updateManuFacturer(String name, String hidden)
 			throws SQLException, Exception;
 
 	public int deleteManuFacturer(String  Name) throws SQLException, Exception;

@@ -1,3 +1,7 @@
+<%@taglib prefix="s" uri="/struts-tags"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="/struts-json-tags" prefix="json"%>
+
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -15,7 +19,47 @@
 .error {
 	color: red;
 }
+
+.label {
+	display: inline-block;
+	max-width: 100%;
+	margin-bottom: 5px;
+	font-weight: 400;
+	color: black;
+	font-size: 15px;
+	margin-right: 20px;
+}
+
+#name {
+	display: block;
+	width: 230%;
+	height: 43px;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow
+		ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out
+		.15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+#submit {
+	border: 1px solid gray;
+	border-radius: 10%;
+	margin-top: 30px;
+	margin-left: 80px;
+	background-color: #ecf5e8;
+}
 </style>
+
 </head>
 
 <body>
@@ -37,6 +81,20 @@
 						<marquee width="50%" behavior="alternate" bgcolor="pink">Add
 							Factory Database</marquee>
 					</h1>
+
+					<s:url var="indexEN" namespace="/" action="locale">
+						<s:param name="request_locale">en</s:param>
+					</s:url>
+					<s:url var="indexES" namespace="/" action="locale">
+						<s:param name="request_locale">es</s:param>
+					</s:url>
+					<s:url var="indexFR" namespace="/" action="locale">
+						<s:param name="request_locale">fr</s:param>
+					</s:url>
+
+					<s:a href="%{indexEN}">English</s:a>
+					<s:a href="%{indexES}">Spanish</s:a>
+					<s:a href="%{indexFR}">France</s:a>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -45,26 +103,32 @@
 				<div class="col-lg-12">
 					<div class="panel panel-default">
 						<div class="panel-body">
-							<form role="form" id="add_ManuFacturer">
-
+							<s:form role="form" id="add_ManuFacturer">
 								<div class="row">
 									<div class="col-lg-7">
 
-										<div class="form-group">
-											<label>name</label> <input type="text" class="form-control"
-												name="name" id="name">
-											<p class="help-block">enter name factory</p>
-										</div>
+										<!-- <div class="form-group"> -->
+										<s:textfield name="name" id="name" key="global.name" size="20" />
 
-										<button type="submit"
+										<!-- </div> -->
+
+										<!-- <button type="submit"
 											class="btn btn-default btn_submit_button">Submit
-											Button</button>
-										<button type="reset" class="btn btn-default">Reset
-											Button</button>
+											Button</button> -->
 
-										<div class="text-center" id="responseManuFacturer"
+										<s:submit name="submit" id="submit" key="global.submit" />
+
+										<!-- <button type="reset" class="btn btn-default">Reset
+											Button</button> -->
+
+										<div class="text-center" id="responseCategory"
 											style="margin-top: 14px;"></div>
-							</form>
+
+									</div>
+									<!-- /.row (nested) -->
+								</div>
+
+							</s:form>
 						</div>
 						<!-- /.row (nested) -->
 					</div>

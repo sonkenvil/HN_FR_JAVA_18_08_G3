@@ -294,6 +294,15 @@
 	</div>
 	<!-- /SECTION -->
 
+
+<!-- ma code binh luan facebook -->
+
+<div>
+
+<!-- thay https://developers.facebook.com/docs/plugins/comments#configurator bang duong dan den chi tiet 1 san pham tren trinh duyet gan dong id-->
+<div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-width="800" data-numposts="5"></div>
+	
+</div>
 	<div class="col-md-12 wow fadeInDown">
 		<div class="section-title text-center">
 			<h3>Related Infomation</h3>

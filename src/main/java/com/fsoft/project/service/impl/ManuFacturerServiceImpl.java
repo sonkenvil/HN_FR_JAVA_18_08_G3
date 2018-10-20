@@ -31,7 +31,7 @@ public class ManuFacturerServiceImpl implements ManuFacturerService{
 	}
 
 	@Override
-	public String updateManuFacturer(String name, String hidden) throws SQLException, Exception {
+	public int updateManuFacturer(String name, String hidden) throws SQLException, Exception {
 
 		return manuFacturerDao.updateManuFacturer(name, hidden);
 	}

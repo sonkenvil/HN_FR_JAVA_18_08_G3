@@ -3,6 +3,8 @@ package com.fsoft.project.action;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.fsoft.project.dao.CategoryDao;
 import com.fsoft.project.dao.impl.CategoryDaoImpl;
 import com.fsoft.project.entity.Category;
@@ -20,21 +22,15 @@ public class ManagementCategoryAction extends ActionSupport{
 	private String hidden;
 	private String msg;
 	private boolean noData = false;
-
-
-
 	private int result;
 	List<Category> listCategory = null;
-
 	private CategoryDao categoryDao = new CategoryDaoImpl();
 	private CategoryService categoryService= new CategoryServiceImpl(categoryDao);
-
+	public static Logger LOG=Logger.getLogger(ManagementCategoryAction.class);
 
 
 	public String addCategory() throws SQLException, Exception {
-
 		result=categoryService.addCategory(Name);
-
 		if (result > 0) {
 			msg = "Registration Successfull";
 		} else {
@@ -56,32 +52,34 @@ public class ManagementCategoryAction extends ActionSupport{
 				noData = true;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error("error at all category action",e);
 		}
 		return WebConstants.ALL_CATEGORY;
 	}
 
+	
 	public String updateCategory() throws SQLException, Exception {
-		
 		result = categoryService.updateCategory(Name, hidden);
+		if (result > 0) {	
+			msg = "Successfull";
+		} else {
+			msg = "error please check again";
+		}
 		return WebConstants.UPDATE_CATEGORY;
 
 	}
 
 	public String deleteCategory() throws SQLException, Exception {
-
 		try {
-			
-			int isDeleted = categoryService.deleteCategory(Name);
-			if (isDeleted > 0) {
+			result = categoryService.deleteCategory(Name);
+			if (result > 0) {
 				msg = "Record deleted successfully";
 			} else {
 				msg = "Some error";
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (SQLException e) {
+			LOG.error("error at delete category action",e);
 		}
-
 		return WebConstants.DELETE_CATEGORY;
 	}
 
@@ -135,8 +133,6 @@ public class ManagementCategoryAction extends ActionSupport{
 	public boolean isNoData() {
 		return noData;
 	}
-
-
 
 	public void setNoData(boolean noData) {
 		this.noData = noData;

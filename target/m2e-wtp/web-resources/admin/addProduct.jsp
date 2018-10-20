@@ -1,8 +1,10 @@
-<%@taglib prefix="s" uri="/struts-tags"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+
 
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
 
 <meta charset="utf-8">
@@ -31,9 +33,9 @@
 	left: 183px;
 }
 
-.error{
+.error {
 	color: red;
-
+}
 </style>
 
 </head>
@@ -45,11 +47,11 @@
 		<!-- Navigation -->
 		<nav class="navbar navbar-default navbar-static-top" role="navigation"
 			style="margin-bottom: 0">
-
 			<jsp:include page="header.jsp"></jsp:include>
 
 			<jsp:include page="left.jsp"></jsp:include>
 		</nav>
+
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
@@ -65,7 +67,8 @@
 				<div class="col-lg-12">
 					<div class="panel panel-default">
 						<div class="panel-body">
-							<form id="add_product" action="<%=request.getContextPath()%>/addProduct" method="post"
+							<form id="add_product"
+								action="<%=request.getContextPath()%>/addProduct" method="post"
 								enctype="multipart/form-data">
 
 								<div class="row">
@@ -74,20 +77,18 @@
 
 										<div class="form-group">
 											<label>Product Name</label> <input type="text"
-												id="productName" name="productName"
-												class="form-control">
+												id="productName" name="productName" class="form-control">
 										</div>
 
 										<div class="form-group">
-											<label>Image Path</label> <input type="file" name="myFile" id="myFile"
-												name="myFile">
+											<label>Image Path</label> <input type="file" name="myFile"
+												id="myFile" name="myFile">
 										</div>
 
 
 										<div class="form-group">
 											<label for="sel1">ManuFacturer Id:</label> <select
-												name="manuFacturerId" class="form-control"
-												id="manuFacturer">
+												name="manuFacturerId" class="form-control" id="manuFacturer">
 
 												<s:iterator value="listManuFacturer">
 													<option value="<s:property value = "id"/>">
@@ -99,13 +100,11 @@
 
 										<div class="form-group">
 											<label for="sel1">Category Id:</label> <select
-												name="categoryId" class="form-control"
-												id="category">
+												name="categoryId" class="form-control" id="category">
 
 												<s:iterator value="listCategory">
 
 													<option value="<s:property value = "id"/>">
-
 														<s:property value="id" />
 
 													</option>
@@ -116,13 +115,13 @@
 										</div>
 
 										<div class="form-group">
-											<label>Color Name</label> <input type="text"
-												name="color" class="form-control">
+											<label>Color Name</label> <input type="color" name="color"
+												class="form-control">
 										</div>
 
 										<div class="form-group">
-											<label>Price Name</label> <input type="text"
-												name="price" class="form-control">
+											<label>Price Name</label> <input type="text" name="price"
+												class="form-control">
 										</div>
 
 									</div>
@@ -134,7 +133,7 @@
 										</div>
 
 										<div class="form-group">
-											 <input type="file" name="imageDetailFileName"
+											<input type="file" name="imageDetailFileName"
 												id="imageDetailFileName">
 										</div>
 
@@ -170,12 +169,18 @@
 
 
 	<script>
-		$(document).ready(function() {
-			$("#adddImageDetail").click(function() {
+		$(document)
+				.ready(
+						function() {
+							$("#adddImageDetail")
+									.click(
+											function() {
 
-				$("#insert").append('<label for="exampleFormControlFile1">upload  file detail</label> <input type="file" name="imageDetailFileName"id="imageDetailFileName">');
-				});
-		});
+												$("#insert")
+														.append(
+																'<label for="exampleFormControlFile1">upload  file detail</label> <input type="file" name="imageDetailFileName"id="imageDetailFileName">');
+											});
+						});
 	</script>
 
 	<jsp:include page="footer.jsp"></jsp:include>

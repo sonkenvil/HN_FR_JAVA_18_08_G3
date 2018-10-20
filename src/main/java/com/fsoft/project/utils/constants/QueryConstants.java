@@ -51,9 +51,9 @@ public class QueryConstants {
 	public static final String UPDATE_CATEGORY="UPDATE CATEGORY SET Name=? WHERE Name=?";
 	public static final String DELETE_CATEGORY="DELETE FROM CATEGORY WHERE Name=?";
 
-	public static final String ID_CATEGORY="SELECT Id FROM CATEGORY";
+	public static final String ID_CATEGORY="SELECT * FROM CATEGORY";
 
-	public static final String ID_MANUFACTURER="SELECT Id FROM MANUFACTURER";
+	public static final String ID_MANUFACTURER="SELECT * FROM MANUFACTURER";
 
 
 	public static final String ADD_MANUFACTURER="INSERT INTO MANUFACTURER VALUES(?)";
@@ -62,15 +62,8 @@ public class QueryConstants {
 
 	public static final String UPDATE_MANUFACTURER="UPDATE MANUFACTURER SET Name=? WHERE Name=?";
 	public static final String DELETE_MANUFACTURER="DELETE FROM MANUFACTURER WHERE Name=?";
-
-	/**
-	 *  product
-	 */
-
 	public static final String ADD_PRODUCT="INSERT INTO PRODUCT VALUES(?,?,?,?,?,?,?)";
-	
 	public static final String UPDATE_PRODUCT="UPDATE PRODUCT SET  ProductName =?, ImagePath=? , ManuFacturerId=? , CategoryId=?,CreateDate=?,  Color=?, Price=? WHERE Id=?";
-	
 	public static final String DELETE_PRODUCT="DELETE FROM PRODUCT WHERE Id=?";
 	
 	public static final String PRE_SELECT_UPDATE_PRODUCT="SELECT* FROM PRODUCT WHERE Id=?";
@@ -81,5 +74,7 @@ public class QueryConstants {
 	
 	
 	public static final String ADD="INSERT INTO upload VALUES(?)";
+	
+	public static final String CHECK_EMAIL_EXISTS="SELECT* FROM MEMBER WHERE Email=?";
 
 }

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -28,13 +29,12 @@
 
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/css/defind_style_admin.css">
-<script src="https://unpkg.com/sweetalert2@7.17.0/dist/sweetalert2.all.js"></script>
+<script
+	src="https://unpkg.com/sweetalert2@7.17.0/dist/sweetalert2.all.js"></script>
 </head>
 <body>
 
 	<div class="container text-center text-center">
-
-
 
 		<form class="form-horizontal" role="form" id="register-form">
 
@@ -43,8 +43,8 @@
 				<label for="FirstName" class="col-sm-3 control-label">First
 					Name</label>
 				<div class="col-sm-4">
-					<input type="text" id="FirstName" name="FirstName" placeholder="First Name"
-						class="form-control" autofocus>
+					<input type="text" id="FirstName" name="FirstName"
+						placeholder="First Name" class="form-control" autofocus>
 
 				</div>
 			</div>
@@ -52,16 +52,16 @@
 				<label for="LastName" class="col-sm-3 control-label">Last
 					Name</label>
 				<div class="col-sm-4">
-					<input type="text" id="LastName" name="LastName" placeholder="Last Name"
-						class="form-control" autofocus>
+					<input type="text" id="LastName" name="LastName"
+						placeholder="Last Name" class="form-control" autofocus>
 
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="Address" class="col-sm-3 control-label">Address</label>
 				<div class="col-sm-4">
-					<input type="text" id="Address" name="Address" placeholder="Address"
-						class="form-control" autofocus>
+					<input type="text" id="Address" name="Address"
+						placeholder="Address" class="form-control" autofocus>
 
 				</div>
 			</div>
@@ -75,8 +75,8 @@
 
 				</div>
 			</div>
-			
-			
+
+
 			<div class="form-group">
 				<div class="col-sm-4">
 					<input type="hidden" id="role" name="role" placeholder="role"
@@ -97,8 +97,8 @@
 			<div class="form-group">
 				<label for="Password" class="col-sm-3 control-label">Password</label>
 				<div class="col-sm-4">
-					<input type="password" id="Password" name="Password" placeholder="Password"
-						class="form-control">
+					<input type="password" id="Password" name="Password"
+						placeholder="Password" class="form-control">
 				</div>
 			</div>
 
@@ -113,17 +113,18 @@
 
 			<div class="form-group">
 				<div class="col-md-4 col-sm-offset-3">
-					<button type="submit"  class="btn btn-info">Submit</button>
+					<button type="submit" class="btn btn-info">Submit</button>
 					<input type="checkbox" onclick="Toggle()" id="ShowPassword" /><b>Show
 						Confirm Password</b>
-						
-						
+
+
 				</div>
-				<div class="text-center" id="responseRegister" style="margin-top: 14px;"></div>
+				<div class="text-center" id="responseRegister"
+					style="margin-top: 14px;"></div>
 			</div>
 		</form>
-		
-		
+
+
 	</div>
 
 	<script>
@@ -160,7 +161,8 @@
 <script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
 
 <!-- validate -->
-<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/jquery.validate.min.js"></script>
 
 <!-- my jquery -->

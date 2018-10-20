@@ -3,16 +3,15 @@ package com.fsoft.project.action;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.fsoft.project.dao.SelectByIdDao;
-import com.fsoft.project.dao.impl.RegisterDaoImpl;
 import com.fsoft.project.dao.impl.SelectByIdDaoImpl;
 import com.fsoft.project.entity.Category;
 import com.fsoft.project.entity.ManuFacturer;
 import com.fsoft.project.service.SelectByIdService;
-import com.fsoft.project.service.impl.RegisterServiceImpl;
 import com.fsoft.project.service.impl.SelectByIdServiceImpl;
 import com.fsoft.project.utils.constants.WebConstants;
-import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class SelectByIdAction extends ActionSupport{
@@ -26,7 +25,7 @@ public class SelectByIdAction extends ActionSupport{
 	
 	SelectByIdDao selectByIdDao;
 	SelectByIdService selectByIdService;
-	
+	public static Logger LOG=Logger.getLogger(SelectByIdAction.class);
 	List<Category> listCategory = new ArrayList<>();
 	List<ManuFacturer> listManuFacturer = new ArrayList<>();
 	
@@ -47,7 +46,7 @@ public class SelectByIdAction extends ActionSupport{
 				noData = true;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error("error at idCategory_ManuFacturer",e);
 		}
 		return WebConstants.ID_CATEGORY_MANUFACTURER;
 	}

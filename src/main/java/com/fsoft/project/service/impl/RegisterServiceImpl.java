@@ -22,4 +22,11 @@ public class RegisterServiceImpl implements RegisterService{
 		return registerDao.registerMember(member);
 	}
 
+
+	@Override
+	public boolean checkEmail(Member member) throws SQLException {
+		// TODO Auto-generated method stub
+		return registerDao.checkEmail(member);
+	}
+
 }
