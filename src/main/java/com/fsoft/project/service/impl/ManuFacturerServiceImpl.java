@@ -3,7 +3,6 @@
  */
 package com.fsoft.project.service.impl;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import com.fsoft.project.dao.ManuFacturerDao;
@@ -23,37 +22,36 @@ public class ManuFacturerServiceImpl implements ManuFacturerService {
 	}
 
 	@Override
-	public ManuFacturer getManuFacturerById(int id) throws SQLException {
+	public ManuFacturer getManuFacturerById(int id) {
 		// TODO Auto-generated method stub
 		return manuFacturerDao.getManuFacturerById(id);
 	}
 
 	@Override
-	public List<ManuFacturer> getListManuFacturerService() throws SQLException {
+	public List<ManuFacturer> getListManuFacturerService() {
 		// TODO Auto-generated method stub
 		return manuFacturerDao.getListManuFacturer();
 	}
 
 	@Override
-	public int addManuFacturer(String name) throws SQLException, Exception {
-
+	public int addManuFacturer(String name) {
 		return manuFacturerDao.addManuFacturer(name);
 	}
 
 	@Override
-	public List<ManuFacturer> allManuFacturer() throws SQLException, Exception {
+	public List<ManuFacturer> allManuFacturer() {
 
 		return manuFacturerDao.allManuFacturer();
 	}
 
 	@Override
-	public int updateManuFacturer(String name, String hidden) throws SQLException, Exception {
+	public int updateManuFacturer(String name, String hidden) {
 
 		return manuFacturerDao.updateManuFacturer(name, hidden);
 	}
 
 	@Override
-	public int deleteManuFacturer(String Name) throws SQLException, Exception {
+	public int deleteManuFacturer(String Name) {
 
 		return manuFacturerDao.deleteManuFacturer(Name);
 	}

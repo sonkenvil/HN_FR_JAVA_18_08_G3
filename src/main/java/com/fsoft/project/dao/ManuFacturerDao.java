@@ -3,7 +3,6 @@
  */
 package com.fsoft.project.dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import com.fsoft.project.entity.ManuFacturer;
@@ -14,16 +13,16 @@ import com.fsoft.project.entity.ManuFacturer;
  */
 public interface ManuFacturerDao {
 
-	ManuFacturer getManuFacturerById(int id) throws SQLException;
+	ManuFacturer getManuFacturerById(int id);
 
-	List<ManuFacturer> getListManuFacturer() throws SQLException;
+	List<ManuFacturer> getListManuFacturer();
 
-	public int addManuFacturer(String name) throws SQLException, Exception;
+	public int addManuFacturer(String name);
 
-	public List<ManuFacturer> allManuFacturer() throws SQLException, Exception;
+	public List<ManuFacturer> allManuFacturer();
 
-	public int updateManuFacturer(String name, String hidden) throws SQLException, Exception;
+	public int updateManuFacturer(String name, String hidden);
 
-	public int deleteManuFacturer(String Name) throws SQLException, Exception;
+	public int deleteManuFacturer(String Name);
 
 }

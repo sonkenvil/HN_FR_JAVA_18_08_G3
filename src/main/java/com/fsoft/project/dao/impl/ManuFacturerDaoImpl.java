@@ -14,6 +14,7 @@ import java.util.List;
 import com.fsoft.project.dao.ManuFacturerDao;
 import com.fsoft.project.db.DbHelper;
 import com.fsoft.project.entity.ManuFacturer;
+import com.fsoft.project.utils.LogUtils;
 import com.fsoft.project.utils.constants.QueryConstants;
 
 /**
@@ -27,66 +28,83 @@ public class ManuFacturerDaoImpl implements ManuFacturerDao {
 	private ResultSet rs;
 
 	@Override
-	public ManuFacturer getManuFacturerById(int id) throws SQLException {
+	public ManuFacturer getManuFacturerById(int id) {
 		// TODO Auto-generated method stub
 		ManuFacturer manuFacturer = null;
 		conn = DbHelper.getConnection();
 		if (conn != null) {
-			pre = conn.prepareStatement(QueryConstants.SELECT_MANUFACTURER_BY_ID);
-			pre.setInt(1, id);
-			ResultSet rs = pre.executeQuery();
-			if (rs.next()) {
-				manuFacturer = new ManuFacturer(rs.getInt("Id"), rs.getString("Name"), rs.getString("Description"));
+			try {
+				pre = conn.prepareStatement(QueryConstants.SELECT_MANUFACTURER_BY_ID);
+				pre.setInt(1, id);
+				ResultSet rs = pre.executeQuery();
+				if (rs.next()) {
+					manuFacturer = new ManuFacturer(rs.getInt("Id"), rs.getString("Name"), rs.getString("Description"));
+				}
+			} catch (SQLException e) {
+				LogUtils.getLogger("ManuFacturerDaoImpl").error(e.getMessage());
+			} finally {
+				DbHelper.closeConnection(conn, pre, rs);
 			}
 		}
 		return manuFacturer;
 	}
 
 	@Override
-	public List<ManuFacturer> getListManuFacturer() throws SQLException {
+	public List<ManuFacturer> getListManuFacturer() {
 		// TODO Auto-generated method stub
 		List<ManuFacturer> listM = null;
 		conn = DbHelper.getConnection();
-		if(conn != null) {
+		if (conn != null) {
 			listM = new LinkedList<>();
-			pre = conn.prepareStatement(QueryConstants.SELECT_MANUFACTURER);
-			ResultSet rs = pre.executeQuery();
-			while(rs.next()) {
-				listM.add(new ManuFacturer(rs.getInt("Id"), rs.getString("Name"), rs.getString("Description")));
+			try {
+				pre = conn.prepareStatement(QueryConstants.SELECT_MANUFACTURER);
+				ResultSet rs = pre.executeQuery();
+				while (rs.next()) {
+					listM.add(new ManuFacturer(rs.getInt("Id"), rs.getString("Name"), rs.getString("Description")));
+				}
+			} catch (SQLException e) {
+				LogUtils.getLogger("ManuFacturerDaoImpl").error(e.getMessage());
+			} finally {
+				DbHelper.closeConnection(conn, pre, rs);
 			}
 		}
 		return listM;
 	}
-	
+
 	@Override
-	public int addManuFacturer(String name) throws SQLException, Exception {
-		int result=0;
+	public int addManuFacturer(String name) {
+		int result = 0;
 		try {
-			conn=DbHelper.getConnection();
+			conn = DbHelper.getConnection();
 			conn.setAutoCommit(false);
-			if(conn!=null) {
+			if (conn != null) {
 				pre = conn.prepareStatement(QueryConstants.ADD_MANUFACTURER);
 				pre.setString(1, name);
-				result=pre.executeUpdate();
+				result = pre.executeUpdate();
 			}
 			conn.commit();
 		} catch (SQLException e) {
-		
+			LogUtils.getLogger("ManuFacturerDaoImpl").error(e.getMessage());
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				LogUtils.getLogger("ManuFacturerDaoImpl").error(e1.getMessage());
+			}
 		} finally {
 			DbHelper.closeConnection(conn, pre);
-			conn.rollback();
 		}
 		return result;
 	}
 
 	@Override
-	public List<ManuFacturer> allManuFacturer() throws SQLException, Exception {
+	public List<ManuFacturer> allManuFacturer() {
 		List<ManuFacturer> listManuFacturer = new ArrayList<ManuFacturer>();
 		try {
-			conn=DbHelper.getConnection();
+			conn = DbHelper.getConnection();
 			conn.setAutoCommit(false);
-			if(conn!=null) {
-				pre=conn.prepareStatement(QueryConstants.ALL_MANUFACTURER);
+			if (conn != null) {
+				pre = conn.prepareStatement(QueryConstants.ALL_MANUFACTURER);
 				rs = pre.executeQuery();
 				int i = 0;
 				if (rs != null) {
@@ -102,29 +120,41 @@ public class ManuFacturerDaoImpl implements ManuFacturerDao {
 			conn.commit();
 
 		} catch (SQLException e) {
-			conn.rollback();
+			LogUtils.getLogger("ManuFacturerDaoImpl").error(e.getMessage());
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				LogUtils.getLogger("ManuFacturerDaoImpl").error(e1.getMessage());
+			}
 		} finally {
-			DbHelper.closeConnection(conn, pre,rs);
+			DbHelper.closeConnection(conn, pre, rs);
 		}
 		return listManuFacturer;
 	}
 
 	@Override
-	public int updateManuFacturer(String name, String hidden) throws SQLException, Exception {
-		int result=0;
+	public int updateManuFacturer(String name, String hidden) {
+		int result = 0;
 		try {
-			conn=DbHelper.getConnection();
+			conn = DbHelper.getConnection();
 			conn.setAutoCommit(false);
-			if(conn!=null) {
+			if (conn != null) {
 				pre = conn.prepareStatement(QueryConstants.UPDATE_MANUFACTURER);
 				pre.setString(1, name);
 				pre.setString(2, hidden);
-				result= pre.executeUpdate();
+				result = pre.executeUpdate();
 			}
 			conn.commit();
 
 		} catch (SQLException e) {
-			conn.rollback();
+			LogUtils.getLogger("ManuFacturerDaoImpl").error(e.getMessage());
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				LogUtils.getLogger("ManuFacturerDaoImpl").error(e1.getMessage());
+			}
 		} finally {
 			DbHelper.closeConnection(conn, pre, rs);
 		}
@@ -132,23 +162,29 @@ public class ManuFacturerDaoImpl implements ManuFacturerDao {
 	}
 
 	@Override
-	public int deleteManuFacturer(String Name) throws SQLException, Exception {
+	public int deleteManuFacturer(String Name) {
 
-		int result =0;
+		int result = 0;
 		try {
-			conn=DbHelper.getConnection();
+			conn = DbHelper.getConnection();
 			DbHelper.getConnection().setAutoCommit(false);
-			if(conn!=null) {
-				pre=conn.prepareStatement(QueryConstants.DELETE_MANUFACTURER);
+			if (conn != null) {
+				pre = conn.prepareStatement(QueryConstants.DELETE_MANUFACTURER);
 				pre.setString(1, Name);
 				result = pre.executeUpdate();
 			}
 			conn.commit();
 
 		} catch (SQLException e) {
-			conn.rollback();
+			LogUtils.getLogger("ManuFacturerDaoImpl").error(e.getMessage());
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				LogUtils.getLogger("ManuFacturerDaoImpl").error(e1.getMessage());
+			}
 		} finally {
-			DbHelper.closeConnection(conn,pre);
+			DbHelper.closeConnection(conn, pre);
 		}
 		return result;
 	}
