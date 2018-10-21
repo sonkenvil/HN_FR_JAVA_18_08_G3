@@ -28,39 +28,50 @@ public class ManuFacturerDaoImpl implements ManuFacturerDao {
 	private ResultSet rs;
 
 	@Override
-	public ManuFacturer getManuFacturerById(int id) throws SQLException {
+	public ManuFacturer getManuFacturerById(int id) {
 		// TODO Auto-generated method stub
 		ManuFacturer manuFacturer = null;
 		conn = DbHelper.getConnection();
 		if (conn != null) {
-			pre = conn.prepareStatement(QueryConstants.SELECT_MANUFACTURER_BY_ID);
-			pre.setInt(1, id);
-			ResultSet rs = pre.executeQuery();
-			if (rs.next()) {
-				manuFacturer = new ManuFacturer(rs.getInt("Id"), rs.getString("Name"), rs.getString("Description"));
+			try {
+				pre = conn.prepareStatement(QueryConstants.SELECT_MANUFACTURER_BY_ID);
+				pre.setInt(1, id);
+				ResultSet rs = pre.executeQuery();
+				if (rs.next()) {
+					manuFacturer = new ManuFacturer(rs.getInt("Id"), rs.getString("Name"), rs.getString("Description"));
+				}
+			} catch (SQLException e) {
+				LogUtils.getLogger(ManuFacturerDaoImpl.class.getName()).error(e.getMessage());
+			} finally {
+				DbHelper.closeConnection(conn, pre, rs);
 			}
 		}
 		return manuFacturer;
 	}
 
 	@Override
-	public List<ManuFacturer> getListManuFacturer() throws SQLException {
+	public List<ManuFacturer> getListManuFacturer() {
 		// TODO Auto-generated method stub
 		List<ManuFacturer> listM = null;
 		conn = DbHelper.getConnection();
 		if (conn != null) {
 			listM = new LinkedList<>();
-			pre = conn.prepareStatement(QueryConstants.SELECT_MANUFACTURER);
-			ResultSet rs = pre.executeQuery();
-			while (rs.next()) {
-				listM.add(new ManuFacturer(rs.getInt("Id"), rs.getString("Name"), rs.getString("Description")));
+			try {
+				pre = conn.prepareStatement(QueryConstants.SELECT_MANUFACTURER);
+				ResultSet rs = pre.executeQuery();
+				while (rs.next()) {
+					listM.add(new ManuFacturer(rs.getInt("Id"), rs.getString("Name"), rs.getString("Description")));
+				}
+			} catch (SQLException e) {
+				LogUtils.getLogger(ManuFacturerDaoImpl.class.getName()).error(e.getMessage());
+			} finally {
+				DbHelper.closeConnection(conn, pre, rs);
 			}
 		}
 		return listM;
 	}
 
-	@Override
-	public int addManuFacturer(String name) throws SQLException, Exception {
+	public int addManuFacturer(String name) {
 		int result = 0;
 		try {
 			conn = DbHelper.getConnection();
@@ -70,7 +81,7 @@ public class ManuFacturerDaoImpl implements ManuFacturerDao {
 				result = pre.executeUpdate();
 			}
 		} catch (SQLException e) {
-			LogUtils.getLogger(ManuFacturerDaoImpl.class.getName()).error(e);
+			LogUtils.getLogger(ManuFacturerDaoImpl.class.getName()).error(e.getMessage());
 		} finally {
 			DbHelper.closeConnection(conn, pre);
 		}
@@ -78,7 +89,7 @@ public class ManuFacturerDaoImpl implements ManuFacturerDao {
 	}
 
 	@Override
-	public List<ManuFacturer> allManuFacturer() throws SQLException, Exception {
+	public List<ManuFacturer> allManuFacturer() {
 		List<ManuFacturer> listManuFacturer = new ArrayList<ManuFacturer>();
 		try {
 			conn = DbHelper.getConnection();
@@ -98,7 +109,7 @@ public class ManuFacturerDaoImpl implements ManuFacturerDao {
 			}
 
 		} catch (SQLException e) {
-			LogUtils.getLogger(ManuFacturerDaoImpl.class.getName()).error(e);
+			LogUtils.getLogger(ManuFacturerDaoImpl.class.getName()).error(e.getMessage());
 		} finally {
 			DbHelper.closeConnection(conn, pre, rs);
 		}
@@ -106,7 +117,8 @@ public class ManuFacturerDaoImpl implements ManuFacturerDao {
 	}
 
 	@Override
-	public int updateManuFacturer(String name, String hidden) throws SQLException, Exception {
+
+	public int updateManuFacturer(String name, String hidden) {
 		int result = 0;
 		try {
 			conn = DbHelper.getConnection();
@@ -117,7 +129,7 @@ public class ManuFacturerDaoImpl implements ManuFacturerDao {
 				result = pre.executeUpdate();
 			}
 		} catch (SQLException e) {
-			LogUtils.getLogger(ManuFacturerDaoImpl.class.getName()).error(e);
+			LogUtils.getLogger(ManuFacturerDaoImpl.class.getName()).error(e.getMessage());
 		} finally {
 			DbHelper.closeConnection(conn, pre, rs);
 		}
@@ -125,7 +137,7 @@ public class ManuFacturerDaoImpl implements ManuFacturerDao {
 	}
 
 	@Override
-	public int deleteManuFacturer(String Name) throws SQLException, Exception {
+	public int deleteManuFacturer(String Name) {
 
 		int result = 0;
 		try {
@@ -157,11 +169,11 @@ public class ManuFacturerDaoImpl implements ManuFacturerDao {
 					result = rs.getInt("Id");
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				LogUtils.getLogger(ManuFacturerDaoImpl.class.getName()).error(e.getMessage());
+			} finally {
+				DbHelper.closeConnection(conn, pre);
 			}
-
 		}
 		return result;
 	}
-
 }

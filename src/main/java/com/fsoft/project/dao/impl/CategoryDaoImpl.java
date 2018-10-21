@@ -15,6 +15,7 @@ import com.fsoft.project.dao.CategoryDao;
 import com.fsoft.project.db.DbHelper;
 import com.fsoft.project.entity.Category;
 import com.fsoft.project.entity.ManuFacturer;
+import com.fsoft.project.utils.LogUtils;
 import com.fsoft.project.utils.constants.QueryConstants;
 
 /**
@@ -41,8 +42,7 @@ public class CategoryDaoImpl implements CategoryDao {
 					category = new Category(rs.getInt("Id"), rs.getString("Name"));
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LogUtils.getLogger(CategoryDaoImpl.class.getName()).error(e.getMessage());
 			} finally {
 				DbHelper.closeConnection(conn, pre, rs);
 			}
@@ -64,7 +64,7 @@ public class CategoryDaoImpl implements CategoryDao {
 				}
 
 			} catch (SQLException e) {
-				e.printStackTrace();
+				LogUtils.getLogger(CategoryDaoImpl.class.getName()).error(e.getMessage());
 			} finally {
 				DbHelper.closeConnection(conn, pre);
 			}
@@ -73,7 +73,7 @@ public class CategoryDaoImpl implements CategoryDao {
 	}
 
 	@Override
-	public int addCategory(String name){
+	public int addCategory(String name) {
 		int result = 0;
 		try {
 			conn = DbHelper.getConnection();
@@ -84,7 +84,7 @@ public class CategoryDaoImpl implements CategoryDao {
 				result = pre.executeUpdate();
 			}
 		} catch (SQLException e) {
-			
+			LogUtils.getLogger(CategoryDaoImpl.class.getName()).error(e.getMessage());
 		} finally {
 			DbHelper.closeConnection(conn, pre);
 		}
@@ -115,6 +115,7 @@ public class CategoryDaoImpl implements CategoryDao {
 			}
 			conn.commit();
 		} catch (SQLException e) {
+			LogUtils.getLogger(CategoryDaoImpl.class.getName()).error(e.getMessage());
 		} finally {
 			DbHelper.closeConnection(conn, pre, rs);
 		}
@@ -122,7 +123,7 @@ public class CategoryDaoImpl implements CategoryDao {
 	}
 
 	@Override
-	public int updateCategory(String name, String hidden){
+	public int updateCategory(String name, String hidden) {
 		int result = 0;
 		try {
 			conn = DbHelper.getConnection();
@@ -134,6 +135,7 @@ public class CategoryDaoImpl implements CategoryDao {
 			}
 
 		} catch (SQLException e) {
+			LogUtils.getLogger(CategoryDaoImpl.class.getName()).error(e.getMessage());
 		} finally {
 			DbHelper.closeConnection(conn, pre);
 		}
@@ -141,7 +143,7 @@ public class CategoryDaoImpl implements CategoryDao {
 	}
 
 	@Override
-	public int deleteCategory(String Name){
+	public int deleteCategory(String Name) {
 
 		int result = 0;
 		try {
@@ -152,13 +154,8 @@ public class CategoryDaoImpl implements CategoryDao {
 				pre.setString(1, Name);
 				result = pre.executeUpdate();
 			}
-			conn.commit();
 		} catch (SQLException e) {
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
+			LogUtils.getLogger(CategoryDaoImpl.class.getName()).error(e.getMessage());
 		} finally {
 			DbHelper.closeConnection(conn, pre);
 		}
@@ -169,9 +166,9 @@ public class CategoryDaoImpl implements CategoryDao {
 	public List<Category> idCategory() {
 		List<Category> listCategory = new ArrayList<Category>();
 		try {
-			conn=DbHelper.getConnection();
-			if(conn!=null) {
-				pre=conn.prepareStatement(QueryConstants.ID_CATEGORY);
+			conn = DbHelper.getConnection();
+			if (conn != null) {
+				pre = conn.prepareStatement(QueryConstants.ID_CATEGORY);
 				rs = pre.executeQuery();
 				if (rs != null) {
 					while (rs.next()) {
@@ -182,10 +179,8 @@ public class CategoryDaoImpl implements CategoryDao {
 					}
 				}
 			}
-			conn.commit();
-
 		} catch (SQLException e) {
-			
+			LogUtils.getLogger(CategoryDaoImpl.class.getName()).error(e.getMessage());
 		} finally {
 			DbHelper.closeConnection(conn, pre, rs);
 		}
@@ -197,9 +192,9 @@ public class CategoryDaoImpl implements CategoryDao {
 		List<ManuFacturer> listManuFacturer = new ArrayList<ManuFacturer>();
 
 		try {
-			conn=DbHelper.getConnection();
-			if(conn!=null) {
-				pre=conn.prepareStatement(QueryConstants.ID_MANUFACTURER);
+			conn = DbHelper.getConnection();
+			if (conn != null) {
+				pre = conn.prepareStatement(QueryConstants.ID_MANUFACTURER);
 				rs = pre.executeQuery();
 				if (rs != null) {
 					while (rs.next()) {
@@ -212,12 +207,12 @@ public class CategoryDaoImpl implements CategoryDao {
 			}
 
 		} catch (SQLException e) {
+			LogUtils.getLogger(CategoryDaoImpl.class.getName()).error(e.getMessage());
 		} finally {
 			DbHelper.closeConnection(conn, pre, rs);
 		}
 		return listManuFacturer;
-		
-	}
+}
 
 	@Override
 	public int getCategoryId(String name) {
@@ -232,14 +227,13 @@ public class CategoryDaoImpl implements CategoryDao {
 					result = rs.getInt("Id");
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				LogUtils.getLogger(CategoryDaoImpl.class.getName()).error(e.getMessage());
 			}
 			
 		}
 		
 		return result;
 	}
-	
 	
 
 }
