@@ -19,10 +19,10 @@ public class LoginServiceImpl implements LoginService {
 		this.loginDao = dao;
 	}
 
-	@Override
+	/*@Override
 	public Member getMember(String email, String password) {
 		return loginDao.getMember(email, password);
-	}
+	}*/
 
 	@Override
 	public String loginPage(Map<String, Object> session, int index) {

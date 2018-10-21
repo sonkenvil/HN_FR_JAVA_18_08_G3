@@ -11,7 +11,7 @@ import com.fsoft.project.entity.Member;
 import com.fsoft.project.utils.constants.QueryConstants;
 
 public class LoginDaoImpl implements LoginDao{
-  private Connection connection;
+  /*private Connection connection;
   private PreparedStatement ps;
   private ResultSet rs;
   @Override
@@ -38,5 +38,5 @@ public class LoginDaoImpl implements LoginDao{
     }
     return member;
   }
- 
+ */
 }
