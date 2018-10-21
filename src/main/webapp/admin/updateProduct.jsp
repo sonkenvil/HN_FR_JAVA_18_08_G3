@@ -56,67 +56,75 @@
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<form action="updateProduct?id=${id}" method="post"
-							
 								enctype="multipart/form-data">
-								<div class="row">
-									<div class="col-lg-10">
-										<div class="form-group">
-										
-											<input type="text" disabled id="id" name="id"
-												class="form-control" value='<s:property value="id"/>'>
+								<s:iterator value="product">
+									<div class="row">
+										<div class="col-lg-10">
+											<div class="form-group">
 
-											<input type="hidden" name="hidden"
-												value='<s:property value="id"/>'>
+												<input type="text" disabled id="id" name="id"
+													class="form-control" value='<s:property value="id"/>'>
+											</div>
+											<div class="form-group">
+												<label>Product Name</label> <input type="text"
+													id="productName" name="productName" class="form-control"
+													value='<s:property value="productName"/>'>
+											</div>
+
+
+											<div class="form-group">
+												<a
+													class="btn-icon-defind btn btn-danger btn-circle icon_del"><i
+													class="fa fa-times"></i></a> <img class="img_curent"
+													src="image/<s:property value="product.imagePath"/>"
+													width="150" height="150" /> <input type="file"
+													id="imagePathName" name="myFile">
+											</div>
+
+
+											<div class="form-group">
+												<input type="hidden" name="manuFacturerId"
+													class="form-control"
+													value='<s:property value="manuFacturer.id"/>'>
+											</div>
+
+											<div class="form-group">
+												<input type="hidden" name="categoryId" class="form-control"
+													value='<s:property value="category.id"/>'>
+											</div>
+
+											<div class="form-group">
+												<label>Color </label> <select name="color">
+													<option value="Black" selected="selected">Black</option>
+													<option value="Red">Red</option>
+													<option value="Gold">Gold</option>
+													<option value="White">White</option>
+													<option value="Gray">Gray</option>
+													<option value="Bright Blue">Bright Blue</option>
+												</select>
+											</div>
+
+											<div class="form-group">
+												<label>Price Name</label> <input type="text"
+													value='<s:property value="price"/>' name="price"
+													class="form-control">
+
+											</div>
+
+											<div class="form-group">
+												<label>Description </label>
+												<textarea name="description" rows="4" class="form-control">
+												<s:property value="description" />
+											</textarea>
+											</div>
+
+											<button type="submit"
+												class="btn btn-default btn_submit_button">Update
+												Product</button>
+											<button type="reset" class="btn btn-default">Cancel</button>
 										</div>
-										<div class="form-group">
-											<label>Product Name</label> <input type="text"
-												id="productName" name="productName" class="form-control"
-												value='<s:property value="product.productName"/>'>
-										</div>
-
-
-										<div class="form-group">
-											<a class="btn-icon-defind btn btn-danger btn-circle icon_del"><i
-												class="fa fa-times"></i></a> 
-												<img class="img_curent" src="image/<s:property value="product.imagePath"/>" width="150" height="150" />
-												
-												<input type="file" id="imagePathName" name="myFile">
-										</div>
-
-
-										<div class="form-group">
-											<input type="hidden" name="manuFacturerId"
-												class="form-control"
-												value='<s:property value="product.manuFacturerId"/>'>
-										</div>
-
-										<div class="form-group">
-											<input type="hidden" name="categoryId" class="form-control"
-												value='<s:property value="product.categoryId"/>'>
-										</div>
-
-										<div class="form-group">
-											<label>Color</label> <input type="color"
-												value='<s:property value="product.color"/>' name="color"
-												class="form-control">
-
-										</div>
-
-										<div class="form-group">
-											<label>Price Name</label> <input type="text"
-												value='<s:property value="product.price"/>' name="price"
-												class="form-control">
-
-										</div>
-										
-										<button type="submit" name="submitType"
-											class="btn btn-default btn_submit_button">Submit
-											Button</button>
-										<button type="reset" class="btn btn-default">Reset
-											Button</button>
 									</div>
-								</div>
-
+								</s:iterator>
 							</form>
 						</div>
 						<!-- /.row (nested) -->
@@ -133,9 +141,9 @@
 
 
 	<jsp:include page="footer.jsp"></jsp:include>
-	<script type="text/javascript">
-
-</script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/update-product.js"></script>
 </body>
 
 </html>

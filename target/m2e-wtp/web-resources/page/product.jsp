@@ -67,11 +67,11 @@
 					</div>
 					<div id="product-main-img">
 						<div class="product-preview">
-							<img src="${product.imagePath }" alt="">
+							<img src="image/${product.imagePath }" alt="">
 						</div>
 						<s:iterator value="listImageDetail">
 							<div class="product-preview">
-								<img src="${imagePath }" alt="">
+								<img src="image/${imagePath }" alt="">
 							</div>
 						</s:iterator>
 					</div>
@@ -157,11 +157,11 @@
 					data-wow-duration="1s">
 					<div id="product-imgs">
 						<div class="product-preview">
-							<img src="${product.imagePath }" alt="">
+							<img src="image/${product.imagePath }" alt="">
 						</div>
 						<s:iterator value="listImageDetail">
 							<div class="product-preview">
-								<img src="${imagePath }" alt="">
+								<img src="image/${imagePath }" alt="">
 							</div>
 						</s:iterator>
 					</div>
@@ -300,7 +300,7 @@
 					<div class="col-md-3 col-xs-6">
 						<div class="product">
 							<div class="product-img">
-								<img src="${imagePath }" alt="">
+								<img src="image/${imagePath }" alt="">
 								<div class="product-label">
 									<span class="sale">-30%</span>
 								</div>

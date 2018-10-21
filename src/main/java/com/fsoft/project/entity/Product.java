@@ -13,6 +13,10 @@ import java.sql.Date;
  */
 public class Product implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3498331984594123865L;
 	private int id;
 	private String productName;
 	private String imagePath;
@@ -39,7 +43,7 @@ public class Product implements Serializable{
 		this.createDate = createDate;
 		this.color = color;
 		this.price = price;
-		this.description = description;
+		this.description = description; 
 	}
 
 	public int getId() {

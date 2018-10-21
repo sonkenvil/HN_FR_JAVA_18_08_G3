@@ -106,7 +106,7 @@
 										<!-- product -->
 										<div class="product new-product">
 											<div class="product-img">
-												<img src="<s:property
+												<img src="image/<s:property
 															value="imagePath" />"
 													alt="">
 												<div class="product-label">
@@ -243,7 +243,7 @@
 						<!-- product -->
 						<div class="product">
 							<div class="product-img">
-								<img src="<s:property value="imagePath"/>"
+								<img src="image/<s:property value="imagePath"/>"
 									alt="">
 								<div class="product-label">
 									<span class="sale">-30%</span> <span class="new">NEW</span>

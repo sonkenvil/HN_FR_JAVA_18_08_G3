@@ -56,6 +56,7 @@ public class ProductAction extends BaseAction implements Preparable{
 	private int id;
 	private List<Product> listProduct;
 	private boolean noData;
+	private String description;
 	
 	@Override
 	public void prepare() throws Exception {
@@ -88,12 +89,15 @@ public class ProductAction extends BaseAction implements Preparable{
 		Product product = new Product();
 		ManuFacturer manuFacturer = new ManuFacturer();
 		Category category = new Category();
+		category.setId(categoryId);
 		manuFacturer.setId(manuFacturerId);
 		product.setProductName(productName);
 		product.setManuFacturer(manuFacturer);
 		product.setCategory(category);
 		product.setColor(color);
 		product.setPrice(price);
+		product.setDescription(description);
+		product.setImagePath(myFileFileName);
 		result = productService.addProduct(product,myFile);
 		if (result > 0) {
 			msg = "success";
@@ -124,13 +128,9 @@ public class ProductAction extends BaseAction implements Preparable{
 		Category category = new Category();
 		String idStr = ServletActionContext.getRequest().getParameter("id");
 		Product product = new Product();
-		
 		if (idStr != null) {
 			product = productService.getProductById(id);
 			product.setImagePath(myFileFileName);
-			
-		
-
 		}
 		manuFacturer.setId(manuFacturerId);
 		category.setId(categoryId);
@@ -139,8 +139,10 @@ public class ProductAction extends BaseAction implements Preparable{
 		product.setCategory(category);
 		product.setColor(color);
 		product.setPrice(price);
+		product.setDescription(description);
 		product.setId(id);
 		result=productService.updateProduct(product,myFile);
+		System.out.println("result: "+result);
 		if (result > 0) {
 			msg = "success";
 		} else {
@@ -190,30 +192,6 @@ public class ProductAction extends BaseAction implements Preparable{
 
 	public void setListRelateProduct(List<Product> listRelateProduct) {
 		this.listRelateProduct = listRelateProduct;
-	}
-
-	public File getMyFile() {
-		return myFile;
-	}
-
-	public void setMyFile(File myFile) {
-		this.myFile = myFile;
-	}
-
-	public String getMyFileContentType() {
-		return myFileContentType;
-	}
-
-	public void setMyFileContentType(String myFileContentType) {
-		this.myFileContentType = myFileContentType;
-	}
-
-	public String getMyFileFileName() {
-		return myFileFileName;
-	}
-
-	public void setMyFileFileName(String myFileFileName) {
-		this.myFileFileName = myFileFileName;
 	}
 
 	public String getProductName() {
@@ -303,5 +281,37 @@ public class ProductAction extends BaseAction implements Preparable{
 	public void setNoData(boolean noData) {
 		this.noData = noData;
 	}
-	
+
+	public File getMyFile() {
+		return myFile;
+	}
+
+	public void setMyFile(File myFile) {
+		this.myFile = myFile;
+	}
+
+	public String getMyFileContentType() {
+		return myFileContentType;
+	}
+
+	public void setMyFileContentType(String myFileContentType) {
+		this.myFileContentType = myFileContentType;
+	}
+
+	public String getMyFileFileName() {
+		return myFileFileName;
+	}
+
+	public void setMyFileFileName(String myFileFileName) {
+		this.myFileFileName = myFileFileName;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 }

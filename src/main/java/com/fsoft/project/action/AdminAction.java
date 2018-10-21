@@ -12,3 +12,4 @@ public class AdminAction extends ActionSupport{
 		return WebConstants.ADMIN_HOME;
 	}
 }
+

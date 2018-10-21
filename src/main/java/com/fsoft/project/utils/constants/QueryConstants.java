@@ -76,14 +76,14 @@ public class QueryConstants {
 	public static final String UPDATE_MANUFACTURER = "UPDATE MANUFACTURER SET Name=? WHERE Name=?";
 	
 	public static final String DELETE_MANUFACTURER = "DELETE FROM MANUFACTURER WHERE Name=?";
+	                                                                                      
+	public static final String ADD_PRODUCT = "INSERT INTO PRODUCT(ProductName, ImagePath, ManuFacturerId, CategoryId, CreateDate, Color, Price,Description) VALUES(?,?,?,?,?,?,?,?)";
 	
-	public static final String ADD_PRODUCT = "INSERT INTO PRODUCT VALUES(?,?,?,?,?,?,?)";
-	
-	public static final String UPDATE_PRODUCT = "UPDATE PRODUCT SET  ProductName =?, ImagePath=? , ManuFacturerId=? , CategoryId=?,CreateDate=?,  Color=?, Price=? WHERE Id=?";
+	public static final String UPDATE_PRODUCT = "UPDATE PRODUCT SET  ProductName =?, ImagePath=? , ManuFacturerId=? , CategoryId=?,CreateDate=?,  Color=?, Price=? , Description=? WHERE Id=?";
 	
 	public static final String DELETE_PRODUCT = "DELETE FROM PRODUCT WHERE Id=?";
 
-	public static final String PRE_SELECT_UPDATE_PRODUCT = "SELECT* FROM PRODUCT WHERE Id=?";
+	public static final String PRE_SELECT_UPDATE_PRODUCT = "SELECT * FROM PRODUCT WHERE Id=?";
 
 	public static final String ALL_PRODUCT = "SELECT Id,ProductName,ImagePath,ManuFacturerId,CategoryId,CreateDate,Color,Price FROM PRODUCT";
 

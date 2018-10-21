@@ -282,9 +282,12 @@ public class ProductDaoImpl implements ProductDao {
 			if(conn!=null) {
 				pre = conn.prepareStatement(QueryConstants.ADD_PRODUCT);
 				DesignProduct.sameProduct(pre, product,myFile);
-				result=pre.executeUpdate();
+				result = pre.executeUpdate();
 			}
-		} catch (Exception e) {
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		} finally {
 			DbHelper.closeConnection(conn, pre, rs);
 			
@@ -335,8 +338,11 @@ public class ProductDaoImpl implements ProductDao {
 					DesignProduct.fetchProduct(product, rs);
 					manuFacturer.setId(rs.getInt("ManuFacturerId"));
 					category.setId(rs.getInt("CategoryId"));
+					product.setCategory(category);
 					product.setManuFacturer(manuFacturer);
 					product.setCreateDate(rs.getDate("CreateDate"));
+					product.setImagePath(rs.getString("Imagepath"));
+					product.setDescription(rs.getString("Description"));
 					return product;
 				}
 			}
@@ -360,14 +366,14 @@ public class ProductDaoImpl implements ProductDao {
 				pre = conn.prepareStatement(QueryConstants.UPDATE_PRODUCT);
 				try {
 					DesignProduct.sameProduct(pre, product, myFile);
-					pre.setInt(8, product.getId());
-					i=pre.executeUpdate();
+					pre.setInt(9, product.getId());
+					i = pre.executeUpdate();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
 		} catch (SQLException e) {
-
+			e.printStackTrace();
 		} finally {
 			DbHelper.closeConnection(conn, pre, rs);
 		}
@@ -382,13 +388,11 @@ public class ProductDaoImpl implements ProductDao {
 		int i = 0;
 		try {
 			conn=DbHelper.getConnection();
-			conn.setAutoCommit(false);
 			if(conn!=null) {
 				pre= conn.prepareStatement(QueryConstants.DELETE_PRODUCT);
 				pre.setInt(1, id);
 				i = pre.executeUpdate();
 			}
-			conn.commit();
 		} catch (SQLException e) {
 		} finally {
 			DbHelper.closeConnection(conn, pre, rs);

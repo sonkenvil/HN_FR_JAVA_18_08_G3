@@ -58,12 +58,12 @@
                                     
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                        <input id="login-email" type="text" class="form-control" name="email" value="" placeholder="email">                                        
+                                        <input id="login-email" type="text" class="form-control" name="email" value="${sessionScope.REGISTER_MEMBER.email}" placeholder="email">                                        
                                     </div>
                                 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
-                                        <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
+                                        <input id="login-password" type="password" class="form-control" name="password" placeholder="password" value="${sessionScope.REGISTER_MEMBER.password}">
                                     </div>
                                     
 
@@ -93,8 +93,8 @@
                                     <div class="col-md-12 control">
                                         <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
                                             Don't have an account! 
-                                        <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">
-                                            Sign Up Here
+                                        <a href="<%=request.getContextPath()%>/page/register.jsp">
+                                            Register Here
                                         </a>
                                         </div>
                                     </div>

@@ -63,7 +63,6 @@ public class HomeServiceImpl implements HomeService {
 
 	@Override
 	public String listProductByValue(Map<String, Object> session) {
-		// TODO Auto-generated method stub
 		if (!WebConstants.DEFAULT.equalsIgnoreCase(sortName) && !WebConstants.ASC.equalsIgnoreCase(sortName)
 				&& !WebConstants.DESC.equalsIgnoreCase(sortName)) {
 			execute(session);

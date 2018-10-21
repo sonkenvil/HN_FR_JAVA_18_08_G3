@@ -86,7 +86,7 @@
 										</div>
 
 
-										<div class="form-group">
+										<div style="display:none" class="form-group">
 											<label for="sel1">ManuFacturer Id:</label> <select
 												name="manuFacturerId" class="form-control" id="manuFacturer">
 
@@ -97,8 +97,19 @@
 												</s:iterator>
 											</select>
 										</div>
+										<div  class="form-group">
+											<label for="sel1">ManuFacturer</label> <select
+												name="manuFacturerName" class="form-control" id="manuFacturer">
 
-										<div class="form-group">
+												<s:iterator value="listManuFacturer">
+													<option value="<s:property value = "name"/>">
+														<s:property value="name" />
+													</option>
+												</s:iterator>
+											</select>
+										</div>
+
+										<div style="display:none" class="form-group">
 											<label for="sel1">Category Id:</label> <select
 												name="categoryId" class="form-control" id="category">
 
@@ -113,16 +124,43 @@
 
 											</select>
 										</div>
-
 										<div class="form-group">
-											<label>Color Name</label> <input type="color" name="color"
-												class="form-control">
+											<label for="sel1">Category</label> <select
+												name="categoryName" class="form-control" id="category">
+
+												<s:iterator value="listCategory">
+
+													<option value="<s:property value = "name"/>">
+														<s:property value="name" />
+
+													</option>
+
+												</s:iterator>
+
+											</select>
 										</div>
 
 										<div class="form-group">
-											<label>Price Name</label> <input type="text" name="price"
+											<label>Color </label>
+											<select name="color">
+												<option value="Black" selected="selected">Black</option>
+												<option value="Red">Red</option>
+												<option value="Gold">Gold</option>
+												<option value="White" >White</option>
+												<option value="Gray" >Gray</option>
+												<option value="Bright Blue">Bright Blue</option>
+											</select>
+										</div>
+
+										<div class="form-group">
+											<label>Price </label> <input type="text" name="price"
 												class="form-control">
 										</div>
+										
+										<div class="form-group">
+											<label>Description </label> <textarea name="description" rows="4" class="form-control"></textarea>
+										</div>
+
 
 									</div>
 

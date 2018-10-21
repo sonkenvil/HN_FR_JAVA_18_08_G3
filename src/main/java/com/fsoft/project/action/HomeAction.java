@@ -141,5 +141,5 @@ public class HomeAction extends BaseAction implements Preparable {
 	public void setListCategory(List<Category> listCategory) {
 		homeService.setListCategory(listCategory);
 	}
-
+	
 }
