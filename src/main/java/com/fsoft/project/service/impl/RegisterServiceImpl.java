@@ -18,14 +18,13 @@ public class RegisterServiceImpl implements RegisterService{
 
 
 	@Override
-	public int registerMember(Member member) throws SQLException {
+	public int registerMember(Member member){
 		return registerDao.registerMember(member);
 	}
 
 
 	@Override
-	public boolean checkEmail(Member member) throws SQLException {
-		// TODO Auto-generated method stub
+	public boolean checkEmail(Member member){
 		return registerDao.checkEmail(member);
 	}
 

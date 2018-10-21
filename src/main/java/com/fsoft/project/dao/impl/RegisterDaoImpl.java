@@ -22,7 +22,7 @@ public class RegisterDaoImpl implements RegisterDao{
 	Connection conn=null;
 	
 	@Override
-	public int registerMember(Member member) throws SQLException {
+	public int registerMember(Member member){
 		int result=0;
 		try {
 			conn=DbHelper.getConnection();
@@ -47,7 +47,7 @@ public class RegisterDaoImpl implements RegisterDao{
 	}
 
 	@Override
-	public boolean checkEmail(Member member) throws SQLException {
+	public boolean checkEmail(Member member){
 		boolean status = false;
 		conn=DbHelper.getConnection();
 		if(conn!=null) {

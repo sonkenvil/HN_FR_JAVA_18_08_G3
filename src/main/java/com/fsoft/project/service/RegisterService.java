@@ -6,7 +6,7 @@ import com.fsoft.project.entity.Member;
 
 public interface RegisterService {
 
-	public int registerMember(Member member) throws SQLException;
+	public int registerMember(Member member);
 
-	public boolean checkEmail(Member member) throws SQLException;
+	public boolean checkEmail(Member member);
 }

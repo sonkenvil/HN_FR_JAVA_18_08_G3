@@ -48,7 +48,7 @@ public class TestShoppingCartService {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
+	/*@Test
 	public void removeLineItem() {
 		shoppingCartService.removeLineItem(session,listProduct, listLineItem, 4, 2);
 		Product p = getProduct(listProduct, 4);
@@ -75,5 +75,5 @@ public class TestShoppingCartService {
 		}
 		return p;
 	}
-
+*/
 }

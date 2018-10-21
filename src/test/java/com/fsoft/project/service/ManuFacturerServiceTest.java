@@ -10,6 +10,8 @@ import static org.junit.Assert.assertTrue;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -17,8 +19,13 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.fsoft.project.dao.impl.LineItemDaoImpl;
 import com.fsoft.project.dao.impl.ManuFacturerDaoImpl;
+import com.fsoft.project.entity.LineItem;
 import com.fsoft.project.entity.ManuFacturer;
+import com.fsoft.project.entity.OrderProduct;
+import com.fsoft.project.entity.Product;
+import com.fsoft.project.service.impl.LineItemServiceImpl;
 import com.fsoft.project.service.impl.ManuFacturerServiceImpl;
 
 /**
@@ -27,10 +34,20 @@ import com.fsoft.project.service.impl.ManuFacturerServiceImpl;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class ManuFacturerServiceTest {
+	
 	@InjectMocks
 	private ManuFacturerServiceImpl manuFacturerService;
 	@Mock
 	private ManuFacturerDaoImpl manuFacturerDao;
+
+	@Before
+	public void setUp() throws Exception {
+		
+	}
+
+	@After
+	public void tearDown() throws Exception {
+	}
 
 	@Test
 	public void testGetManuFacturerByIdSuccess() {
@@ -121,4 +138,11 @@ public class ManuFacturerServiceTest {
 		assertTrue(manuFacturerService.deleteManuFacturer(manuFacturer.getName()) == 0);
 	}
 
+	@Test
+	public void testGetNameManuFacturerId() {
+		ManuFacturerService manu = new ManuFacturerServiceImpl(new ManuFacturerDaoImpl());
+		int expected = 1;
+		int actual = manu.getManufacturerId("ABC");
+		assertTrue(expected != actual);
+	}
 }

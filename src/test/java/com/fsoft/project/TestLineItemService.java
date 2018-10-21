@@ -22,6 +22,7 @@ public class TestLineItemService {
 	private LineItem lineItem;
 	private Product product;
 	private OrderProduct order;
+	private LineItem lineItem2;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -45,7 +46,9 @@ public class TestLineItemService {
 		lineItem.setProduct(product);
 		order.setId(5);
 		lineItem.setOrder(order);
+		lineItem2 = new LineItem(order, product, 5);
 		items.add(lineItem);
+		items.add(lineItem2);
 		int expected = items.size();
 		int actual;
 		actual = lineItemService.addLineItem(items);

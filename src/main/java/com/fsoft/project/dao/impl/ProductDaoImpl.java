@@ -343,7 +343,6 @@ public class ProductDaoImpl implements ProductDao {
 					product.setCreateDate(rs.getDate("CreateDate"));
 					product.setImagePath(rs.getString("Imagepath"));
 					product.setDescription(rs.getString("Description"));
-					return product;
 				}
 			}
 		} catch (SQLException e) {

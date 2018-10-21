@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import com.fsoft.project.utils.LogUtils;
+
 public class DbHelper {
 	private static Connection connection;
 	private static String DRIVER;
@@ -23,9 +25,9 @@ public class DbHelper {
 			Class.forName(DRIVER);
 			connection = DriverManager.getConnection(URL, USER, PASSWORD);
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			LogUtils.getLogger(DbHelper.class.getName()).error(e.getMessage());
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LogUtils.getLogger(DbHelper.class.getName()).error(e.getMessage());
 		}
 		return connection;
 	}

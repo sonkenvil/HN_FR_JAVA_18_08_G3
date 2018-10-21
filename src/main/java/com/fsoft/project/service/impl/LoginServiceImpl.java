@@ -2,22 +2,17 @@ package com.fsoft.project.service.impl;
 
 import java.util.Map;
 
-import com.fsoft.project.dao.LoginDao;
-import com.fsoft.project.entity.Member;
 import com.fsoft.project.service.LoginService;
 import com.fsoft.project.utils.constants.Constants;
 import com.fsoft.project.utils.constants.WebConstants;
 
 public class LoginServiceImpl implements LoginService {
-	private LoginDao loginDao;
+	
 	private int productId;
 	public LoginServiceImpl() {
 
 	}
 
-	public LoginServiceImpl(LoginDao dao) {
-		this.loginDao = dao;
-	}
 
 	/*@Override
 	public Member getMember(String email, String password) {
