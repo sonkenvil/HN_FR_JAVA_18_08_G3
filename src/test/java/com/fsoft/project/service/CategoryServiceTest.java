@@ -4,6 +4,7 @@
 package com.fsoft.project.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -51,14 +52,73 @@ public class CategoryServiceTest {
 		listC.add(new Category(1, "Ca"));
 		listC.add(new Category(2, "Ca"));
 		listC.add(new Category(3, "Ca"));
-		Mockito.when(categoryService.getListCategory()).thenReturn(listC);
+		Mockito.when(categoryDao.getListCategory()).thenReturn(listC);
 		assertEquals(3, categoryService.getListCategory().size());
 	}
 
 	@Test
 	public void testGetListCategoryFail() {
 		List<Category> listC = null;
-		Mockito.when(categoryService.getListCategory()).thenReturn(listC);
+		Mockito.when(categoryDao.getListCategory()).thenReturn(listC);
 		assertEquals(null, categoryService.getListCategory());
+	}
+
+	@Test
+	public void testAddCategorySuccess() {
+		Category category = new Category(1, "Ca");
+		Mockito.when(categoryDao.addCategory(category.getName())).thenReturn(1);
+		assertTrue(categoryService.addCategory(category.getName()) == 1);
+	}
+
+	@Test
+	public void testAddCategoryFail() {
+		Category category = new Category(1, "Ca");
+		Mockito.when(categoryDao.addCategory(category.getName())).thenReturn(0);
+		assertTrue(categoryService.addCategory(category.getName()) == 0);
+	}
+
+	@Test
+	public void testAllCategorySuccess() {
+		List<Category> listC = new LinkedList<>();
+		listC.add(new Category(1, "Ca"));
+		listC.add(new Category(2, "Ca"));
+		listC.add(new Category(3, "Ca"));
+		Mockito.when(categoryDao.allCategory()).thenReturn(listC);
+		assertEquals(3, categoryService.allCategory().size());
+	}
+
+	@Test
+	public void testAllCategoryFail() {
+		List<Category> listC = null;
+		Mockito.when(categoryDao.allCategory()).thenReturn(listC);
+		assertEquals(null, categoryService.allCategory());
+	}
+
+	@Test
+	public void testUpdateCategorySuccess() {
+		Category category = new Category(1, "Ca");
+		Mockito.when(categoryDao.updateCategory(category.getName(), "Sa")).thenReturn(1);
+		assertTrue(categoryService.updateCategory(category.getName(), "Sa") == 1);
+	}
+
+	@Test
+	public void testUpdateCategoryFail() {
+		Category category = new Category(1, "Ca");
+		Mockito.when(categoryDao.updateCategory(category.getName(), "Sa")).thenReturn(0);
+		assertTrue(categoryService.updateCategory(category.getName(), "Sa") == 0);
+	}
+
+	@Test
+	public void testDeleteCategorySuccess() {
+		Category category = new Category(1, "Ca");
+		Mockito.when(categoryDao.deleteCategory(category.getName())).thenReturn(1);
+		assertTrue(categoryService.deleteCategory(category.getName()) == 1);
+	}
+
+	@Test
+	public void testDeleteCategoryFail() {
+		Category category = new Category(1, "Ca");
+		Mockito.when(categoryDao.deleteCategory(category.getName())).thenReturn(0);
+		assertTrue(categoryService.deleteCategory(category.getName()) == 0);
 	}
 }

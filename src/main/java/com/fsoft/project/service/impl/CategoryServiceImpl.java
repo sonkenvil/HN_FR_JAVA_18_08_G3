@@ -35,34 +35,33 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public int addCategory(String name){
+	public int addCategory(String name) {
 		return categoryDao.addCategory(name);
 	}
 
 	@Override
-	public List<Category> allCategory(){
+	public List<Category> allCategory() {
 		return categoryDao.allCategory();
 	}
 
 	@Override
-	public int updateCategory(String name, String hidden){
+	public int updateCategory(String name, String hidden) {
 		return categoryDao.updateCategory(name, hidden);
 	}
 
 	@Override
-	public int deleteCategory(String Name){
+	public int deleteCategory(String Name) {
 		return categoryDao.deleteCategory(Name);
 	}
-	
+
 	@Override
-	public List<Category> idCategory(){
-		
+	public List<Category> idCategory() {
+
 		return categoryDao.idCategory();
 	}
 
 	@Override
-	public List<ManuFacturer> idManuFacturer(){
-		
+	public List<ManuFacturer> idManuFacturer() {
 		return categoryDao.idManuFacturer();
 	}
 
