@@ -77,20 +77,14 @@ public class CategoryDaoImpl implements CategoryDao {
 		int result = 0;
 		try {
 			conn = DbHelper.getConnection();
-			conn.setAutoCommit(false);
 
 			if (conn != null) {
 				pre = conn.prepareStatement(QueryConstants.ADD_CATEGORY);
 				pre.setString(1, name);
 				result = pre.executeUpdate();
 			}
-			conn.commit();
 		} catch (SQLException e) {
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
+			
 		} finally {
 			DbHelper.closeConnection(conn, pre);
 		}
@@ -104,7 +98,6 @@ public class CategoryDaoImpl implements CategoryDao {
 
 		try {
 			conn = DbHelper.getConnection();
-			conn.setAutoCommit(false);
 			if (conn != null) {
 				pre = conn.prepareStatement(QueryConstants.ALL_CATEGORY);
 				rs = pre.executeQuery();
@@ -122,11 +115,6 @@ public class CategoryDaoImpl implements CategoryDao {
 			}
 			conn.commit();
 		} catch (SQLException e) {
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
 		} finally {
 			DbHelper.closeConnection(conn, pre, rs);
 		}
@@ -138,21 +126,14 @@ public class CategoryDaoImpl implements CategoryDao {
 		int result = 0;
 		try {
 			conn = DbHelper.getConnection();
-			conn.setAutoCommit(false);
 			if (conn != null) {
 				pre = conn.prepareStatement(QueryConstants.UPDATE_CATEGORY);
 				pre.setString(1, name);
 				pre.setString(2, hidden);
 				result = pre.executeUpdate();
 			}
-			conn.commit();
 
 		} catch (SQLException e) {
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
 		} finally {
 			DbHelper.closeConnection(conn, pre);
 		}
@@ -238,5 +219,27 @@ public class CategoryDaoImpl implements CategoryDao {
 		
 	}
 
+	@Override
+	public int getCategoryId(String name) {
+		int result = 0;
+		conn = DbHelper.getConnection();
+		if(conn != null) {
+			try {
+				pre = conn.prepareStatement(QueryConstants.GET_ID_CATEGORY);
+				pre.setString(1, name);
+				rs = pre.executeQuery();
+				if(rs.next()) {
+					result = rs.getInt("Id");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return result;
+	}
+	
+	
 
 }

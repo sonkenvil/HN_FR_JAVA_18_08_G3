@@ -30,5 +30,7 @@ public interface CategoryService {
 	List<Category> idCategory(); // 
 
 	List<ManuFacturer> idManuFacturer();
+	
+	int getCategoryId(String name);
 
 }

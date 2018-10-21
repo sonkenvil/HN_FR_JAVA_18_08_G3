@@ -10,15 +10,21 @@ import java.util.List;
 import org.apache.struts2.ServletActionContext;
 
 import com.fsoft.project.base.BaseAction;
+import com.fsoft.project.dao.impl.CategoryDaoImpl;
 import com.fsoft.project.dao.impl.ImageDetailDaoImpl;
+import com.fsoft.project.dao.impl.ManuFacturerDaoImpl;
 import com.fsoft.project.dao.impl.ProductDaoImpl;
 import com.fsoft.project.entity.Category;
 import com.fsoft.project.entity.ImageDetail;
 import com.fsoft.project.entity.ManuFacturer;
 import com.fsoft.project.entity.Product;
+import com.fsoft.project.service.CategoryService;
 import com.fsoft.project.service.ImageDetailService;
+import com.fsoft.project.service.ManuFacturerService;
 import com.fsoft.project.service.ProductService;
+import com.fsoft.project.service.impl.CategoryServiceImpl;
 import com.fsoft.project.service.impl.ImageDetailServiceImpl;
+import com.fsoft.project.service.impl.ManuFacturerServiceImpl;
 import com.fsoft.project.service.impl.ProductServiceImpl;
 import com.fsoft.project.utils.constants.Constants;
 import com.fsoft.project.utils.constants.WebConstants;
@@ -38,6 +44,8 @@ public class ProductAction extends BaseAction implements Preparable{
 	private int productId;
 	private ProductService productService;
 	private ImageDetailService imageDetailService;
+	private ManuFacturerService manuFacturerService;
+	private CategoryService categoryService;
 	private Product product;
 	private List<ImageDetail> listImageDetail;
 	private List<Product> listRelateProduct;
@@ -57,11 +65,15 @@ public class ProductAction extends BaseAction implements Preparable{
 	private List<Product> listProduct;
 	private boolean noData;
 	private String description;
+	private String manuFacturerName;
+	private String categoryName;
 	
 	@Override
 	public void prepare() throws Exception {
 		productService = new ProductServiceImpl(new ProductDaoImpl());
 		imageDetailService = new ImageDetailServiceImpl(new ImageDetailDaoImpl());
+		manuFacturerService = new ManuFacturerServiceImpl(new ManuFacturerDaoImpl());
+		categoryService = new CategoryServiceImpl(new CategoryDaoImpl());
 	}
 
 	public String execute() throws SQLException {
@@ -89,8 +101,10 @@ public class ProductAction extends BaseAction implements Preparable{
 		Product product = new Product();
 		ManuFacturer manuFacturer = new ManuFacturer();
 		Category category = new Category();
-		category.setId(categoryId);
-		manuFacturer.setId(manuFacturerId);
+		System.out.println(categoryService.getCategoryId(categoryName));
+		System.out.println(manuFacturerService.getManufacturerId(manuFacturerName));
+		category.setId(categoryService.getCategoryId(categoryName));
+		manuFacturer.setId(manuFacturerService.getManufacturerId(manuFacturerName));
 		product.setProductName(productName);
 		product.setManuFacturer(manuFacturer);
 		product.setCategory(category);
@@ -313,5 +327,23 @@ public class ProductAction extends BaseAction implements Preparable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public String getManuFacturerName() {
+		return manuFacturerName;
+	}
+
+	public void setManuFacturerName(String manuFacturerName) {
+		this.manuFacturerName = manuFacturerName;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+	
+	
 
 }

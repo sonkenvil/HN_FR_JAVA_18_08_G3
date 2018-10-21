@@ -32,8 +32,7 @@ public class ManagementManuFacturerAction extends ActionSupport{
 
 
 	public String addManuFacturer() throws SQLException, Exception {
-
-		result=manuFacturerService.addManuFacturer(Name);
+		result = manuFacturerService.addManuFacturer(Name);
 		if (result > 0) {
 			msg = "Registration Successfull";
 		} else {
@@ -83,14 +82,6 @@ public class ManagementManuFacturerAction extends ActionSupport{
 
 		return WebConstants.DELETE_MANUFACTURER;
 	}
-
-	
-	public void validate(){
-	    if (getName().length() == 0) {
-	        addFieldError("getName", "First name is required.");
-	    }
-	}
-	
 
 	public int getId() {
 		return id;

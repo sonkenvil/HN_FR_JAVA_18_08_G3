@@ -44,7 +44,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<h1 class="page-header">
-						<marquee width="50%" behavior="alternate" bgcolor="pink">Add
+						<marquee width="50%" behavior="alternate" bgcolor="pink">Update
 							Product Database</marquee>
 					</h1>
 				</div>
@@ -75,10 +75,10 @@
 											<div class="form-group">
 												<a
 													class="btn-icon-defind btn btn-danger btn-circle icon_del"><i
-													class="fa fa-times"></i></a> <img class="img_curent"
+													class="fa fa-times"></i></a> <img class="img_curent" id="img_curent"
 													src="image/<s:property value="product.imagePath"/>"
 													width="150" height="150" /> <input type="file"
-													id="imagePathName" name="myFile">
+													id="imagePathName" name="myFile" >
 											</div>
 
 
@@ -144,6 +144,7 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/update-product.js"></script>
+	
 </body>
 
 </html>

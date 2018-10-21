@@ -45,38 +45,39 @@
 								id="dataTables-example">
 								<thead>
 									<tr>
-										<th>id</th>
-										<th>name</th>
-										<th>image</th>
-										<th>color</th>
-										<th>price</th>
+										<th>No</th>
+										<th style="display: none">id</th>
+										<th>Name</th>
+										<th>Image</th>
+										<th>Color</th>
+										<th>Price</th>
 										<th>Action</th>
 									</tr>
 								</thead>
 
 								<tbody>
-								
-									
-									
+									<s:set var="counter" value="0" />
 									<s:iterator value="listProduct">
+										<s:set var="counter" value="%{#counter+1}" />
 										<tr>
-											<td><s:property value="id" /></td>
+											<td><s:property value="#counter" /></td>
+											<td style="display: none"><s:property value="id" /></td>
 											<td><s:property value="productName" /></td>
 											<td>
-											 
-											 <%-- <img src="/${imagePathFileName}" --%>
-											 <img src="image/${imagePath}"   
-                                                     width="40" height="40" />
-											
+												<%-- <img src="/${imagePathFileName}" --%> <img
+												src="image/${imagePath}" width="40" height="40" />
+
 											</td>
 											<td><s:property value="color" /></td>
-											<td><s:property value="price" /></td>
-											
-											<td class="center td_all">
-											<a onclick="return confirm('Are you sure you want to delete this item?');"
-											class="alert alert-danger" href="deleteProduct?id=<s:property value="id"/>">delete</a> <a
-											class="alert alert-success" href="fetchProduct?id=<s:property value="id"/>">edit</a></td>
-											
+											<td>$ <s:property value="price" /></td>
+
+											<td class="center td_all"><a
+												onclick="return confirm('Are you sure you want to delete this item?');"
+												class="alert alert-danger"
+												href="deleteProduct?id=<s:property value="id"/>">delete</a>
+												<a class="alert alert-success"
+												href="fetchProduct?id=<s:property value="id"/>">edit</a></td>
+
 											<%-- class="alert alert-success" href="updateProduct?submitType=updatedata&id=<s:property value="id"/>">edit</a></td> --%>
 										</tr>
 									</s:iterator>
@@ -97,12 +98,12 @@
 
 	<jsp:include page="footer.jsp"></jsp:include>
 	<script>
-    $(document).ready(function() {
-        $('#dataTables-example').DataTable({
-            responsive: true
-        });
-    });
-    </script>
+		$(document).ready(function() {
+			$('#dataTables-example').DataTable({
+				responsive : true
+			});
+		});
+	</script>
 
 </body>
 

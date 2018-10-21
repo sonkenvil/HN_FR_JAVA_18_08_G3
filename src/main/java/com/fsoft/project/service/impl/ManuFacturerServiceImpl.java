@@ -42,20 +42,22 @@ public class ManuFacturerServiceImpl implements ManuFacturerService {
 
 	@Override
 	public List<ManuFacturer> allManuFacturer() throws SQLException, Exception {
-
 		return manuFacturerDao.allManuFacturer();
 	}
 
 	@Override
 	public int updateManuFacturer(String name, String hidden) throws SQLException, Exception {
-
 		return manuFacturerDao.updateManuFacturer(name, hidden);
 	}
 
 	@Override
 	public int deleteManuFacturer(String Name) throws SQLException, Exception {
-
 		return manuFacturerDao.deleteManuFacturer(Name);
+	}
+
+	@Override
+	public int getManufacturerId(String name) {
+		return manuFacturerDao.getManufacturerId(name);
 	}
 
 }

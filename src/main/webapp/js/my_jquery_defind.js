@@ -217,11 +217,9 @@ function updateCategory() {
 		+"&hidden="+ $("#hidden").val(),
 		success : function(data) {
 			var ht = data.msg;
-			alert(ht+ "kkkk")
+			alert(ht)
 			
 			if (ht ==="Successfull" ) {
-				
-				alert(data.result+ "1212")
 				window.location.href = 'allCategory.jsp';
 			}
 		},
@@ -250,7 +248,6 @@ function deleteCategory(that) {
 			var ht = data.msg;
 			alert(ht+ " delete ok")
 			if (data.result ===1 ) {
-				alert(ht+" ok")
 				window.location.href = 'allCategory.jsp';
 			}
 		},
@@ -277,7 +274,6 @@ $(document).ready(function(){
 		,submitHandler: function(form){
 			$("label.error").hide();
 			addManuFacturer();
-
 		}
 
 	});
@@ -285,7 +281,7 @@ $(document).ready(function(){
 
 
 function addManuFacturer() {
-
+alert("123");
 	var name = $("#name").val();
 	$.ajax({
 		type : "POST",
@@ -378,7 +374,7 @@ function deleteManuFacturer(that) {
 		data : "name=" + $(that).parent().prev().text(),
 		success : function(data) {
 			if (data.msg === "Delete Successful") {
-				alert(data.msg)
+				(data.msg)
 				$(that).closest('tr').remove();
 				if (data == 'success') {
 					window.location.href = 'allManuFacturer.jsp';

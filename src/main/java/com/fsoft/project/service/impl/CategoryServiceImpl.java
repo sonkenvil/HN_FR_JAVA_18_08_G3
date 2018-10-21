@@ -56,14 +56,17 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	@Override
 	public List<Category> idCategory(){
-		
 		return categoryDao.idCategory();
 	}
 
 	@Override
 	public List<ManuFacturer> idManuFacturer(){
-		
 		return categoryDao.idManuFacturer();
+	}
+
+	@Override
+	public int getCategoryId(String name) {
+		return categoryDao.getCategoryId(name);
 	}
 
 }

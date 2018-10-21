@@ -92,4 +92,8 @@ public class QueryConstants {
 	public static final String ADD = "INSERT INTO upload VALUES(?)";
 
 	public static final String CHECK_EMAIL_EXISTS = "SELECT* FROM MEMBER WHERE Email=?";
+	
+	public static final String GET_ID_CATEGORY = "SELECT Id FROM CATEGORY WHERE Name=?";
+	
+	public static final String GET_ID_MANUFACTURER = "SELECT Id FROM MANUFACTURER WHERE Name=?";
 }

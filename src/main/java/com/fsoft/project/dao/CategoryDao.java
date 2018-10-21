@@ -30,5 +30,9 @@ public interface CategoryDao {
 	List<Category> idCategory(); // 
 
 	List<ManuFacturer> idManuFacturer();
+	
+	int getCategoryId(String name);
+	
+	
 
 }

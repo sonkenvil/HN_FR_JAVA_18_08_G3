@@ -26,4 +26,5 @@ public interface ManuFacturerService {
 
 	public int deleteManuFacturer(String Name) throws SQLException, Exception;
 
+	int getManufacturerId(String name);
 }

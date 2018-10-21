@@ -45,7 +45,7 @@
 								<thead>
 									<tr>
 										<th>Stt</th>
-										<th>name</th>
+										<th>Name</th>
 										<th>Action</th>
 									</tr>
 								</thead>

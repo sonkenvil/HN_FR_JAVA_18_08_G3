@@ -86,17 +86,7 @@
 										</div>
 
 
-										<div style="display:none" class="form-group">
-											<label for="sel1">ManuFacturer Id:</label> <select
-												name="manuFacturerId" class="form-control" id="manuFacturer">
-
-												<s:iterator value="listManuFacturer">
-													<option value="<s:property value = "id"/>">
-														<s:property value="id" />
-													</option>
-												</s:iterator>
-											</select>
-										</div>
+										
 										<div  class="form-group">
 											<label for="sel1">ManuFacturer</label> <select
 												name="manuFacturerName" class="form-control" id="manuFacturer">
@@ -109,21 +99,7 @@
 											</select>
 										</div>
 
-										<div style="display:none" class="form-group">
-											<label for="sel1">Category Id:</label> <select
-												name="categoryId" class="form-control" id="category">
-
-												<s:iterator value="listCategory">
-
-													<option value="<s:property value = "id"/>">
-														<s:property value="id" />
-
-													</option>
-
-												</s:iterator>
-
-											</select>
-										</div>
+										
 										<div class="form-group">
 											<label for="sel1">Category</label> <select
 												name="categoryName" class="form-control" id="category">
