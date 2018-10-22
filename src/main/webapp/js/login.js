@@ -29,7 +29,7 @@ $("#loginform").validate({
 	            		}else if(data.index == 4){
 	            			window.location.href = 'checkout';
 	            		}else{
-	            			window.location.href = 'admin.jsp';
+	            			window.location.href = 'admin';
 	            		}
 	            	}else{
 	            		$("#error").show();
