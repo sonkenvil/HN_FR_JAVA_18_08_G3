@@ -1,0 +1,4 @@
+2018-10-22 07:15:21 ERROR ImageDetailDaoImpl:84 - An error occurred while converting the nvarchar value to JDBC data type INTEGER.
+2018-10-22 07:17:01 ERROR ImageDetailDaoImpl:84 - An error occurred while converting the nvarchar value to JDBC data type INTEGER.
+2018-10-22 07:23:05 ERROR ImageDetailDaoImpl:84 - The column name Description is not valid.
+2018-10-22 07:23:46 ERROR ImageDetailDaoImpl:84 - The column name Id is not valid.
