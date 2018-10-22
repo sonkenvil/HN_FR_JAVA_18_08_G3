@@ -3,7 +3,6 @@
  */
 package com.fsoft.project.service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import com.fsoft.project.entity.ImageDetail;
@@ -14,7 +13,7 @@ import com.fsoft.project.entity.ImageDetail;
  */
 public interface ImageDetailService {
 
-	List<ImageDetail> getListImageDetailByProductId(int productId) throws SQLException;
-	
-	ImageDetail getImageDetailById(int id) throws SQLException;
+	List<ImageDetail> getListImageDetailByProductId(int productId);
+
+	ImageDetail getImageDetailById(int id);
 }
